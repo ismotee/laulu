@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="bin">
+        <df name="data">
+          <df name="arkisto">
+          </df>
+          <df name="keskeytetytViivat">
+          </df>
+          <df name="tallennetut">
+            <df name="kuvat">
+              <df name="kalibroinnit">
+              </df>
+              <df name="kokonaiset">
+              </df>
+            </df>
+          </df>
+          <df name="valmiitViivat">
+          </df>
+        </df>
+        <df name="libs">
+        </df>
+      </df>
+      <df name="data">
+        <df name="arkisto">
+        </df>
+        <df name="keskeytetytViivat">
+        </df>
+        <df name="valmiitViivat">
+        </df>
+      </df>
+      <df name="obj">
+        <df name="linux64">
+          <df name="Release">
+            <df name="src">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="src">
+        <in>Hiiri.h</in>
+        <in>Kyna.cpp</in>
+        <in>Kyna.h</in>
+        <in>Monitori.cpp</in>
+        <in>Monitori.h</in>
+        <in>Ohjain.cpp</in>
+        <in>Ohjain.h</in>
+        <in>OscInterface.cpp</in>
+        <in>OscInterface.h</in>
+        <in>Sessio.cpp</in>
+        <in>Sessio.h</in>
+        <in>Soitin.cpp</in>
+        <in>Soitin.h</in>
+        <in>Tilat.h</in>
+        <in>Vaiheet.cpp</in>
+        <in>Vaiheet.h</in>
+        <in>Viiva.cpp</in>
+        <in>Viiva.h</in>
+        <in>Viiva2.cpp</in>
+        <in>Viiva2.h</in>
+        <in>ViivaOhjain.cpp</in>
+        <in>ViivaOhjain.h</in>
+        <in>ViivaPankki.cpp</in>
+        <in>ViivaPankki.h</in>
+        <in>hidpen.cpp</in>
+        <in>hidpen.h</in>
+        <in>main.cpp</in>
+        <in>ofApp.cpp</in>
+        <in>ofApp.h</in>
+        <in>staticSettings.h</in>
+        <in>tiedosto.cpp</in>
+        <in>tiedosto.h</in>
+        <in>tilastot.cpp</in>
+        <in>tilastot.h</in>
+        <in>timedThread.cpp</in>
+        <in>timedThread.h</in>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>
