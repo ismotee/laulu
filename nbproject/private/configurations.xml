@@ -19,8 +19,6 @@
           <df name="valmiitViivat">
           </df>
         </df>
-        <df name="libs">
-        </df>
       </df>
       <df name="data">
         <df name="arkisto">
@@ -57,8 +55,6 @@
         <in>Vaiheet.h</in>
         <in>Viiva.cpp</in>
         <in>Viiva.h</in>
-        <in>Viiva2.cpp</in>
-        <in>Viiva2.h</in>
         <in>ViivaOhjain.cpp</in>
         <in>ViivaOhjain.h</in>
         <in>ViivaPankki.cpp</in>

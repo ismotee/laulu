@@ -65,14 +65,6 @@ Viiva Soitin::nykyinenViiva() {
 
 void Soitin::katkaiseViivaKohdasta(int kohta) {
 
-    nykyinen = viivat->at(nykyinen_id);
-    
-    if (kohta > 1) {
-        nykyinen.pisteet.resize(kohta - 1);
-        nykyinen.sumeus.resize(kohta - 1);
-        nykyinen.paksuus.resize(kohta - 1);
-    }
-    nykyinen.lisaaPiste(viivat->at(nykyinen_id).pisteet[kohta].sijainti,viivat->at(nykyinen_id).pisteet[kohta].paine);
 }
 
 Viiva Soitin::soita() {

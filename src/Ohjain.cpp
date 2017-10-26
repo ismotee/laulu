@@ -19,16 +19,13 @@ void Ohjain::setup() {
     Monitori::paljasta();
     //Monitori::piilota();
 
-    ViivaOhjain::pankki.aloitaUusiMuokattava();
-    ViivaOhjain::pankki.aloitaUusiKalibrointi();
-    ViivaOhjain::arvoMuokattavanVari();
 }
 
 void Ohjain::updateMonitori() {
 
     if (Kyna::drag && Tilat::tila == Piirtaa) {
         monitoriVari = ofColor();
-        monitoriVari = ViivaOhjain::haeMuokattava().vari;
+//        monitoriVari = ViivaOhjain::pankki.viivaNyt.varit.back();
     } else {
         if (monitoriVari.getLightness() < 100)
             monitoriVari.setBrightness(monitoriVari.getBrightness() - 1);
@@ -40,10 +37,10 @@ void Ohjain::updateMonitori() {
     }
 
     if(Tilat::tila == Soittaa)
-        monitoriVari = pankki.nykyinen.vari;
+//        monitoriVari = pankki.viivaNyt.varit.back();
     
     Monitori::piirraVari(monitoriVari);
-    Monitori::piirraViiva(ViivaOhjain::haeMuokattava());
+    Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);
 
 
 }
@@ -60,8 +57,8 @@ void Ohjain::update() {
 void Ohjain::piirtaa() {
     Vaiheet::update();
 
-    Monitori::piirraVari(ViivaOhjain::haeMuokattava().vari);
-    Monitori::piirraViiva(ViivaOhjain::haeMuokattava());
+    Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.varit.back());
+    Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);
     Vaiheet::verbose();
 }
 
@@ -72,7 +69,7 @@ void Ohjain::soittaa() {
     
     Viiva v = pankki.soita();
     
-    Monitori::piirraVari(v.vari);
+    Monitori::piirraVari(v.varit.back());
     Monitori::piirraViiva(v);
 }
 
@@ -121,7 +118,6 @@ VaiheetEnum Ohjain::kalibroi() {
             ViivaOhjain::tallennaKalibrointi();
             Monitori::tallennaKuvana(tallennusHakemisto + "kuvat/kalibroinnit/" + tiedosto::aika() + ".png");
         }
-        aloitaImprovisointi();
         cout << "kalibroitu\n";
         return Improvisoi;
     }
@@ -160,17 +156,6 @@ VaiheetEnum Ohjain::improvisoi() {
 VaiheetEnum Ohjain::laskeKohde() {
 
     //aseta kalibrointi uusiksi, jotta ei tule värihyppäystä
-    ViivaOhjain::pankki.muokattava.asetaAlkuperainenVari();
-    pankki.kalibrointi = pankki.muokattava;
-    ViivaOhjain::lahestymisLaskuri = 0;
-    ViivaOhjain::muutos.clear();
-
-
-    if (pankki.viivat.size() < 10) {
-        return Kulje;
-    }
-
-
     return LahestyKohdetta;
 }
 
@@ -202,9 +187,7 @@ VaiheetEnum Ohjain::viimeistele() {
 
     pankki.tallennaHakemistoon("valmiitViivat/");
 
-    ViivaOhjain::pankki.muokattava.asetaAlkuperainenVari();
     //pankki.leikkaaMuokattava(pankki.muokattava.OTANNAN_KOKO);
-    ViivaOhjain::pankki.kalibrointi = ViivaOhjain::pankki.muokattava;
 
 
     //Monitori::tyhjenna();
@@ -219,12 +202,8 @@ VaiheetEnum Ohjain::keskeyta() {
 
 
     Monitori::tyhjenna();
-    ofColor vari = pankki.muokattava.vari;
-    ViivaOhjain::pankki.aloitaUusiMuokattava();
-    ViivaOhjain::pankki.aloitaUusiKalibrointi();
-    //ViivaOhjain::arvoMuokattavanVari();
-    pankki.muokattava.vari = vari;
-    pankki.muokattava.alkuperainenVari = vari;
+    ViivaOhjain::pankki.aloitaUusiViivaNyt();
+
     return Kulje;
 }
 
@@ -263,9 +242,9 @@ void Ohjain::updateOSC() {
         OscInterface::sendMessage(msg);
 
         if (Vaiheet::vaiheetEnum != Kulje) {
-            OscInterface::sendMessage(pankki.muokattava.makePisteAsOscMessage());
-            OscInterface::sendMessage(pankki.muokattava.makePaksuusAsOscMessage());
-            OscInterface::sendMessage(pankki.muokattava.makeSumeusAsOscMessage());
+            OscInterface::sendMessage(pankki.viivaNyt.makePisteAsOscMessage());
+            OscInterface::sendMessage(pankki.viivaNyt.makePaksuusAsOscMessage());
+            OscInterface::sendMessage(pankki.viivaNyt.makeSumeusAsOscMessage());
         }
     
 

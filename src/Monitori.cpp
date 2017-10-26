@@ -125,7 +125,7 @@ void Monitori::piirraViiva(const Viiva& viiva) {
     }    
 
     //sumeus on 0...1
-    float sumeus = viiva.haeViimeisinSumeus().arvo;
+    float sumeus = viiva.sumeus.arvot.back();
     //pehmennetään ottamalla 8 viimeistä arvoa
     //float sumeus = keskiarvo(viiva.haeArvot(&viiva.sumeus, 8) );
     
@@ -137,7 +137,7 @@ void Monitori::piirraViiva(const Viiva& viiva) {
    */ 
     //paksuus on 0...1
     //pehmennetään ottamalla 8 viimeistä arvoa
-    float paksuus = keskiarvo(viiva.haeArvot(&viiva.paksuus, 6) );
+    float paksuus = viiva.paksuus.keskiarvot.back();
     // blur: 0...16
     pensseli::blur = ofClamp(pow(sumeus, 2) * 16, 0.1, 16);
     
@@ -146,7 +146,7 @@ void Monitori::piirraViiva(const Viiva& viiva) {
     
     viivaFbo.begin();
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-        pensseli::strokeTo( viiva.pisteet.back().sijainti );
+        pensseli::strokeTo( viiva.pisteet.back());
     viivaFbo.end();
 }
 

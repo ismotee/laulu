@@ -18,9 +18,7 @@ struct ViivaOhjain {
     int nykyinenPolku, polkuLaskuri;
         
     void setup(string hakemisto_, string tallennusHakemisto_);
-    void arvoMuokattavanVari();
     void tallennaKalibrointi();
-    void aloitaImprovisointi();
     
     // Tarkastaa kalibroinnin laadukkuuden. Jos kalibrointi valmis, palauttaa true, muuten false
     bool kulkeminen();
@@ -31,15 +29,9 @@ struct ViivaOhjain {
     const Viiva& haeMuokattava() const;
     const Viiva& haeKalibrointi() const;
     
-    const Viiva& etsiViiva();
     
-    float muutoksenMaaraPolulla();
     
     
 private:
-    //apufunktio kalibroinnille
-    bool tarkastaKalibrointi();
-    bool tarkastaImprovisaatio();
     
-    int improvisaatioLaskin;
 };

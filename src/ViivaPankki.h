@@ -3,6 +3,7 @@
 #include "Viiva.h"
 #include "tiedosto.h"
 #include "Soitin.h"
+#include "Vaiheet.h"
 
 /* ViivaPankki
  * Varasto-luokka viivoille.
@@ -18,33 +19,22 @@ struct ViivaPankki: public Soitin {
     vector<Viiva> viivat;
     // kalibrointi ja muokattava viiva pidetään erillään pankista.
     //muokattavaaa viivaa myös tarkastellaan kalibroinnin aikana
-    Viiva kalibrointi;
-    Viiva muokattava;
-    Viiva samankaltaisin;
     
-    ViivaPankki() {Soitin::setup(&viivat);}
-    // tällä hetkellä muokattava viiva lisätään viivat vectoriin
-    void lisaaMuokattavaPankkiin();
+    Viiva viivaNyt;
+    vector<float> samankaltaisuus;
     
     
+    
+    ViivaPankki() {}
 
-    // nollausfunktiot kalibrointi ja muokattava Viivalle
-    void aloitaUusiKalibrointi();
-    void aloitaUusiMuokattava();
-    
-    // pisteen lisäysfunktiot kalibroinnille ja muokattavalle Viivalle
-    void lisaaPisteKalibrointiin(ofPoint paikka, float paine);
-    void lisaaPisteMuokattavaan(ofPoint paikka, float paine);
-    
+    void aloitaUusiViivaNyt();
+    void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
+    Viiva* etsiViiva();
     
     // lataus ja tallennus
     // tapahtuu aina hakemistokohtaisesti.
     // tiedosto nimetään automaattisesti ajan mukaan
     void tallennaHakemistoon(string polku);
     bool lataaHakemistosta(string polku);
-    
-    void leikkaaMuokattava(unsigned int otanta);
-    
-    
-    void teeKalibraatioMuutos();
+        
 };

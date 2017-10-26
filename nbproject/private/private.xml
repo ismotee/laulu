@@ -12,9 +12,11 @@
         <group>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Viiva2.h</file>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Soitin.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Tilat.h</file>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Viiva.cpp</file>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Viiva.h</file>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/ViivaOhjain.cpp</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Vaiheet.cpp</file>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Soitin.cpp</file>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/ViivaPankki.h</file>
             <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Ohjain.cpp</file>

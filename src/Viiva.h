@@ -1,95 +1,155 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "tilastot.h"
+#include "Vaiheet.h"
 
-
-/* Viiva.h
- * Viiva -luokka sekä kaksi säiliö -luokkaa datalle: 
- * ViivanPiste ja ViivanOminaisuus
- */
-
-
-
-/* ViivanPiste
- * viivan pisteiden säilytykseen
- */
-struct ViivanPiste {
-    float paine;
-    ofPoint sijainti;
-    ViivanPiste(ofPoint sijainti_ = ofPoint(), float paine_ = 0);
-};
-
-/* ViivanOminaisuus
- * yleinen säiliö -luokka erilaisille viivan ominaisuuksille
- * Säiliöön varastoidaan myös arvosta lasketut analyysit kuten
- * keskiarvo ja keskihajonta
- */
-
-struct ViivanOminaisuus {
-    float arvo;
-    float keskiarvo;
-    float keskihajonta;
-    float keskihajonnanKeskihajonta;
-    float konvergenssi;
-    ViivanOminaisuus();
-};
-
-
-/* Viiva
- * Viiva -luokka on kuvaus yhdestä käyttäjän piirtämästä viivasta.
- * Viiva -luokassa säilytettään viivan pisteitä ja niistä johdettuja 
- * ominaisuusarvoja. Ominaisuusarvoja voidaan analysoida ja tiedot 
- * tallennetaan Viivan sisälle. 
- * 
- * Koska Viivasta saatu tieto on pitkittäistä ja poikittaista, Viiva -luokka
- * pyrkii tarjoamaan työkalut tiedon jäsentämiseen pistekohtaisesti ja viivakohtaisesti
- * esim pisteet[2],paksuus[2].arvo, sumeus[2].arvo kertoo kaiken yhdestä pisteestä kun taas
- * haeKeskiarvot(&paksuus); palauttaa kaikki paksuus -ominaisuuden keskiarvot
- */
-
-struct Viiva {
-    //miten suurta osaa datasta käytetään tilastollisessa tarkastelussa:
-    static const int OTANNAN_KOKO;
-    static const float MAX_KIIHTYVYYS;
-    
-    vector<ViivanPiste> pisteet;
-    vector<ViivanOminaisuus> paksuus;
-    vector<ViivanOminaisuus> sumeus;
-    ofColor vari , alkuperainenVari;
-
-    void lisaaPiste(ofPoint paikka, float paine);
-    
-    ViivanPiste haeViimeisinPiste() const;
-    ViivanOminaisuus haeViimeisinPaksuus() const;
-    ViivanOminaisuus haeViimeisinSumeus() const;
-    ofVec2f paksuusSumeusVektori();
+struct ViivanApufunktiot {
     ofVec3f variRGBtoVec3(ofColor col);
     ofColor variRGBfromVec3(ofVec3f vec);
-    void asetaAlkuperainenVari();
+    ofColor asetaHSLnMukaan(float lh, float ls, float ll);
+    float getLightness(double s, double v);
+
+};
+
+struct Kalibraatio {
+    float paksuus;
+    float sumeus;
+    float paksuusKa;
+    float sumeusKa;
+    float paksuusKh;
+    float sumeusKh;
+    float paksuusKhkh;
+    float sumeusKhkh;
+    float paksuusKonvergenssi;
+    float sumeusKonvergenssi;
     
-    vector<float> haeArvot(const vector<ViivanOminaisuus>* const ominaisuus) const;
-    vector<float> haeArvot(const vector<ViivanOminaisuus>* const ominaisuus, unsigned int otanta) const;
+    ofColor vari;
+    ofVec2f paksuusSumeusVektori() {
+        return ofVec2f(paksuus,sumeus);
+    }
+};
+
+
+struct ViivanOminaisuus {
+    vector<float> arvot;
+    vector<float> keskiarvot;
+    vector<float> keskihajonnat;
+    vector<float> keskihajonnanKeskihajonnat;
+    vector<float> konvergenssit;
+
+    unsigned int size() {
+        return arvot.size();
+    }
+
+    float& operator[](int x) {
+        return arvot[x];
+    }
+
+    int tarkistaKoko(unsigned int otanta) {
+        int n = 0;
+        if (otanta >= size())
+            n = size();
+        else if (otanta <= 0)
+            return 0;
+        else
+            n = otanta;
+        return n;
+    }
+
+    void laskeUusinKeskiarvo(int otanta) {
+        int n = tarkistaKoko(otanta);
+        keskiarvot.push_back(keskiarvo(arvot, n));
+    }
+
+    void laskeUusinKeskihajonta(int otanta) {
+        int n = tarkistaKoko(otanta);
+        keskihajonnat.push_back(keskihajonta(arvot, n));
+    }
+
+    void laskeUusinKeskihajonnanKeskihajonta(int otanta) {
+        int n = tarkistaKoko(otanta);
+        keskihajonnanKeskihajonnat.push_back(keskihajonta(keskihajonnat,n));
+    }
     
-    vector<float> haeKeskiarvot(const vector<ViivanOminaisuus>* const ominaisuus) const;
-    vector<float> haeKeskiarvot(const vector<ViivanOminaisuus>* const ominaisuus, unsigned int otanta) const;
-    vector<float> haeKeskihajonnat(const vector<ViivanOminaisuus>* const ominaisuus) const;
-    vector<float> haeKeskihajonnat(const vector<ViivanOminaisuus>* const ominaisuus, unsigned int otanta) const;
-    vector<float> haeKeskihajonnanKeskihajonnat(const vector<ViivanOminaisuus>* const ominaisuus) const;
-    vector<float> haeKeskihajonnanKeskihajonnat(const vector<ViivanOminaisuus>* const ominaisuus, unsigned int otanta) const;
-    vector<float> haeKonvergenssit(const vector<ViivanOminaisuus>* const ominaisuus) const;
-    vector<float> haeKonvergenssit(const vector<ViivanOminaisuus>* const ominaisuus, unsigned int otanta) const;
+    void laskeUusinKonvergenssi() {
+        konvergenssit.push_back(1 - 5 * keskihajonnanKeskihajonnat.back() / keskiarvot.back());
+    }
     
-    void muokkaaVaria(const ViivanOminaisuus& paksuus, const ViivanOminaisuus& sumeus);
-    void muokkaaVaria2(ofColor kohdeVari, float maara);
+    void lisaaJaLaske(float uusi, int otanta) {
+        arvot.push_back(uusi);
+        laskeUusinKeskiarvo(otanta);
+        laskeUusinKeskihajonta(otanta);
+        laskeUusinKeskihajonnanKeskihajonta(otanta);
+        laskeUusinKonvergenssi();
+    }
     
+    float back() {
+        return arvot.back();
+    }
+    
+    bool empty() {
+        return arvot.empty();
+    }
+    
+};
+
+struct Viiva : public ViivanApufunktiot {
+    //miten suurta osaa datasta käytetään tilastollisessa tarkastelussa:
+    static const int OTANNAN_KOKO = 50;
+    static const float MAX_KIIHTYVYYS;
+    const char* versio = "1";
+
+    std::string nimi;
+    int improvisaatioLaskin;
+    int lahestymisLaskuri;
+    ViivanOminaisuus muutos;
+    Viiva* kohde;
+    
+    bool kalibraatioValmis;
+    bool improvisaatioValmis;
+    bool lahestyKohdettaValmis;
+    
+    vector<ofPoint> pisteet;
+    vector<ofColor> varit;
+    vector<VaiheetEnum> vaiheet;
+    vector<std::string> kohteet;
+    ViivanOminaisuus paine;
+    ViivanOminaisuus paksuus;
+    ViivanOminaisuus sumeus;
+
+    Kalibraatio kalibraatio;
+    Kalibraatio alkuperainenKalibraatio;
+
+    
+    Viiva();
+    
+    std::string nimeaViiva(std::string format = "%F_%H-%M-%S");
+    void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
+    void laskeUusimmat();
+    void asetaKalibraatio();
+    void asetaAlkuperainenKalibraatio();
+    void tarkistaVaihe(VaiheetEnum vaihe);
+    void tarkistaKalibraatio();
+    void tarkistaImprovisaatio();
+    void tarkistaLahestyKohdetta();
+    ofVec2f paksuusSumeusVektori();
+
+    void asetaKohde(Viiva* kohde_);
+    
+    void muokkaaVaria();
+    void muokkaaVaria2(float maara);
+    void lahestyKohdetta();
+    float muutoksenMaaraPolulla();
+    void nollaaLaskurit();
+
     ofxOscMessage makePisteAsOscMessage();
     ofxOscMessage makePaksuusAsOscMessage();
     ofxOscMessage makeSumeusAsOscMessage();
+
+    unsigned int size(){return pisteet.size();}
     
-    
+
 protected:
-    
+
 };
-
-
-
