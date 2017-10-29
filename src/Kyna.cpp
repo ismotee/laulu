@@ -31,6 +31,7 @@ void Kyna::moved(float x, float y) {
 
 void Kyna::released(float x, float y) {
     paikka = ofPoint(x, y);
+    click = false;
     drag = false;
 }
 

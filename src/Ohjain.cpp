@@ -25,7 +25,7 @@ void Ohjain::updateMonitori() {
 
     if (Kyna::drag && Tilat::tila == Piirtaa) {
         monitoriVari = ofColor();
-//        monitoriVari = ViivaOhjain::pankki.viivaNyt.varit.back();
+//        monitoriVari = ViivaOhjain::pankki.viivaNyt.haeVari();
     } else {
         if (monitoriVari.getLightness() < 100)
             monitoriVari.setBrightness(monitoriVari.getBrightness() - 1);
@@ -37,7 +37,7 @@ void Ohjain::updateMonitori() {
     }
 
     if(Tilat::tila == Soittaa)
-//        monitoriVari = pankki.viivaNyt.varit.back();
+        monitoriVari = pankki.viivaNyt.haeVari();
     
     Monitori::piirraVari(monitoriVari);
     Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);
@@ -47,19 +47,21 @@ void Ohjain::updateMonitori() {
 
 void Ohjain::update() {
     /*jaetaan update Tilan mukaan. Tilan vaihtoehdot: rajaa, piirtaa, soittaa. update ajaa jonkun edellä mainituista funktioista */
+    cout << "tila:" << Tilat::toString() << "\n";
     Tilat::update();
-    
+
     // tehdään OSC paketin lähetys
-    updateOSC();
+    //updateOSC();
     
 }
 
 void Ohjain::piirtaa() {
+    
+    Vaiheet::verbose();
     Vaiheet::update();
 
-    Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.varit.back());
+    Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
     Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);
-    Vaiheet::verbose();
 }
 
 void Ohjain::soittaa() {
@@ -69,7 +71,7 @@ void Ohjain::soittaa() {
     
     Viiva v = pankki.soita();
     
-    Monitori::piirraVari(v.varit.back());
+    Monitori::piirraVari(v.haeVari());
     Monitori::piirraViiva(v);
 }
 
@@ -81,7 +83,7 @@ void Ohjain::rajaa() {
 VaiheetEnum Ohjain::kulje() {
     //jos painetaan kynällä, aloitetaan kalibrointi
     if (Kyna::click) {
-        return Improvisoi;
+        return Kalibroi;
     }
 
     ViivaOhjain::kulkeminen();
@@ -103,7 +105,7 @@ VaiheetEnum Ohjain::kalibroi() {
         irrotuslaskenta = 0;
 
     //onko kalibroitu onnistuneesti?
-    bool kalibrointiValmis;
+    bool kalibrointiValmis = false;
 
     //Kalibroidaan. Jos painekynä on käytössä, käytetään painedataa, muuten asetetaan paine=1
     if (hidpen::isOpen)
@@ -129,6 +131,9 @@ VaiheetEnum Ohjain::kalibroi() {
 VaiheetEnum Ohjain::improvisoi() {
 
     //jos nostetaan kynä joksikin aikaa, palataan alkuun. TODO: toimiiko tämä ihan oikein?
+    
+    cout << "aloitetaan impro\n";
+    
     static int irrotuslaskenta = 0;
     if (!Kyna::drag) {
         irrotuslaskenta++;
@@ -139,6 +144,9 @@ VaiheetEnum Ohjain::improvisoi() {
     } else
         irrotuslaskenta = 0;
 
+    cout << "irrotuslaskenta tehty\n";
+    
+    
     bool improvisointiValmis;
 
     if (hidpen::isOpen)
@@ -146,6 +154,8 @@ VaiheetEnum Ohjain::improvisoi() {
     else
         improvisointiValmis = ViivaOhjain::improvisointi(Kyna::paikka, 1);
 
+    cout<< "improvisointi tehty\n";
+    
     if (improvisointiValmis) {
         return LaskeKohde;
     }
@@ -196,13 +206,14 @@ VaiheetEnum Ohjain::viimeistele() {
 
 VaiheetEnum Ohjain::keskeyta() {
     //tallennetaan kuva hylättävästä viivasta
-    Monitori::tallennaKuvana(tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png");
-    cout << tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png\n";
-    pankki.tallennaHakemistoon("keskeytetytViivat/");
+//    Monitori::tallennaKuvana(tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png");
+//    cout << tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png\n";
+//    pankki.tallennaHakemistoon("keskeytetytViivat/");
 
 
     Monitori::tyhjenna();
     ViivaOhjain::pankki.aloitaUusiViivaNyt();
+    cout << "uusiViiva Aloitettu\n";
 
     return Kulje;
 }

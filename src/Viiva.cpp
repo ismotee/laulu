@@ -3,7 +3,6 @@
 
 const float Viiva::MAX_KIIHTYVYYS = 1.5;
 
-
 ofColor ViivanApufunktiot::asetaHSLnMukaan(float lh, float ls, float ll) {
     float bh = lh;
     if (ll <= 0.5)
@@ -54,7 +53,7 @@ std::string Viiva::nimeaViiva(std::string format) {
     return std::string(buffer);
 }
 
-Viiva::Viiva() : improvisaatioLaskin(0) {
+Viiva::Viiva() : improvisaatioLaskin(0), kalibraatioValmis(false),improvisaatioValmis(false) {
     nimi = "viiva_" + nimeaViiva();
 }
 
@@ -100,7 +99,8 @@ void Viiva::lisaaPiste(ofPoint paikka, float paine_, VaiheetEnum vaihe) {
         sumeus[1] = sumeus[2];
     }
 
-    cout << pisteet.size() << " " << paine.size() << " " << sumeus.size() << " " << paksuus.size() << " " << varit.size() << " " << vaiheet.size() << "\n";
+
+    // cout << pisteet.size() << " " << paine.size() << " " << sumeus.size() << " " << paksuus.size() << " " << varit.size() << " " << vaiheet.size() << "\n";
 }
 
 void Viiva::tarkistaVaihe(VaiheetEnum vaihe) {
@@ -119,13 +119,13 @@ void Viiva::tarkistaVaihe(VaiheetEnum vaihe) {
     } else if (vaihe == Improvisoi) {
         tarkistaImprovisaatio();
     }
-    
+
     //LahestyKohdetta
-    if(vaihe == LahestyKohdetta) {
+    if (vaihe == LahestyKohdetta) {
         lahestyKohdetta();
         tarkistaLahestyKohdetta();
     }
-    
+
     if (vaihe != LahestyKohdetta && vaiheet.back() == LahestyKohdetta) {
         muutos = ViivanOminaisuus();
         delete kohde;
@@ -134,12 +134,19 @@ void Viiva::tarkistaVaihe(VaiheetEnum vaihe) {
 }
 
 void Viiva::tarkistaKalibraatio() {
-    float konvergenssi = paksuus.konvergenssit.back() * sumeus.konvergenssit.back();
+    float konvergenssi;
+    if (paksuus.konvergenssit.back() == 0)
+        konvergenssi = sumeus.konvergenssit.back();
+    else if (sumeus.konvergenssit.back() == 0)
+        konvergenssi = paksuus.konvergenssit.back();
+    else
+        konvergenssi = paksuus.konvergenssit.back() * sumeus.konvergenssit.back();
+
 
     if (konvergenssi > 0.6)
         kalibraatioValmis = true;
-    kalibraatioValmis = false;
-
+    else
+        kalibraatioValmis = false;
 }
 
 void Viiva::tarkistaImprovisaatio() {
@@ -155,8 +162,6 @@ void Viiva::tarkistaImprovisaatio() {
 
     improvisaatioValmis = false;
 }
-
-
 
 void Viiva::tarkistaLahestyKohdetta() {
     lahestymisLaskuri++;
@@ -176,7 +181,7 @@ void Viiva::tarkistaLahestyKohdetta() {
 
     float muutoksenKeskihajonta = keskihajonta(arvot);
     cout << "muutoksen keskihajonta: " << muutoksenKeskihajonta << "\n";
-    
+
     if (muutoksenKeskihajonta < 0.003 && lahestymisLaskuri > 150)
         lahestyKohdettaValmis = true;
 
@@ -185,15 +190,14 @@ void Viiva::tarkistaLahestyKohdetta() {
 }
 
 void Viiva::lahestyKohdetta() {
-    muutos.lisaaJaLaske(muutoksenMaaraPolulla(),OTANNAN_KOKO);
+    muutos.lisaaJaLaske(muutoksenMaaraPolulla(), OTANNAN_KOKO);
 
     muokkaaVaria2(muutos.back());
 
 }
 
-
 void Viiva::asetaKalibraatio() {
-    kalibraatio.vari = varit.back();
+    kalibraatio.vari = haeVari();
 
     kalibraatio.paksuus = paksuus.back();
     kalibraatio.paksuusKa = paksuus.keskiarvot.back();
@@ -223,7 +227,7 @@ void Viiva::muokkaaVaria() {
 }
 
 float Viiva::muutoksenMaaraPolulla() {
-        //lasketaan käyttäjän improvisoinninaikaisen eleen muutoksen projektio vektorilla, joka osoittaa lähtöpisteestä päämäärään, PS-koordinaatistossa.
+    //lasketaan käyttäjän improvisoinninaikaisen eleen muutoksen projektio vektorilla, joka osoittaa lähtöpisteestä päämäärään, PS-koordinaatistossa.
     //skaalataan niin, että päämäärän kohdalla projektio on 1 ja lähtöpisteessä 0
     if (!kohde)
         return 0;
@@ -236,19 +240,24 @@ float Viiva::muutoksenMaaraPolulla() {
     float projektio = (m - k).dot((s - k).getNormalized()) / (s - k).length();
 
     return ofClamp(projektio, -0.5, 1.2);
-    
-}
 
+}
 
 void Viiva::muokkaaVaria2(float maara) {
 
-    
+
     ofVec3f kohta = variRGBtoVec3(kalibraatio.vari) + (variRGBtoVec3(kohde->kalibraatio.vari) - variRGBtoVec3(kalibraatio.vari)) * maara;
 
     varit.push_back(variRGBfromVec3(kohta));
     varit.back().r = ofClamp(varit.back().r, 0, 255);
     varit.back().g = ofClamp(varit.back().g, 0, 255);
     varit.back().b = ofClamp(varit.back().b, 0, 255);
+}
+
+ofColor Viiva::haeVari() {
+    if (varit.empty())
+        return ofColor();
+    return varit.back();
 }
 
 ofxOscMessage Viiva::makePisteAsOscMessage() {

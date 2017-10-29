@@ -23,13 +23,13 @@ struct Kalibraatio {
     float sumeusKhkh;
     float paksuusKonvergenssi;
     float sumeusKonvergenssi;
-    
+
     ofColor vari;
+
     ofVec2f paksuusSumeusVektori() {
-        return ofVec2f(paksuus,sumeus);
+        return ofVec2f(paksuus, sumeus);
     }
 };
-
 
 struct ViivanOminaisuus {
     vector<float> arvot;
@@ -69,13 +69,16 @@ struct ViivanOminaisuus {
 
     void laskeUusinKeskihajonnanKeskihajonta(int otanta) {
         int n = tarkistaKoko(otanta);
-        keskihajonnanKeskihajonnat.push_back(keskihajonta(keskihajonnat,n));
+        keskihajonnanKeskihajonnat.push_back(keskihajonta(keskihajonnat, n));
     }
-    
+
     void laskeUusinKonvergenssi() {
-        konvergenssit.push_back(1 - 5 * keskihajonnanKeskihajonnat.back() / keskiarvot.back());
+        if (keskiarvot.back() == 0)
+            konvergenssit.push_back(0);
+        else
+            konvergenssit.push_back(1 - 5 * keskihajonnanKeskihajonnat.back() / keskiarvot.back());
     }
-    
+
     void lisaaJaLaske(float uusi, int otanta) {
         arvot.push_back(uusi);
         laskeUusinKeskiarvo(otanta);
@@ -83,15 +86,25 @@ struct ViivanOminaisuus {
         laskeUusinKeskihajonnanKeskihajonta(otanta);
         laskeUusinKonvergenssi();
     }
-    
+
     float back() {
         return arvot.back();
     }
-    
+
     bool empty() {
         return arvot.empty();
     }
-    
+
+    string toString() {
+        if (empty())
+            return "";
+        return "arvo: " + std::to_string(arvot.back()) +
+                "\nkeskiarvo: " + std::to_string(keskiarvot.back()) +
+                "\nkeskihajonta: " + std::to_string(keskihajonnat.back()) +
+                "\nkeskihajonnankeskihajonta: " + std::to_string(keskihajonnanKeskihajonnat.back()) +
+                "\nkonvergenssi: " + std::to_string(konvergenssit.back()) + "\n";
+    }
+
 };
 
 struct Viiva : public ViivanApufunktiot {
@@ -105,11 +118,11 @@ struct Viiva : public ViivanApufunktiot {
     int lahestymisLaskuri;
     ViivanOminaisuus muutos;
     Viiva* kohde;
-    
+
     bool kalibraatioValmis;
     bool improvisaatioValmis;
     bool lahestyKohdettaValmis;
-    
+
     vector<ofPoint> pisteet;
     vector<ofColor> varit;
     vector<VaiheetEnum> vaiheet;
@@ -121,9 +134,9 @@ struct Viiva : public ViivanApufunktiot {
     Kalibraatio kalibraatio;
     Kalibraatio alkuperainenKalibraatio;
 
-    
+
     Viiva();
-    
+
     std::string nimeaViiva(std::string format = "%F_%H-%M-%S");
     void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
     void laskeUusimmat();
@@ -136,9 +149,10 @@ struct Viiva : public ViivanApufunktiot {
     ofVec2f paksuusSumeusVektori();
 
     void asetaKohde(Viiva* kohde_);
-    
+
     void muokkaaVaria();
     void muokkaaVaria2(float maara);
+    ofColor haeVari();
     void lahestyKohdetta();
     float muutoksenMaaraPolulla();
     void nollaaLaskurit();
@@ -147,8 +161,10 @@ struct Viiva : public ViivanApufunktiot {
     ofxOscMessage makePaksuusAsOscMessage();
     ofxOscMessage makeSumeusAsOscMessage();
 
-    unsigned int size(){return pisteet.size();}
-    
+    unsigned int size() {
+        return pisteet.size();
+    }
+
 
 protected:
 
