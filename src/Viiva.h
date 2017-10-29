@@ -117,7 +117,7 @@ struct Viiva : public ViivanApufunktiot {
     int improvisaatioLaskin;
     int lahestymisLaskuri;
     ViivanOminaisuus muutos;
-    Viiva* kohde;
+    std::shared_ptr<Viiva> kohde;
 
     bool kalibraatioValmis;
     bool improvisaatioValmis;
@@ -148,7 +148,7 @@ struct Viiva : public ViivanApufunktiot {
     void tarkistaLahestyKohdetta();
     ofVec2f paksuusSumeusVektori();
 
-    void asetaKohde(Viiva* kohde_);
+    void asetaKohde(shared_ptr<Viiva> kohde_);
 
     void muokkaaVaria();
     void muokkaaVaria2(float maara);
@@ -156,6 +156,7 @@ struct Viiva : public ViivanApufunktiot {
     void lahestyKohdetta();
     float muutoksenMaaraPolulla();
     void nollaaLaskurit();
+    void tyhjennaOminaisuudet();
 
     ofxOscMessage makePisteAsOscMessage();
     ofxOscMessage makePaksuusAsOscMessage();

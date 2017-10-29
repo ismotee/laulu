@@ -53,7 +53,7 @@ std::string Viiva::nimeaViiva(std::string format) {
     return std::string(buffer);
 }
 
-Viiva::Viiva() : improvisaatioLaskin(0), kalibraatioValmis(false),improvisaatioValmis(false) {
+Viiva::Viiva() : improvisaatioLaskin(0), kalibraatioValmis(false),improvisaatioValmis(false),kohde(NULL) {
     nimi = "viiva_" + nimeaViiva();
 }
 
@@ -116,6 +116,9 @@ void Viiva::tarkistaVaihe(VaiheetEnum vaihe) {
     if (vaiheet.back() == Kalibroi && vaihe == Improvisoi) {
         asetaKalibraatio();
         asetaAlkuperainenKalibraatio();
+        tyhjennaOminaisuudet();
+        varit.push_back(kalibraatio.vari);
+        
     } else if (vaihe == Improvisoi) {
         tarkistaImprovisaatio();
     }
@@ -128,7 +131,7 @@ void Viiva::tarkistaVaihe(VaiheetEnum vaihe) {
 
     if (vaihe != LahestyKohdetta && vaiheet.back() == LahestyKohdetta) {
         muutos = ViivanOminaisuus();
-        delete kohde;
+        kohde.reset();
     }
 
 }
@@ -297,7 +300,16 @@ void Viiva::nollaaLaskurit() {
     lahestyKohdettaValmis = false;
 }
 
-void Viiva::asetaKohde(Viiva* kohde_) {
+void Viiva::tyhjennaOminaisuudet() {
+    paksuus = ViivanOminaisuus();
+    sumeus = ViivanOminaisuus();
+    paine = ViivanOminaisuus();
+    pisteet.clear();
+    varit.clear();
+}
+
+
+void Viiva::asetaKohde(shared_ptr<Viiva> kohde_) {
     kohde = kohde_;
 }
 

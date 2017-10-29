@@ -152,7 +152,7 @@ VaiheetEnum Ohjain::improvisoi() {
     if (hidpen::isOpen)
         improvisointiValmis = ViivaOhjain::improvisointi(Kyna::paikka, Kyna::paine);
     else
-        improvisointiValmis = ViivaOhjain::improvisointi(Kyna::paikka, 1);
+        improvisointiValmis = ViivaOhjain::improvisointi(Kyna::paikka, 0.5);
 
     cout<< "improvisointi tehty\n";
     

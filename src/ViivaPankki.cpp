@@ -6,8 +6,12 @@ void ViivaPankki::aloitaUusiViivaNyt() {
 
 void ViivaPankki::lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe) {
     
-    if(vaihe == LaskeKohde)
-        viivaNyt.asetaKohde(etsiViiva());
+    if(vaihe == LaskeKohde) {
+        
+        shared_ptr<Viiva> ptr = make_shared<Viiva>(*etsiViiva());
+        
+        viivaNyt.asetaKohde(ptr);
+    }
     viivaNyt.lisaaPiste(paikka,paine,vaihe);
 }
 
