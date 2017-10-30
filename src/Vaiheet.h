@@ -2,7 +2,10 @@
 #include "ofMain.h"
 #include "Kyna.h"
 
-enum VaiheetEnum {Kulje,Kalibroi,Improvisoi,LaskeKohde,LahestyKohdetta,Viimeistele,Keskeyta};
+enum VaiheetEnum {Kulje,Kalibroi,Improvisoi,LaskeKohde,LahestyKohdetta,Viimeistele,Keskeyta,EiOle};
+
+VaiheetEnum tulkkaaVaihe(std::string vaiheStr);
+std::string vaiheenNimi(VaiheetEnum vaihe);
 
 
 struct Vaiheet: public Kyna {

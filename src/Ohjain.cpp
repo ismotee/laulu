@@ -18,7 +18,6 @@ void Ohjain::setup() {
     //näkyykö viiva: (paljasta / piilota)
     Monitori::paljasta();
     //Monitori::piilota();
-
 }
 
 void Ohjain::updateMonitori() {
@@ -69,7 +68,7 @@ void Ohjain::soittaa() {
     if(pankki.uusiViiva)
         Monitori::tyhjenna();
     
-    Viiva v = pankki.soita();
+    Viiva v = pankki.viivat[0];
     
     Monitori::piirraVari(v.haeVari());
     Monitori::piirraViiva(v);
@@ -118,7 +117,7 @@ VaiheetEnum Ohjain::kalibroi() {
         //tallenna viiva ja kuva
         if (tallennetaan) {
             ViivaOhjain::tallennaKalibrointi();
-            Monitori::tallennaKuvana(tallennusHakemisto + "kuvat/kalibroinnit/" + tiedosto::aika() + ".png");
+//            Monitori::tallennaKuvana(tallennusHakemisto + "kuvat/kalibroinnit/" + tiedosto::aika() + ".png");
         }
         cout << "kalibroitu\n";
         return Improvisoi;

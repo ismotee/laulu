@@ -57,6 +57,38 @@ Viiva::Viiva() : improvisaatioLaskin(0), kalibraatioValmis(false),improvisaatioV
     nimi = "viiva_" + nimeaViiva();
 }
 
+bool Viiva::muodostaViiva( 
+        const std::vector<ofPoint>& pisteet_, 
+        const std::vector<float>& paineet_, 
+        const std::vector<float>& paksuudet_, 
+        const std::vector<float>& sumeudet_, 
+        const std::vector<VaiheetEnum>& vaiheet_, 
+        const std::vector<ofColor>& varit_,
+        std::string nimi_
+) {
+    tyhjennaOminaisuudet();
+    int koko = pisteet_.size();
+    if( koko != paineet_.size()
+        || koko != paksuudet_.size()
+        || koko != sumeudet_.size() 
+        || koko != vaiheet_.size() 
+        || koko != varit_.size() 
+    )
+        return false; //vektorit eivät ole samankokoisia!
+    
+    pisteet = pisteet_;
+    vaiheet = vaiheet_;
+    varit = varit_;
+    nimi = nimi_;
+    
+    for(int i=0; i<koko; i++) {
+        paine.lisaaJaLaske(paineet_[i], OTANNAN_KOKO);
+        paksuus.lisaaJaLaske(paksuudet_[i], OTANNAN_KOKO);
+        sumeus.lisaaJaLaske(sumeudet_[i], OTANNAN_KOKO);
+    } 
+    return true;
+}
+
 void Viiva::lisaaPiste(ofPoint paikka, float paine_, VaiheetEnum vaihe) {
 
     if (!vaiheet.empty())

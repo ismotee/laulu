@@ -1,5 +1,33 @@
 #include "Vaiheet.h"
 
+//{Kulje,Kalibroi,Improvisoi,LaskeKohde,LahestyKohdetta,Viimeistele,Keskeyta,EiOle};
+
+VaiheetEnum tulkkaaVaihe(std::string vaiheStr) {
+    //tassa kartassa on vaiheiden kutsumanimet:
+    static const std::map<std::string, VaiheetEnum> vaiheSanat {
+        { "Kalibroi", Kalibroi },
+        { "Improvisoi", Improvisoi },
+        { "LahestyKohdetta", LahestyKohdetta }
+    };
+
+    //katsotaan kartasta, vastaako annettu sana jotain vaihetta, ja palautetaan se vaihe
+    const auto iter = vaiheSanat.find( vaiheStr );
+    if( iter != vaiheSanat.cend() )
+        return iter->second;
+    
+    //jos ei ymmarretty sanaa, palautetaan vaihe 'EiOle'
+    return EiOle;
+}
+
+std::string vaiheenNimi(VaiheetEnum vaihe) {
+    switch(vaihe) {
+        case Kalibroi: return "Kalibroi";
+        case Improvisoi: return "Improvisoi";
+        case LahestyKohdetta: return "LahestyKohdetta";
+        default: return "EiOle";
+    }
+}
+
 void Vaiheet::setup() {
     vaiheetEnum = Kulje;
     Kyna::setup();

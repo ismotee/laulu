@@ -9,11 +9,8 @@
         <in>OscInterface.cpp</in>
         <in>Sessio.cpp</in>
         <in>Soitin.cpp</in>
-        <in>Soitin.h</in>
-        <in>Tilat.h</in>
         <in>Vaiheet.cpp</in>
         <in>Viiva.cpp</in>
-        <in>Viiva.h</in>
         <in>ViivaOhjain.cpp</in>
         <in>ViivaPankki.cpp</in>
         <in>hidpen.cpp</in>
@@ -40,10 +37,12 @@
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h</itemPath>
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h</itemPath>
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/ip/PacketListener.h</itemPath>
+              <itemPath>../../../addons/ofxOsc/libs/oscpack/src/ip/TimerListener.h</itemPath>
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h</itemPath>
             </logicalFolder>
             <logicalFolder name="osc" displayName="osc" projectFiles="true">
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h</itemPath>
+              <itemPath>../../../addons/ofxOsc/libs/oscpack/src/osc/OscHostEndianness.h</itemPath>
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.cpp</itemPath>
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h</itemPath>
               <itemPath>../../../addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h</itemPath>
@@ -65,6 +64,7 @@
         <itemPath>../../../addons/ofxOsc/src/ofxOscMessage.cpp</itemPath>
         <itemPath>../../../addons/ofxOsc/src/ofxOscMessage.h</itemPath>
         <itemPath>../../../addons/ofxOsc/src/ofxOscParameterSync.cpp</itemPath>
+        <itemPath>../../../addons/ofxOsc/src/ofxOscParameterSync.h</itemPath>
         <itemPath>../../../addons/ofxOsc/src/ofxOscReceiver.cpp</itemPath>
         <itemPath>../../../addons/ofxOsc/src/ofxOscReceiver.h</itemPath>
         <itemPath>../../../addons/ofxOsc/src/ofxOscSender.cpp</itemPath>
@@ -136,17 +136,17 @@
               <pElem>../../../libs/utf8cpp/include</pElem>
               <pElem>../../../libs/utf8cpp/include/utf8</pElem>
               <pElem>../../../libs/openFrameworks</pElem>
-              <pElem>../../../libs/openFrameworks/types</pElem>
-              <pElem>../../../libs/openFrameworks/app</pElem>
-              <pElem>../../../libs/openFrameworks/3d</pElem>
-              <pElem>../../../libs/openFrameworks/communication</pElem>
               <pElem>../../../libs/openFrameworks/graphics</pElem>
-              <pElem>../../../libs/openFrameworks/video</pElem>
-              <pElem>../../../libs/openFrameworks/math</pElem>
-              <pElem>../../../libs/openFrameworks/utils</pElem>
-              <pElem>../../../libs/openFrameworks/sound</pElem>
+              <pElem>../../../libs/openFrameworks/3d</pElem>
               <pElem>../../../libs/openFrameworks/events</pElem>
+              <pElem>../../../libs/openFrameworks/sound</pElem>
+              <pElem>../../../libs/openFrameworks/communication</pElem>
+              <pElem>../../../libs/openFrameworks/utils</pElem>
+              <pElem>../../../libs/openFrameworks/types</pElem>
               <pElem>../../../libs/openFrameworks/gl</pElem>
+              <pElem>../../../libs/openFrameworks/math</pElem>
+              <pElem>../../../libs/openFrameworks/app</pElem>
+              <pElem>../../../libs/openFrameworks/video</pElem>
             </incDir>
             <preprocessorList>
               <Elem>GCC_HAS_REGEX</Elem>
@@ -248,10 +248,6 @@
         <ccTool>
           <incDir>
             <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
             <pElem>nbproject</pElem>
             <pElem>nbproject/private</pElem>
             <pElem>../../../addons/ofxOsc/src</pElem>
@@ -301,19 +297,17 @@
         <ccTool flags="0">
         </ccTool>
       </item>
-      <item path="src/Soitin.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Soitin.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Tilat.h" ex="false" tool="3" flavor2="0">
+      <item path="src/Soitin.cpp" ex="false" tool="1" flavor2="11">
+        <ccTool flags="0">
+        </ccTool>
       </item>
       <item path="src/Vaiheet.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
         </ccTool>
       </item>
-      <item path="src/Viiva.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Viiva.h" ex="false" tool="3" flavor2="0">
+      <item path="src/Viiva.cpp" ex="false" tool="1" flavor2="11">
+        <ccTool flags="0">
+        </ccTool>
       </item>
       <item path="src/ViivaOhjain.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">

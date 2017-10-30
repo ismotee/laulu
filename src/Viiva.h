@@ -136,7 +136,16 @@ struct Viiva : public ViivanApufunktiot {
 
 
     Viiva();
-
+    bool muodostaViiva( 
+            const std::vector<ofPoint>& pisteet_,
+            const std::vector<float>& paineet_,
+            const std::vector<float>& paksuudet_,
+            const std::vector<float>& sumeudet_,
+            const std::vector<VaiheetEnum>& vaiheet_,
+            const std::vector<ofColor>& varit_,
+            std::string nimi_
+    );
+    
     std::string nimeaViiva(std::string format = "%F_%H-%M-%S");
     void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
     void laskeUusimmat();
