@@ -19,6 +19,9 @@ void Ohjain::setup() {
     Monitori::paljasta();
     //Monitori::piilota();
     Tilat::tila = Rajaa;
+    
+    //valintakriteerien kokeilua:
+    savyAlue = Alue(200, 230);
 }
 
 void Ohjain::updateMonitori() {
@@ -54,6 +57,10 @@ void Ohjain::update() {
 
     // tehdään OSC paketin lähetys
     updateOSC();
+    
+    //kokeillaan valintakriteerejä
+    savyAlue.min += 0.1;
+    savyAlue.max += 0.1;
 
 }
 
@@ -67,7 +74,6 @@ void Ohjain::piirtaa() {
 }
 
 void Ohjain::soittaa() {
-
 
     ViivaOhjain::soita();
 
@@ -84,7 +90,10 @@ void Ohjain::rajaa() {
     pankki.valitseViivat(savyAlue,saturaatioAlue,kirkkausAlue,paksuusAlue,sumeusAlue);
     
     //piirretään kartta
-    Monitori::piirraKartta(ViivaOhjain::pankki.viivat);
+    Monitori::tyhjenna();
+    Monitori::piirraKartta(ViivaOhjain::pankki.viivat, 3);
+    Monitori::piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);
+    
 }
 
 VaiheetEnum Ohjain::kulje() {

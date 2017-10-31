@@ -280,15 +280,13 @@ void Monitori::tallennaKuvana(std::string tiedosto) {
 }
 
 
-void Monitori::piirraKartta(const std::vector<Viiva>& viivat) {
+void Monitori::piirraKartta(const std::vector<Viiva>& viivat, float r) {
     if(viivat.empty() ) {
         std::cerr << "Monitori::piirraKartta: Ei viivoja!\n";
         return;
     }
 
     viivaFbo.begin();
-    //taustavärinä sama kuin blurrin reunat
-    ofClear(pensseli::clearColor);
 
     //piirretään viivat karttaan
     for(unsigned int i=0; i<viivat.size(); i++) {        
@@ -299,7 +297,7 @@ void Monitori::piirraKartta(const std::vector<Viiva>& viivat) {
         float y = (1 - viivat[i].kalibraatio.sumeusKa) * ofGetHeight();
         ofSetColor(viivat[i].kalibraatio.vari);
         
-        ofDrawCircle(x,y,10);
+        ofDrawCircle(x,y,r);
     }
 
     viivaFbo.end();

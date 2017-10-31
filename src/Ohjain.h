@@ -12,8 +12,6 @@ struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public Monitori
     ofColor monitoriVari;
     Alue savyAlue,saturaatioAlue,kirkkausAlue,paksuusAlue,sumeusAlue;
     
-    
-    
     void setup();
     void update();
     void updateMonitori();
@@ -38,7 +36,6 @@ struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public Monitori
     
     
     // Tilat funktiot
-    
     void piirtaa();
     void soittaa();
     void rajaa();

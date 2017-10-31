@@ -1,5 +1,65 @@
 #include "ViivaPankki.h"
 
+float wrap(float f, float max) {
+    if(f > max) {
+        int n = (int)(f/max);
+        f -= n * max;                
+    }
+    if(f < 0) {
+        f *= -1;
+        //poistetaan max:n monikerrat
+        int n = (int)(f/max);
+        f -= n*max;        
+        f *= -1;//käännetään takaisin. Tämän jälkeen f on [-max ... 0]
+        f += max; //nyt pitäisi olla [0...max]
+    }
+    return f;
+}
+
+
+bool Alue::onAlueella(float f) const {
+    if (f < min) return false;
+    else if (f > max) return false;
+    else return true;
+}
+
+
+bool Alue::onAlueella_wrapped(float f, float wrapLimit) const{
+    float r = this->range();
+    float P = this->keskipiste();
+    
+    P = wrap(P, wrapLimit);
+    f = wrap(f, wrapLimit);
+    
+    if(P >= r && P <= wrapLimit - r ) {
+        if(f > P-r && f < P+r) return true;
+        else return false;
+    }
+    else if (P < r) {
+        if(f > P - r + wrapLimit || f < P+r) return true;
+        else return false;
+    }
+    else if (P > wrapLimit - r) {
+        if(f > P-r || f < P + r - wrapLimit) return true;
+        else return false;
+    }
+}
+
+
+float Alue::keskipiste() const{
+    return range() + min;
+}
+
+float Alue::range() const{ //maksimietäisyys keskipisteestä
+    return (max - min) / 2;
+}
+
+void Alue::asetaKeskipisteenMukaan(float p, float r) {
+    min = p - r;
+    max = p + r;
+}
+
+
 void ViivaPankki::aloitaUusiViivaNyt() {
     viivaNyt = Viiva();
 }
@@ -81,5 +141,24 @@ void ViivaPankki::asetaKohteeksi(int id) {
 }
 
 void ViivaPankki::valitseViivat(Alue savyAlue, Alue saturaatioAlue, Alue kirkkausAlue, Alue paksuusAlue, Alue sumeusAlue) {
-
+    
+    valitutViivat.clear();
+    
+    for(int i = 0; i < viivat.size(); i ++) {
+        Kalibraatio k = viivat[i].kalibraatio;
+        
+        if(!savyAlue.onAlueella_wrapped(k.vari.getHue(), 255) || !savyAlue.aktiivinen )
+            continue;
+        if(!saturaatioAlue.onAlueella(k.vari.getSaturation() ) || !saturaatioAlue.aktiivinen)
+            continue;
+        if(!kirkkausAlue.onAlueella(k.vari.getBrightness() ) || !kirkkausAlue.aktiivinen) 
+            continue;
+        if(!paksuusAlue.onAlueella(k.paksuus) || !paksuusAlue.aktiivinen)
+            continue;
+        if(!sumeusAlue.onAlueella(k.sumeus) || !sumeusAlue.aktiivinen)
+            continue;
+        
+        //jos tähän päästiin, ollaan alueilla!
+        valitutViivat.push_back(viivat[i]);
+    }
 }

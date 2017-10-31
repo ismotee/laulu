@@ -55,7 +55,7 @@ public:
     void piirraViivaAlusta(const Viiva&, unsigned int n);
     void piirraVari(ofColor vari_);
     
-    void piirraKartta(const std::vector<Viiva>& viivat);    
+    void piirraKartta(const std::vector<Viiva>& viivat, float r = 10);
     
     void tyhjenna();
     

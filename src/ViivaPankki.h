@@ -18,7 +18,13 @@ struct Alue {
     float min;
     float max;
     
-    Alue():aktiivinen(true),min(0),max(0){}
+    Alue():aktiivinen(true),min(0),max(255){}
+    Alue(float min_, float max_): aktiivinen(true),min(min_), max(max_){}
+    bool onAlueella(float f) const;
+    bool onAlueella_wrapped(float f, float wrapLimit = 255) const;
+    float keskipiste() const;
+    float range() const;
+    void asetaKeskipisteenMukaan(float p, float r);
 };
 
 
