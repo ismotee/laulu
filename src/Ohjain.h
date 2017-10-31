@@ -7,7 +7,7 @@
 #include "Viiva.h"
 #include "Tilat.h"
 
-struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public Monitori, public OscInterface {
+struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public Monitori, public OscViiva {
 
     ofColor monitoriVari;
     

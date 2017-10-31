@@ -24,6 +24,9 @@ void ViivaOhjain::setup(string hakemisto_, string tallennusHakemisto_) {
     
     pankki.aloitaUusiViivaNyt();
     
+    lukupaa = 1;
+    soitettava_id = 0;
+    soitettava = pankki[0];
 }
 
 bool ViivaOhjain::kalibrointi(ofPoint paikka, float paine) {
@@ -43,8 +46,6 @@ bool ViivaOhjain::improvisointi(ofPoint paikka, float paine) {
 }
 
 bool ViivaOhjain::laskeKohdeVari() {
-
-
 
 }
 
@@ -68,5 +69,43 @@ bool ViivaOhjain::lahesty(ofPoint paikka, float paine) {
 }
 
 bool ViivaOhjain::kulkeminen() {
+    //ofRandom(0,pankki.size());
+}
+
+void ViivaOhjain::soita() {
+    lukupaa++;
+    if(lukupaa >= pankki[soitettava_id].size())
+        lukupaa = 1;
+    
+    cout << "koko: " << lukupaa << "/" << pankki[soitettava_id].size() << "\n";
+    
+    soitettava = pankki[soitettava_id];
+    
+    soitettava.resize(lukupaa);
+}
+
+void ViivaOhjain::soitaTaakse() {
+
+}
+
+void ViivaOhjain::edellinenViiva() {
+    soitettava_id--;
+    if(soitettava_id< 0)
+        soitettava_id = pankki.size() -1;
+    
+}
+
+void ViivaOhjain::seuraavaViiva() {
+    soitettava_id++;
+    if(soitettava_id>=pankki.size())
+        soitettava_id=0;
+    
+}
+
+const Viiva& ViivaOhjain::haeKalibrointi() const {
+
+}
+
+const Viiva& ViivaOhjain::haeMuokattava() const {
 
 }

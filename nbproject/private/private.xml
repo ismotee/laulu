@@ -10,17 +10,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/ViivaPankki.cpp</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/Viiva.h</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/Ohjain.cpp</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/ViivaPankki.h</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/tiedosto.cpp</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/Soitin.h</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/Vaiheet.cpp</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/Soitin.cpp</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/Viiva.cpp</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/tiedosto.h</file>
-            <file>file:/home/olento/koodaus/of_v0.9.8_linux64_release/apps/myApps/laulu/src/Vaiheet.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/ViivaPankki.cpp</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Ohjain.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Viiva.cpp</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/ViivaOhjain.cpp</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/ViivaPankki.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/tiedosto.cpp</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/hidpen.cpp</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Viiva.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/OscInterface.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/OscInterface.cpp</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/ViivaOhjain.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Vaiheet.h</file>
+            <file>file:/home/ismo/ohjelmointi/openFrameworks/apps/olento/laulu/src/Ohjain.cpp</file>
         </group>
     </open-files>
 </project-private>

@@ -30,8 +30,14 @@ struct ViivaOhjain {
     const Viiva& haeKalibrointi() const;
     
     
+    void soita();
+    void soitaTaakse();
     
-    
-private:
+    void edellinenViiva();
+    void seuraavaViiva();
+
+    int lukupaa;
+    int soitettava_id;
+    Viiva soitettava;
     
 };

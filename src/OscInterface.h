@@ -1,10 +1,16 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "Vaiheet.h"
+#include "Viiva.h"
+
 
 struct OscInterface {
     
     bool connection;
+    bool setupDone;
+    
+    OscInterface():setupDone(false),connection(false) {}
     
     ofxOscReceiver receiver;
     ofxOscSender sender;
@@ -16,4 +22,8 @@ struct OscInterface {
     void connect();
     void disconnect();
 
+};
+
+struct OscViiva: public OscInterface {
+    void sendViiva(Viiva& viiva);
 };

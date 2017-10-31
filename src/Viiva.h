@@ -31,6 +31,24 @@ struct Kalibraatio {
     }
 };
 
+struct OminaisuusSiivu {
+    float arvo;
+    float keskiarvo;
+    float keskihajonta;
+    float keskihajonnanKeskihajonta;
+    float konvergenssi;
+    
+};
+
+struct ViivanSiivu {
+    ofPoint piste;
+    ofColor vari;
+    OminaisuusSiivu paine;
+    OminaisuusSiivu paksuus;
+    OminaisuusSiivu sumeus;
+    VaiheetEnum vaihe;
+};
+
 struct ViivanOminaisuus {
     vector<float> arvot;
     vector<float> keskiarvot;
@@ -45,6 +63,8 @@ struct ViivanOminaisuus {
     float& operator[](int x) {
         return arvot[x];
     }
+    
+    OminaisuusSiivu haeSiivu(int id);
 
     int tarkistaKoko(unsigned int otanta) {
         int n = 0;
@@ -95,6 +115,14 @@ struct ViivanOminaisuus {
         return arvot.empty();
     }
 
+    void resize(int i) {
+        arvot.resize(i);
+        keskiarvot.resize(i);
+        keskihajonnat.resize(i);
+        keskihajonnanKeskihajonnat.resize(i);
+        konvergenssit.resize(i);
+    }
+    
     string toString() {
         if (empty())
             return "";
@@ -106,6 +134,7 @@ struct ViivanOminaisuus {
     }
 
 };
+
 
 struct Viiva : public ViivanApufunktiot {
     //miten suurta osaa datasta käytetään tilastollisessa tarkastelussa:
@@ -147,6 +176,7 @@ struct Viiva : public ViivanApufunktiot {
     );
     
     std::string nimeaViiva(std::string format = "%F_%H-%M-%S");
+    bool kulje();
     void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
     void laskeUusimmat();
     void asetaKalibraatio();
@@ -156,6 +186,18 @@ struct Viiva : public ViivanApufunktiot {
     void tarkistaImprovisaatio();
     void tarkistaLahestyKohdetta();
     ofVec2f paksuusSumeusVektori();
+    ViivanSiivu haeSiivu(int id) {
+        ViivanSiivu siivu;
+        if(id < pisteet.size()) {
+            siivu.piste = pisteet[id];
+            siivu.vari = varit[id];
+            siivu.paksuus = paksuus.haeSiivu(id);
+            siivu.sumeus = sumeus.haeSiivu(id);
+            siivu.paine = paine.haeSiivu(id);
+            siivu.vaihe = vaiheet[id];
+        }
+        return siivu;
+    }
 
     void asetaKohde(shared_ptr<Viiva> kohde_);
 
@@ -166,6 +208,7 @@ struct Viiva : public ViivanApufunktiot {
     float muutoksenMaaraPolulla();
     void nollaaLaskurit();
     void tyhjennaOminaisuudet();
+    void resize(int i);
 
     ofxOscMessage makePisteAsOscMessage();
     ofxOscMessage makePaksuusAsOscMessage();

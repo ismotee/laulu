@@ -10,6 +10,7 @@ Viiva tiedosto::lataaViiva(std::string tiedostonNimi) {
     
     std::ifstream file(tiedostonNimi, std::ios::binary | std::ios::in);
     if(!file.is_open() ) {
+        cout << "ei tiedostoa: " << tiedostonNimi << "\n";
         return result; //ei tiedostoa!
     }
     
@@ -136,7 +137,6 @@ Viiva tiedosto::lataaViiva(std::string tiedostonNimi) {
             
             varit.insert(varit.end(),buffer,buffer+koko);
             
-            
             delete[] buffer;
         }
     
@@ -146,14 +146,15 @@ Viiva tiedosto::lataaViiva(std::string tiedostonNimi) {
         }
         
         //Jos vaihe on Kalibroi, lisätään väreiksi kalibraation väriä
-        if(vaihe == Kalibroi && varit.size() != pisteet.size() ) {
+        if(vaihe == Kalibroi) {
             varit.resize(pisteet.size(), kalibraationVari);
         }
-        
-    }
+    } 
     file.close();
     
     result.muodostaViiva(pisteet, paineet, paksuudet, sumeudet, vaiheet, varit, nimi);
+    cout << "ladattiin pisteet: " << result.pisteet.size() << "\n"; 
+    
     return result;
 }
 

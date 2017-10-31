@@ -73,9 +73,10 @@ bool Viiva::muodostaViiva(
         || koko != sumeudet_.size() 
         || koko != vaiheet_.size() 
         || koko != varit_.size() 
-    )
+    ) {
+        cout << "muodosta viiva: vektorien koko ei täsmää: " << pisteet_.size() << " " << paineet_.size() << " " << paksuudet_.size() << " " << sumeudet_.size() << " " << vaiheet_.size() << " " << varit_.size() << "\n";
         return false; //vektorit eivät ole samankokoisia!
-    
+    }
     pisteet = pisteet_;
     vaiheet = vaiheet_;
     varit = varit_;
@@ -345,5 +346,23 @@ void Viiva::asetaKohde(shared_ptr<Viiva> kohde_) {
     kohde = kohde_;
 }
 
+OminaisuusSiivu ViivanOminaisuus::haeSiivu(int id) {
+    OminaisuusSiivu siivu;
+    if (id < size()) {
+        siivu.arvo = arvot[id];
+        siivu.keskiarvo = keskiarvot[id];
+        siivu.keskihajonta = keskihajonnat[id];
+        siivu.keskihajonnanKeskihajonta = keskihajonnanKeskihajonnat[id];
+        siivu.konvergenssi = konvergenssit[id];
+    }
+    return siivu;
+}
 
-
+void Viiva::resize(int i) {
+    pisteet.resize(i);
+    varit.resize(i);
+    vaiheet.resize(i);
+    paine.resize(i);
+    paksuus.resize(i);
+    sumeus.resize(i);
+}

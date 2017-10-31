@@ -1,7 +1,7 @@
 #include "ViivaPankki.h"
 
 void ViivaPankki::aloitaUusiViivaNyt() {
-    
+    viivaNyt = Viiva();
 }
 
 void ViivaPankki::lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe) {
@@ -73,4 +73,9 @@ bool ViivaPankki::lataaHakemistosta(string polku) {
     for(int i = 0; i < dir.size();i++)
         viivat.push_back(tiedosto::lataaViiva(dir[i].getAbsolutePath()));
     
+}
+
+void ViivaPankki::asetaKohteeksi(int id) {
+    if(id < size())
+        viivaNyt.asetaKohde(make_shared<Viiva>(viivat[id]));
 }

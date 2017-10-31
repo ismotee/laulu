@@ -6,10 +6,28 @@
         <df name="data">
           <df name="arkisto">
           </df>
+          <df name="keskeytetytViivat">
+          </df>
           <df name="tallennetut">
+            <df name="kuvat">
+              <df name="kalibroinnit">
+              </df>
+              <df name="kokonaiset">
+              </df>
+            </df>
+          </df>
+          <df name="valmiitViivat">
           </df>
         </df>
         <df name="libs">
+        </df>
+      </df>
+      <df name="data">
+        <df name="arkisto">
+        </df>
+        <df name="keskeytetytViivat">
+        </df>
+        <df name="valmiitViivat">
         </df>
       </df>
       <df name="obj">

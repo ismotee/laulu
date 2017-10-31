@@ -5,7 +5,7 @@
 VaiheetEnum tulkkaaVaihe(std::string vaiheStr) {
     //tassa kartassa on vaiheiden kutsumanimet:
     static const std::map<std::string, VaiheetEnum> vaiheSanat {
-        { "Kalibroi", Kalibroi },
+        { "kalibrointi", Kalibroi },
         { "Improvisoi", Improvisoi },
         { "LahestyKohdetta", LahestyKohdetta }
     };
@@ -21,7 +21,7 @@ VaiheetEnum tulkkaaVaihe(std::string vaiheStr) {
 
 std::string vaiheenNimi(VaiheetEnum vaihe) {
     switch(vaihe) {
-        case Kalibroi: return "Kalibroi";
+        case Kalibroi: return "kalibrointi";
         case Improvisoi: return "Improvisoi";
         case LahestyKohdetta: return "LahestyKohdetta";
         default: return "EiOle";

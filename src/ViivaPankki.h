@@ -14,22 +14,28 @@
  */
 
 
-struct ViivaPankki: public Soitin {
+struct ViivaPankki {
 
     vector<Viiva> viivat;
     // kalibrointi ja muokattava viiva pidetään erillään pankista.
     //muokattavaaa viivaa myös tarkastellaan kalibroinnin aikana
     
+    
+    Viiva& operator[](std::size_t idx)       { return viivat[idx]; }
+    const Viiva& operator[](std::size_t idx) const { return viivat[idx]; }
+
+    bool empty(){return viivat.empty();}
+    long unsigned int size(){return viivat.size();}
+    
     Viiva viivaNyt;
     vector<float> samankaltaisuus;
-    
-    
     
     ViivaPankki() {}
 
     void aloitaUusiViivaNyt();
     void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
     Viiva* etsiViiva();
+    void asetaKohteeksi(int id);
     
     // lataus ja tallennus
     // tapahtuu aina hakemistokohtaisesti.
@@ -37,4 +43,5 @@ struct ViivaPankki: public Soitin {
     void tallennaHakemistoon(string polku);
     bool lataaHakemistosta(string polku);
         
+private:
 };
