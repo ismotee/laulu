@@ -293,8 +293,8 @@ void Monitori::piirraKartta(const std::vector<Viiva>& viivat, float r) {
 /*        float x = viivat[i].paksuus.keskiarvot.back() * ofGetWidth();
         float y = (1 - viivat[i].sumeus.keskiarvot.back() ) * ofGetHeight();
         ofSetColor(viivat[i].varit[i]);*/
-        float x = viivat[i].kalibraatio.paksuusKa * ofGetWidth();
-        float y = (1 - viivat[i].kalibraatio.sumeusKa) * ofGetHeight();
+        float x = viivat[i].kalibraatio.paksuus * ofGetWidth();
+        float y = (1 - viivat[i].kalibraatio.sumeus) * ofGetHeight();
         ofSetColor(viivat[i].kalibraatio.vari);
         
         ofDrawCircle(x,y,r);

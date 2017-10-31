@@ -169,12 +169,12 @@ void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeus) {
     if(viivat.empty())
         return;
     
-    float lyhinEtaisyys = (viivat[0].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).lengthSquared();
+    float lyhinEtaisyys = (viivat[0].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).length();
     int lyhinId = 0;
     
     for(int i = 0; i < viivat.size();i++) {
 
-        float etaisyys = (viivat[i].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).lengthSquared();
+        float etaisyys = (viivat[i].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).length();
 
         if(etaisyys < lyhinEtaisyys) {
             lyhinEtaisyys = etaisyys;
@@ -186,7 +186,7 @@ void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeus) {
     for(int i = 0; i < valitutViivat.size();i++) {
         
         // verrataan nimeen, koska nimi on aina uniikki. 
-        if(viivat[lyhinId].nimi.compare(valitutViivat[i]) == 0) {
+        if(viivat[lyhinId].nimi.compare(valitutViivat[i].nimi) == 0) {
             // poistetaan viiva ja lopetetaan metodi välittömästi
             valitutViivat.erase(valitutViivat.begin()+i);
             return;

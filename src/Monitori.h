@@ -37,6 +37,8 @@ public:
 
 class Monitori : public pensseli {
 public:
+    static ofVec2f paksuusSumeusHiiresta();
+
     ofColor taustaVari = ofColor::black;
     ofFbo viivaFbo;
     

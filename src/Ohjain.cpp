@@ -59,8 +59,8 @@ void Ohjain::update() {
     updateOSC();
     
     //kokeillaan valintakriteerejä
-    savyAlue.min += 0.1;
-    savyAlue.max += 0.1;
+    //savyAlue.min += 0.1;
+    //savyAlue.max += 0.1;
 
 }
 
@@ -82,18 +82,22 @@ void Ohjain::soittaa() {
     if (soitettava.size()) {
         Monitori::piirraVari(ViivaOhjain::soitettava.haeVari());
         Monitori::piirraViiva(ViivaOhjain::soitettava);
-    }
+    }        
 }
 
 void Ohjain::rajaa() {
     
-    pankki.valitseViivat(savyAlue,saturaatioAlue,kirkkausAlue,paksuusAlue,sumeusAlue);
+    //pankki.valitseViivat(savyAlue,saturaatioAlue,kirkkausAlue,paksuusAlue,sumeusAlue);
     
     //piirretään kartta
     Monitori::tyhjenna();
     Monitori::piirraKartta(ViivaOhjain::pankki.viivat, 3);
     Monitori::piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);
-    
+        
+    if(Kyna::click) {
+        //Kynasta saa suoraan paksuus-sumeus-vektorin:
+        ViivaOhjain::pankki.toglaaValinta(Kyna::paikka_scaled);
+    }
 }
 
 VaiheetEnum Ohjain::kulje() {

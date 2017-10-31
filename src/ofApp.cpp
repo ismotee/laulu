@@ -18,6 +18,7 @@ void ofApp::setupMonitor() {
 
 void ofApp::update() {
     Ohjain::update();
+    Kyna::update();   
 }
 
 //--------------------------------------------------------------
