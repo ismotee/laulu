@@ -162,3 +162,37 @@ void ViivaPankki::valitseViivat(Alue savyAlue, Alue saturaatioAlue, Alue kirkkau
         valitutViivat.push_back(viivat[i]);
     }
 }
+
+// etsitään viivaa, joka on lähimpänä annettua Paksuus-Sumeus vektoria valituista Viivaoista. Jos löytyy, poistetaan. Jos ei, lisätään.
+void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeus) {
+
+    if(viivat.empty())
+        return;
+    
+    float lyhinEtaisyys = (viivat[0].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).lengthSquared();
+    int lyhinId = 0;
+    
+    for(int i = 0; i < viivat.size();i++) {
+
+        float etaisyys = (viivat[i].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).lengthSquared();
+
+        if(etaisyys < lyhinEtaisyys) {
+            lyhinEtaisyys = etaisyys;
+            lyhinId = i;
+        }
+    }
+    
+    
+    for(int i = 0; i < valitutViivat.size();i++) {
+        
+        // verrataan nimeen, koska nimi on aina uniikki. 
+        if(viivat[lyhinId].nimi.compare(valitutViivat[i]) == 0) {
+            // poistetaan viiva ja lopetetaan metodi välittömästi
+            valitutViivat.erase(valitutViivat.begin()+i);
+            return;
+        }
+    }
+    // jos ei löytynyt niin lisätään viiva
+    valitutViivat.push_back(viivat[lyhinId]);
+    
+}

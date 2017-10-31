@@ -52,6 +52,7 @@ struct ViivaPankki {
     Viiva* etsiViiva();
     void asetaKohteeksi(int id);
     void valitseViivat(Alue savyAlue,Alue saturaatioAlue, Alue kirkkausAlue, Alue paksuusAlue, Alue sumeusAlue);
+    void toglaaValinta(ofVec2f paksuusSumeus);
     
     // lataus ja tallennus
     // tapahtuu aina hakemistokohtaisesti.
