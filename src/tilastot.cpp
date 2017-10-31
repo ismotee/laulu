@@ -3,11 +3,19 @@
 #include <cmath>
 
 
-float keskiarvo(const std::vector<float>& v) {
+float keskiarvo(const std::vector<float>& v){
     if(v.empty() ) return 0;
     
     float summa = std::accumulate(v.begin(), v.end(), 0.0);
     return summa / v.size();
+}
+
+
+float keskiarvo(const std::vector<float>& v, int otanta){
+    if(v.empty() ) return 0;
+    
+    float summa = std::accumulate(v.begin()+(v.size()-otanta), v.end(), 0.0);
+    return summa / otanta;
 }
 
 
@@ -24,12 +32,6 @@ float keskihajonta(const std::vector<float>& v) {
     return std::sqrt(varianssi(v) );
 }
 
-float keskiarvo(const std::vector<float>& v, int otanta) {
-    if(v.empty() ) return 0;
-    
-    float summa = std::accumulate(v.begin()+(v.size()-otanta), v.end(), 0.0);
-    return summa / otanta;
-}
 
 
 float varianssi(const std::vector<float>& v, int otanta) {

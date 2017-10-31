@@ -67,6 +67,8 @@ bool Viiva::muodostaViiva(
         std::string nimi_
 ) {
     tyhjennaOminaisuudet();
+    
+    //tarkistetaan, että eri vektorien koot täsmäävät
     int koko = pisteet_.size();
     if( koko != paineet_.size()
         || koko != paksuudet_.size()
@@ -77,16 +79,31 @@ bool Viiva::muodostaViiva(
         cout << "muodosta viiva: vektorien koko ei täsmää: " << pisteet_.size() << " " << paineet_.size() << " " << paksuudet_.size() << " " << sumeudet_.size() << " " << vaiheet_.size() << " " << varit_.size() << "\n";
         return false; //vektorit eivät ole samankokoisia!
     }
+    
+    //seuraavat vektorit voi kopioida suoraan:
     pisteet = pisteet_;
     vaiheet = vaiheet_;
     varit = varit_;
     nimi = nimi_;
     
+    //paineet, paksuudet ja sumeudet pitää laskea yksitellen:
     for(int i=0; i<koko; i++) {
+        
+        //asetetaan kalibrointitiedot kun kalibrointivaihe päättyy:
+        if(i>0) {            
+            if(vaiheet[i] != Kalibroi && vaiheet[i-1] == Kalibroi)
+                asetaKalibraatio();
+        }
+        
         paine.lisaaJaLaske(paineet_[i], OTANNAN_KOKO);
         paksuus.lisaaJaLaske(paksuudet_[i], OTANNAN_KOKO);
         sumeus.lisaaJaLaske(sumeudet_[i], OTANNAN_KOKO);
     } 
+
+    //jos oli pelkkää kalibraatiota loppuun asti, tallennetaan lopussa kalibrointitiedot
+    if(!kalibraatioValmis)
+        asetaKalibraatio();
+    
     return true;
 }
 
@@ -246,6 +263,7 @@ void Viiva::asetaKalibraatio() {
     kalibraatio.sumeusKh = sumeus.keskihajonnat.back();
     kalibraatio.sumeusKhkh = sumeus.keskihajonnanKeskihajonnat.back();
     kalibraatio.sumeusKonvergenssi = sumeus.konvergenssit.back();
+    kalibraatioValmis = true;
 }
 
 void Viiva::asetaAlkuperainenKalibraatio() {

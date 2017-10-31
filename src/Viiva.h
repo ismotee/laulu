@@ -56,17 +56,20 @@ struct ViivanOminaisuus {
     vector<float> keskihajonnanKeskihajonnat;
     vector<float> konvergenssit;
 
-    unsigned int size() {
-        return arvot.size();
-    }
+    unsigned int size() const { return arvot.size(); }
+    unsigned int size() { return arvot.size(); }
 
     float& operator[](int x) {
+        return arvot[x];
+    }
+
+    const float& operator[](int x) const {
         return arvot[x];
     }
     
     OminaisuusSiivu haeSiivu(int id);
 
-    int tarkistaKoko(unsigned int otanta) {
+    int tarkistaKoko(unsigned int otanta) const {
         int n = 0;
         if (otanta >= size())
             n = size();
@@ -107,13 +110,11 @@ struct ViivanOminaisuus {
         laskeUusinKonvergenssi();
     }
 
-    float back() {
-        return arvot.back();
-    }
+    float back() { return arvot.back();}
+    float back() const { return arvot.back();}
 
-    bool empty() {
-        return arvot.empty();
-    }
+    bool empty() { return arvot.empty(); }
+    bool empty() const { return arvot.empty(); }
 
     void resize(int i) {
         arvot.resize(i);
@@ -208,15 +209,15 @@ struct Viiva : public ViivanApufunktiot {
     float muutoksenMaaraPolulla();
     void nollaaLaskurit();
     void tyhjennaOminaisuudet();
-    void resize(int i);
+    
+    void resize(int i);    
 
     ofxOscMessage makePisteAsOscMessage();
     ofxOscMessage makePaksuusAsOscMessage();
     ofxOscMessage makeSumeusAsOscMessage();
 
-    unsigned int size() {
-        return pisteet.size();
-    }
+    unsigned int size() const { return pisteet.size(); }
+    bool empty() const { return pisteet.empty(); }
 
 
 protected:

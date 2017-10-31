@@ -18,6 +18,7 @@ void Ohjain::setup() {
     //näkyykö viiva: (paljasta / piilota)
     Monitori::paljasta();
     //Monitori::piilota();
+    Tilat::tila = Rajaa;
 }
 
 void Ohjain::updateMonitori() {
@@ -36,10 +37,13 @@ void Ohjain::updateMonitori() {
 
     if (Tilat::tila == Soittaa)
         monitoriVari = pankki.viivaNyt.haeVari();
-
-    Monitori::piirraVari(monitoriVari);
-    Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);
-
+    if (Tilat::tila == Rajaa) {
+        //Monitori::piirraKartta(  ) );
+    }
+    else {
+        Monitori::piirraVari(monitoriVari);
+        Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);    
+    }
 
 }
 
@@ -76,7 +80,8 @@ void Ohjain::soittaa() {
 }
 
 void Ohjain::rajaa() {
-
+    //piirretään kartta
+    Monitori::piirraKartta(ViivaOhjain::pankki.viivat);
 }
 
 VaiheetEnum Ohjain::kulje() {
