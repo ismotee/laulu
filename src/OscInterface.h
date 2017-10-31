@@ -25,5 +25,5 @@ struct OscInterface {
 };
 
 struct OscViiva: public OscInterface {
-    void sendViiva(Viiva& viiva);
+    void sendViiva(Viiva viiva);
 };

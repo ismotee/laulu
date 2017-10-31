@@ -62,8 +62,8 @@ bool OscInterface::setAddressAndPortsFromFile(std::string path) {
     return true;
 }
 
-void OscViiva::sendViiva(Viiva& viiva) {
-    if (connection) {
+void OscViiva::sendViiva(Viiva viiva) {
+    if (connection && viiva.size()) {
         ofxOscMessage msg;
         if (viiva.size() > 2) {
             msg.setAddress("/Viiva/jatkuu");

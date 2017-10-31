@@ -241,7 +241,7 @@ void Ohjain::updateOSC() {
 
     // seg faulttaa tällä hetkellä
   //  cout << "lähetetään Osc paketti\n";
-  //  OscViiva::sendViiva(pankki.viivaNyt);
+    OscViiva::sendViiva(pankki.viivaNyt);
   //  cout << "Osc paketti lähetetty\n";
 }
 
