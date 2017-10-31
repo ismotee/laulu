@@ -79,3 +79,7 @@ void ViivaPankki::asetaKohteeksi(int id) {
     if(id < size())
         viivaNyt.asetaKohde(make_shared<Viiva>(viivat[id]));
 }
+
+void ViivaPankki::valitseViivat(Alue savyAlue, Alue saturaatioAlue, Alue kirkkausAlue, Alue paksuusAlue, Alue sumeusAlue) {
+
+}

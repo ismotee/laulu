@@ -80,6 +80,9 @@ void Ohjain::soittaa() {
 }
 
 void Ohjain::rajaa() {
+    
+    pankki.valitseViivat(savyAlue,saturaatioAlue,kirkkausAlue,paksuusAlue,sumeusAlue);
+    
     //piirretään kartta
     Monitori::piirraKartta(ViivaOhjain::pankki.viivat);
 }
