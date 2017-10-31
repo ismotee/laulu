@@ -13,10 +13,17 @@
  * ei tapahdu laskemista. kts. ViivaOhjain
  */
 
+struct Alue {
+    bool aktiivinen;
+    float min;
+    float max;
+};
+
 
 struct ViivaPankki {
 
     vector<Viiva> viivat;
+    vector<Viiva> valitutViivat;
     // kalibrointi ja muokattava viiva pidetään erillään pankista.
     //muokattavaaa viivaa myös tarkastellaan kalibroinnin aikana
     
@@ -36,6 +43,7 @@ struct ViivaPankki {
     void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
     Viiva* etsiViiva();
     void asetaKohteeksi(int id);
+    void valitseViivat(Alue hue,Alue saturation, Alue brightness, Alue paksuus, Alue sumeus);
     
     // lataus ja tallennus
     // tapahtuu aina hakemistokohtaisesti.
