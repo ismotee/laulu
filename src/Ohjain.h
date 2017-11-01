@@ -10,7 +10,6 @@
 struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public Monitori, public OscViiva {
 
     ofColor monitoriVari;
-    Alue savyAlue,saturaatioAlue,kirkkausAlue,paksuusAlue,sumeusAlue;
     
     void setup();
     void update();

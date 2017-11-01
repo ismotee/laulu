@@ -19,9 +19,6 @@ void Ohjain::setup() {
     Monitori::paljasta();
     //Monitori::piilota();
     Tilat::tila = Rajaa;
-    
-    //valintakriteerien kokeilua:
-    savyAlue = Alue(200, 230);
 }
 
 void Ohjain::updateMonitori() {
@@ -86,10 +83,7 @@ void Ohjain::soittaa() {
 }
 
 void Ohjain::rajaa() {
-    
-    //pankki.valitseViivat(savyAlue,saturaatioAlue,kirkkausAlue,paksuusAlue,sumeusAlue);
-    
-    //piirretään kartta
+    //Kaikki viivat pienellä ja valitut viivat isolla
     Monitori::tyhjenna();
     Monitori::piirraKartta(ViivaOhjain::pankki.viivat, 3);
     Monitori::piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);
