@@ -13,6 +13,7 @@ struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public OscViiva
     
     Multimonitori monitori1;
     Multimonitori monitori2;
+    bool valintaMuuttui = false;
     
     void setup();
     void update();

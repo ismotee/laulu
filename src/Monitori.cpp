@@ -349,6 +349,8 @@ void Multimonitori::teeVeto(ofPoint kohde, unsigned int pensseli_i, float paksuu
         return;
     }
     
+    kohde *= viivaScale;
+    
     //jos sumeus on täysi, ei piirretä mitään
     if(sumeus == 1) {
         pensselit[pensseli_i].moveTo(kohde);
@@ -548,3 +550,33 @@ void Multimonitori::tallennaKartta(const std::vector<Viiva>& viivat, std::string
     karttaFbo.readToPixels(px);
     ofSaveImage(px, filename);
 }
+
+int Multimonitori::suurimmanKoko(const std::vector<Viiva>& viivat) {
+    if(viivat.empty()) 
+        return 0;
+    int suurin = viivat[0].size();
+    for(int i=0; i<viivat.size(); i++ ) {
+        if(viivat[i].size() > suurin)
+            suurin = viivat[i].size();        
+    }    
+    return suurin;
+}
+
+void Multimonitori::piirraViivatLopusta(const std::vector<Viiva>& viivat) {
+    int suurin = suurimmanKoko(viivat);
+    if(suurin <= 0) 
+        return;
+    
+    piirraViivatKohdasta(viivat, suurin);    
+}
+
+void Multimonitori::piirraViivatKokonaan(const std::vector<Viiva>& viivat) {
+    int suurin = suurimmanKoko(viivat);
+    if(suurin <= 0) 
+        return;
+    
+    piirraViivatAlusta(viivat, suurin);
+}
+
+
+

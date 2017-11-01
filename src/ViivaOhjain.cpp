@@ -88,6 +88,10 @@ void ViivaOhjain::soita() {
     soitettava.resize(lukupaa);
 }
 
+void ViivaOhjain::meneAlkuun() {
+    lukupaa = 0;
+}
+
 void ViivaOhjain::soitaTaakse() {
 
 }

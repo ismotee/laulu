@@ -77,14 +77,19 @@ public:
 
     ofColor taustaVari = ofColor::black;
     
+    float viivaScale = 0.5;
+    
     void teeVeto(ofPoint kohde, unsigned int pensseli_i, float paksuus, float sumeus, ofColor vari);
 
     void setup(unsigned int pensseli_n = 0);
     void luoPensselit(unsigned int n);
     void draw();
+    int suurimmanKoko(const std::vector<Viiva>& viivat);
 
     void piirraViivatAlusta(const std::vector<Viiva>& viivat, unsigned int n);
     void piirraViivatKohdasta(const std::vector<Viiva>& viivat, unsigned int n);
+    void piirraViivatLopusta(const std::vector<Viiva>& viivat);
+    void piirraViivatKokonaan(const std::vector<Viiva>& viivat);
     void piirraKartta(const std::vector<Viiva>& viivat, float r = 10);
 
     void tyhjenna();
