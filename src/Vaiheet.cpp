@@ -62,10 +62,7 @@ void Vaiheet::update() {
             
             break;
         
-    }
-    
-    //kyna::update vasta lopuksi koska muuten click boolean tyhjenee ennen kuin sitä on luettu
-    Kyna::update();
+    }    
 }
 
 void Vaiheet::verbose() {

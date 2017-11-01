@@ -169,12 +169,12 @@ void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeus) {
     if(viivat.empty())
         return;
     
-    float lyhinEtaisyys = (viivat[0].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).lengthSquared();
+    float lyhinEtaisyys = (viivat[0].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).length();
     int lyhinId = 0;
     
     for(int i = 0; i < viivat.size();i++) {
 
-        float etaisyys = (viivat[i].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).lengthSquared();
+        float etaisyys = (viivat[i].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).length();
 
         if(etaisyys < lyhinEtaisyys) {
             lyhinEtaisyys = etaisyys;

@@ -74,12 +74,12 @@ bool ViivaOhjain::kulkeminen() {
 
 void ViivaOhjain::soita() {
     lukupaa++;
-    if(lukupaa >= pankki[soitettava_id].size())
+    if(lukupaa >= pankki.valitutViivat[soitettava_id].size())
         lukupaa = 1;
     
-    cout << "koko: " << lukupaa << "/" << pankki[soitettava_id].size() << "\n";
+    cout << "koko: " << lukupaa << "/" << pankki.valitutViivat[soitettava_id].size() << "\n";
     
-    soitettava = pankki[soitettava_id];
+    soitettava = pankki.valitutViivat[soitettava_id];
     
     soitettava.resize(lukupaa);
 }
@@ -91,13 +91,13 @@ void ViivaOhjain::soitaTaakse() {
 void ViivaOhjain::edellinenViiva() {
     soitettava_id--;
     if(soitettava_id< 0)
-        soitettava_id = pankki.size() -1;
+        soitettava_id = pankki.valitutViivat.size() -1;
     
 }
 
 void ViivaOhjain::seuraavaViiva() {
     soitettava_id++;
-    if(soitettava_id>=pankki.size())
+    if(soitettava_id>=pankki.valitutViivat.size())
         soitettava_id=0;
     
 }
