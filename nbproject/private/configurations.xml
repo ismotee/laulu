@@ -39,7 +39,6 @@
         </df>
       </df>
       <df name="src">
-        <in>Hiiri.h</in>
         <in>Kyna.cpp</in>
         <in>Kyna.h</in>
         <in>Monitori.cpp</in>
