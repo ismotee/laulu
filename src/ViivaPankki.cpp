@@ -164,17 +164,17 @@ void ViivaPankki::valitseViivat(Alue savyAlue, Alue saturaatioAlue, Alue kirkkau
 }
 
 // etsitään viivaa, joka on lähimpänä annettua Paksuus-Sumeus vektoria valituista Viivaoista. Jos löytyy, poistetaan. Jos ei, lisätään.
-void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeus) {
+void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeusKa) {
 
     if(viivat.empty())
         return;
     
-    float lyhinEtaisyys = (viivat[0].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).length();
+    float lyhinEtaisyys = (viivat[0].kalibraatio.paksuusSumeusKeskiarvoVektori()-paksuusSumeusKa).length();
     int lyhinId = 0;
     
     for(int i = 0; i < viivat.size();i++) {
 
-        float etaisyys = (viivat[i].kalibraatio.paksuusSumeusVektori()-paksuusSumeus).length();
+        float etaisyys = (viivat[i].kalibraatio.paksuusSumeusKeskiarvoVektori()-paksuusSumeusKa).length();
 
         if(etaisyys < lyhinEtaisyys) {
             lyhinEtaisyys = etaisyys;
