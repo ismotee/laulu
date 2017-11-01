@@ -39,15 +39,17 @@ void Ohjain::updateMonitori() {
         monitoriVari = pankki.viivaNyt.haeVari();
     if (Tilat::tila == Rajaa) {
         ViivaOhjain::soita();
+        if(valintaMuuttui)
+            monitori2.tyhjenna();
         monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
     } else {
         //monitori2.piirraVari(monitoriVari);
 
 
         vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
-
-        monitori2.piirraViivatKohdasta(v, v[0].size()-1);
+        monitori2.piirraViivatKokonaan(v);
     }
+    
 
 }
 
@@ -91,12 +93,16 @@ void Ohjain::rajaa() {
     //Kaikki viivat pienellä ja valitut viivat isolla
     monitori1.tyhjenna();
     monitori1.piirraKartta(ViivaOhjain::pankki.viivat, 3);
-    monitori1.piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);
+    monitori1.piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);    
 
     if (Kyna::click) {
         //Kynasta saa suoraan paksuus-sumeus-vektorin:
+        valintaMuuttui = true;
+        ViivaOhjain::meneAlkuun();
         ViivaOhjain::pankki.toglaaValinta(Kyna::paikka_scaled);
     }
+    else
+        valintaMuuttui = false;
 }
 
 VaiheetEnum Ohjain::kulje() {

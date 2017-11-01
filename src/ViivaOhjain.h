@@ -32,6 +32,7 @@ struct ViivaOhjain {
     
     void soita();
     void soitaTaakse();
+    void meneAlkuun();
     
     void edellinenViiva();
     void seuraavaViiva();
