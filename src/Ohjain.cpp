@@ -237,6 +237,7 @@ VaiheetEnum Ohjain::keskeyta() {
 
 
     monitori1.tyhjenna();
+    pankki.viimeistelePiirto();
     ViivaOhjain::pankki.aloitaUusiViivaNyt();
     cout << "uusiViiva Aloitettu\n";
 

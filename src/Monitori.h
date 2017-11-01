@@ -77,7 +77,7 @@ public:
 
     ofColor taustaVari = ofColor::black;
     
-    float viivaScale = 0.5;
+    float viivaScale = 1;
     
     void teeVeto(ofPoint kohde, unsigned int pensseli_i, float paksuus, float sumeus, ofColor vari);
 
