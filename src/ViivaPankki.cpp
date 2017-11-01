@@ -186,7 +186,7 @@ void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeus) {
     for(int i = 0; i < valitutViivat.size();i++) {
         
         // verrataan nimeen, koska nimi on aina uniikki. 
-        if(viivat[lyhinId].nimi.compare(valitutViivat[i]) == 0) {
+        if(viivat[lyhinId].nimi.compare(valitutViivat[i].nimi) == 0) {
             // poistetaan viiva ja lopetetaan metodi välittömästi
             valitutViivat.erase(valitutViivat.begin()+i);
             return;

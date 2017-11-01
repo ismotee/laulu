@@ -29,6 +29,11 @@ struct Kalibraatio {
     ofVec2f paksuusSumeusVektori() {
         return ofVec2f(paksuus, sumeus);
     }
+
+    ofVec2f paksuusSumeusKeskiarvoVektori() {
+        return ofVec2f(paksuusKa, sumeusKa);
+    }
+
 };
 
 struct OminaisuusSiivu {
@@ -37,7 +42,7 @@ struct OminaisuusSiivu {
     float keskihajonta;
     float keskihajonnanKeskihajonta;
     float konvergenssi;
-    
+
 };
 
 struct ViivanSiivu {
@@ -56,8 +61,13 @@ struct ViivanOminaisuus {
     vector<float> keskihajonnanKeskihajonnat;
     vector<float> konvergenssit;
 
-    unsigned int size() const { return arvot.size(); }
-    unsigned int size() { return arvot.size(); }
+    unsigned int size() const {
+        return arvot.size();
+    }
+
+    unsigned int size() {
+        return arvot.size();
+    }
 
     float& operator[](int x) {
         return arvot[x];
@@ -66,7 +76,7 @@ struct ViivanOminaisuus {
     const float& operator[](int x) const {
         return arvot[x];
     }
-    
+
     OminaisuusSiivu haeSiivu(int id);
 
     int tarkistaKoko(unsigned int otanta) const {
@@ -110,11 +120,21 @@ struct ViivanOminaisuus {
         laskeUusinKonvergenssi();
     }
 
-    float back() { return arvot.back();}
-    float back() const { return arvot.back();}
+    float back() {
+        return arvot.back();
+    }
 
-    bool empty() { return arvot.empty(); }
-    bool empty() const { return arvot.empty(); }
+    float back() const {
+        return arvot.back();
+    }
+
+    bool empty() {
+        return arvot.empty();
+    }
+
+    bool empty() const {
+        return arvot.empty();
+    }
 
     void resize(int i) {
         arvot.resize(i);
@@ -123,7 +143,7 @@ struct ViivanOminaisuus {
         keskihajonnanKeskihajonnat.resize(i);
         konvergenssit.resize(i);
     }
-    
+
     string toString() {
         if (empty())
             return "";
@@ -136,10 +156,9 @@ struct ViivanOminaisuus {
 
 };
 
-
 struct Viiva : public ViivanApufunktiot {
     //miten suurta osaa datasta käytetään tilastollisessa tarkastelussa:
-    static const int OTANNAN_KOKO = 50;
+    static const int OTANNAN_KOKO = 300;
     static const float MAX_KIIHTYVYYS;
     const char* versio = "1";
 
@@ -166,7 +185,7 @@ struct Viiva : public ViivanApufunktiot {
 
 
     Viiva();
-    bool muodostaViiva( 
+    bool muodostaViiva(
             const std::vector<ofPoint>& pisteet_,
             const std::vector<float>& paineet_,
             const std::vector<float>& paksuudet_,
@@ -174,8 +193,8 @@ struct Viiva : public ViivanApufunktiot {
             const std::vector<VaiheetEnum>& vaiheet_,
             const std::vector<ofColor>& varit_,
             std::string nimi_
-    );
-    
+            );
+
     std::string nimeaViiva(std::string format = "%F_%H-%M-%S");
     bool kulje();
     void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
@@ -187,9 +206,16 @@ struct Viiva : public ViivanApufunktiot {
     void tarkistaImprovisaatio();
     void tarkistaLahestyKohdetta();
     ofVec2f paksuusSumeusVektori();
+
+    ofVec2f paksuusSumeusKeskiarvoVektori() {
+        if (!pisteet.empty())
+            return ofVec2f(paksuus.keskiarvot.back(), sumeus.keskiarvot.back());
+        return ofVec3f();
+    }
+
     ViivanSiivu haeSiivu(int id) {
         ViivanSiivu siivu;
-        if(id < pisteet.size()) {
+        if (id < pisteet.size()) {
             siivu.piste = pisteet[id];
             siivu.vari = varit[id];
             siivu.paksuus = paksuus.haeSiivu(id);
@@ -209,15 +235,20 @@ struct Viiva : public ViivanApufunktiot {
     float muutoksenMaaraPolulla();
     void nollaaLaskurit();
     void tyhjennaOminaisuudet();
-    
-    void resize(int i);    
+
+    void resize(int i);
 
     ofxOscMessage makePisteAsOscMessage();
     ofxOscMessage makePaksuusAsOscMessage();
     ofxOscMessage makeSumeusAsOscMessage();
 
-    unsigned int size() const { return pisteet.size(); }
-    bool empty() const { return pisteet.empty(); }
+    unsigned int size() const {
+        return pisteet.size();
+    }
+
+    bool empty() const {
+        return pisteet.empty();
+    }
 
 
 protected:
