@@ -7,9 +7,12 @@
 #include "Viiva.h"
 #include "Tilat.h"
 
-struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public Monitori, public OscViiva {
+struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public OscViiva {
 
     ofColor monitoriVari;
+    
+    Multimonitori monitori1;
+    Multimonitori monitori2;
     
     void setup();
     void update();

@@ -73,11 +73,15 @@ bool ViivaOhjain::kulkeminen() {
 }
 
 void ViivaOhjain::soita() {
+    if(pankki.valitutViivat.empty())
+        return;
     lukupaa++;
-    if(lukupaa >= pankki.valitutViivat[soitettava_id].size())
+//    if(lukupaa >= pankki.valitutViivat[soitettava_id].size())
+    if(lukupaa >= 1000)
         lukupaa = 1;
     
     cout << "koko: " << lukupaa << "/" << pankki.valitutViivat[soitettava_id].size() << "\n";
+    
     
     soitettava = pankki.valitutViivat[soitettava_id];
     

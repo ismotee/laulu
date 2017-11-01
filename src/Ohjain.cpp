@@ -2,7 +2,7 @@
 
 void Ohjain::setup() {
     Vaiheet::setup();
-    Monitori::setup();
+    monitori1.setup();
 
     ViivaOhjain::setup("arkisto/", "tallennetut/");
 
@@ -16,8 +16,8 @@ void Ohjain::setup() {
     //tallennetaan = true;
 
     //näkyykö viiva: (paljasta / piilota)
-    Monitori::paljasta();
-    //Monitori::piilota();
+    //monitori1.paljasta();
+    //monitori1.piilota();
     Tilat::tila = Rajaa;
 }
 
@@ -38,11 +38,15 @@ void Ohjain::updateMonitori() {
     if (Tilat::tila == Soittaa)
         monitoriVari = pankki.viivaNyt.haeVari();
     if (Tilat::tila == Rajaa) {
-        //Monitori::piirraKartta(  ) );
-    }
-    else {
-        Monitori::piirraVari(monitoriVari);
-        Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);    
+        ViivaOhjain::soita();
+        monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
+    } else {
+        //monitori2.piirraVari(monitoriVari);
+
+
+        vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
+
+        monitori2.piirraViivatKohdasta(v, v[0].size()-1);
     }
 
 }
@@ -54,7 +58,7 @@ void Ohjain::update() {
 
     // tehdään OSC paketin lähetys
     updateOSC();
-    
+
     //kokeillaan valintakriteerejä
     //savyAlue.min += 0.1;
     //savyAlue.max += 0.1;
@@ -66,8 +70,9 @@ void Ohjain::piirtaa() {
     Vaiheet::verbose();
     Vaiheet::update();
 
-    Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
-    Monitori::piirraViiva(ViivaOhjain::pankki.viivaNyt);
+    //Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
+    vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
+    monitori1.piirraViivatKohdasta(v, pankki.viivaNyt.size() - 1);
 }
 
 void Ohjain::soittaa() {
@@ -77,18 +82,18 @@ void Ohjain::soittaa() {
     cout << ofToString(soitettava.size()) << "\n";
 
     if (soitettava.size()) {
-        Monitori::piirraVari(ViivaOhjain::soitettava.haeVari());
-        Monitori::piirraViiva(ViivaOhjain::soitettava);
-    }        
+        //monitori1.piirraVari(ViivaOhjain::soitettava.haeVari());
+        monitori1.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
+    }
 }
 
 void Ohjain::rajaa() {
     //Kaikki viivat pienellä ja valitut viivat isolla
-    Monitori::tyhjenna();
-    Monitori::piirraKartta(ViivaOhjain::pankki.viivat, 3);
-    Monitori::piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);
-        
-    if(Kyna::click) {
+    monitori1.tyhjenna();
+    monitori1.piirraKartta(ViivaOhjain::pankki.viivat, 3);
+    monitori1.piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);
+
+    if (Kyna::click) {
         //Kynasta saa suoraan paksuus-sumeus-vektorin:
         ViivaOhjain::pankki.toglaaValinta(Kyna::paikka_scaled);
     }
@@ -132,7 +137,7 @@ VaiheetEnum Ohjain::kalibroi() {
         //tallenna viiva ja kuva
         if (tallennetaan) {
             ViivaOhjain::tallennaKalibrointi();
-            //            Monitori::tallennaKuvana(tallennusHakemisto + "kuvat/kalibroinnit/" + tiedosto::aika() + ".png");
+            //            monitori1.tallennaKuvana(tallennusHakemisto + "kuvat/kalibroinnit/" + tiedosto::aika() + ".png");
         }
         cout << "kalibroitu\n";
         return Improvisoi;
@@ -214,18 +219,18 @@ VaiheetEnum Ohjain::viimeistele() {
     //pankki.leikkaaMuokattava(pankki.muokattava.OTANNAN_KOKO);
 
 
-    //Monitori::tyhjenna();
+    //monitori1.tyhjenna();
     return laskeKohde();
 }
 
 VaiheetEnum Ohjain::keskeyta() {
     //tallennetaan kuva hylättävästä viivasta
-    //    Monitori::tallennaKuvana(tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png");
+    //    monitori1.tallennaKuvana(tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png");
     //    cout << tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png\n";
     //    pankki.tallennaHakemistoon("keskeytetytViivat/");
 
 
-    Monitori::tyhjenna();
+    monitori1.tyhjenna();
     ViivaOhjain::pankki.aloitaUusiViivaNyt();
     cout << "uusiViiva Aloitettu\n";
 
@@ -255,8 +260,8 @@ void Ohjain::keyPressed(int key) {
 void Ohjain::updateOSC() {
 
     // seg faulttaa tällä hetkellä
-  //  cout << "lähetetään Osc paketti\n";
+    //  cout << "lähetetään Osc paketti\n";
     OscViiva::sendViiva(pankki.viivaNyt);
-  //  cout << "Osc paketti lähetetty\n";
+    //  cout << "Osc paketti lähetetty\n";
 }
 

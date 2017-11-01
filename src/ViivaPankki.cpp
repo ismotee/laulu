@@ -196,3 +196,7 @@ void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeus) {
     valitutViivat.push_back(viivat[lyhinId]);
     
 }
+
+void ViivaPankki::viimeistelePiirto() {
+
+}

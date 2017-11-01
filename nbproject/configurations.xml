@@ -272,18 +272,22 @@
       <item path="src/Kyna.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
           <incDir>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
             <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
             <pElem>../../../libs/openFrameworks/app</pElem>
+            <pElem>../../../libs/openFrameworks/3d</pElem>
+            <pElem>../../../libs/openFrameworks/communication</pElem>
+            <pElem>../../../libs/openFrameworks/graphics</pElem>
             <pElem>../../../libs/openFrameworks/video</pElem>
+            <pElem>../../../libs/openFrameworks/math</pElem>
+            <pElem>../../../libs/openFrameworks/utils</pElem>
+            <pElem>../../../libs/openFrameworks/sound</pElem>
+            <pElem>../../../libs/openFrameworks/events</pElem>
+            <pElem>../../../libs/openFrameworks/gl</pElem>
             <pElem>src</pElem>
+            <pElem>data</pElem>
+            <pElem>data/arkisto</pElem>
+            <pElem>data/valmiitViivat</pElem>
+            <pElem>data/keskeytetytViivat</pElem>
             <pElem>nbproject</pElem>
             <pElem>nbproject/private</pElem>
             <pElem>../../../addons/ofxOsc/src</pElem>
@@ -400,18 +404,22 @@
       <item path="src/Sessio.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
           <incDir>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
             <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
             <pElem>../../../libs/openFrameworks/app</pElem>
+            <pElem>../../../libs/openFrameworks/3d</pElem>
+            <pElem>../../../libs/openFrameworks/communication</pElem>
+            <pElem>../../../libs/openFrameworks/graphics</pElem>
             <pElem>../../../libs/openFrameworks/video</pElem>
+            <pElem>../../../libs/openFrameworks/math</pElem>
+            <pElem>../../../libs/openFrameworks/utils</pElem>
+            <pElem>../../../libs/openFrameworks/sound</pElem>
+            <pElem>../../../libs/openFrameworks/events</pElem>
+            <pElem>../../../libs/openFrameworks/gl</pElem>
             <pElem>src</pElem>
+            <pElem>data</pElem>
+            <pElem>data/arkisto</pElem>
+            <pElem>data/valmiitViivat</pElem>
+            <pElem>data/keskeytetytViivat</pElem>
             <pElem>nbproject</pElem>
             <pElem>nbproject/private</pElem>
             <pElem>../../../addons/ofxOsc/src</pElem>
@@ -462,18 +470,22 @@
       <item path="src/Vaiheet.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
           <incDir>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
             <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
             <pElem>../../../libs/openFrameworks/app</pElem>
+            <pElem>../../../libs/openFrameworks/3d</pElem>
+            <pElem>../../../libs/openFrameworks/communication</pElem>
+            <pElem>../../../libs/openFrameworks/graphics</pElem>
             <pElem>../../../libs/openFrameworks/video</pElem>
+            <pElem>../../../libs/openFrameworks/math</pElem>
+            <pElem>../../../libs/openFrameworks/utils</pElem>
+            <pElem>../../../libs/openFrameworks/sound</pElem>
+            <pElem>../../../libs/openFrameworks/events</pElem>
+            <pElem>../../../libs/openFrameworks/gl</pElem>
             <pElem>src</pElem>
+            <pElem>data</pElem>
+            <pElem>data/arkisto</pElem>
+            <pElem>data/valmiitViivat</pElem>
+            <pElem>data/keskeytetytViivat</pElem>
             <pElem>nbproject</pElem>
             <pElem>nbproject/private</pElem>
             <pElem>../../../addons/ofxOsc/src</pElem>

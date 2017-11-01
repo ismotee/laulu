@@ -150,6 +150,7 @@ void Viiva::lisaaPiste(ofPoint paikka, float paine_, VaiheetEnum vaihe) {
     }
 
 
+    varit.push_back(ofColor());
     // cout << pisteet.size() << " " << paine.size() << " " << sumeus.size() << " " << paksuus.size() << " " << varit.size() << " " << vaiheet.size() << "\n";
 }
 

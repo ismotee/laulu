@@ -85,8 +85,10 @@ public:
 
     void piirraViivatAlusta(const std::vector<Viiva>& viivat, unsigned int n);
     void piirraViivatKohdasta(const std::vector<Viiva>& viivat, unsigned int n);
+    void piirraKartta(const std::vector<Viiva>& viivat, float r = 10);
 
     void tyhjenna();
     void lopetaViivat();
     void tallennaKuvana(std::string filename = "kuvat/default.png");
+    void tallennaKartta(const std::vector<Viiva>& viivat, std::string filename = "kuvat/kartta.png");
 };

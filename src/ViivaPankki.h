@@ -32,6 +32,7 @@ struct ViivaPankki {
 
     vector<Viiva> viivat;
     vector<Viiva> valitutViivat;
+    vector<Viiva> piirretytViivat;
     // kalibrointi ja muokattava viiva pidetään erillään pankista.
     //muokattavaaa viivaa myös tarkastellaan kalibroinnin aikana
     
@@ -53,6 +54,7 @@ struct ViivaPankki {
     void asetaKohteeksi(int id);
     void valitseViivat(Alue savyAlue,Alue saturaatioAlue, Alue kirkkausAlue, Alue paksuusAlue, Alue sumeusAlue);
     void toglaaValinta(ofVec2f paksuusSumeus);
+    void viimeistelePiirto();
     
     // lataus ja tallennus
     // tapahtuu aina hakemistokohtaisesti.

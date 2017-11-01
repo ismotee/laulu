@@ -11,7 +11,7 @@ void ofApp::setup() {
 
 void ofApp::setupMonitor() {
     ofBackground(ofColor::black);
-    Monitori::setup();
+    monitori2.setup();
 }
 
 //--------------------------------------------------------------
@@ -24,14 +24,14 @@ void ofApp::update() {
 //--------------------------------------------------------------
 
 void ofApp::draw() {
-    Monitori::draw();
+    monitori1.draw();
 }
 
 //--------------------------------------------------------------
 
 void ofApp::drawMonitor(ofEventArgs& args) {
     Ohjain::updateMonitori();
-    Monitori::draw();
+    monitori2.draw();
 }
 
 //--------------------------------------------------------------

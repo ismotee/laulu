@@ -489,3 +489,62 @@ void Multimonitori::lopetaViivat() {
         p.lopetaViiva();
 }
 
+void Multimonitori::piirraKartta(const std::vector<Viiva>& viivat, float r) {
+    if(viivat.empty() ) {
+        std::cerr << "Monitori::piirraKartta: Ei viivoja!\n";
+        return;
+    }
+
+    viivaFbo.begin();
+
+    //piirretään viivat karttaan
+    for(unsigned int i=0; i<viivat.size(); i++) {        
+/*        float x = viivat[i].paksuus.keskiarvot.back() * ofGetWidth();
+        float y = (1 - viivat[i].sumeus.keskiarvot.back() ) * ofGetHeight();
+        ofSetColor(viivat[i].varit[i]);*/
+        float x = viivat[i].kalibraatio.paksuusKa * ofGetWidth();
+        float y = (1 - viivat[i].kalibraatio.sumeusKa) * ofGetHeight();
+        ofSetColor(viivat[i].kalibraatio.vari);
+        
+        ofDrawCircle(x,y,r);
+    }
+
+    viivaFbo.end();
+}
+
+void Multimonitori::tallennaKartta(const std::vector<Viiva>& viivat, std::string filename) {
+    if(viivat.empty() ) {
+        std::cerr << "Monitori::tallennaKartta: Ei viivoja!\n";
+        return;
+    }
+    
+    //luodaan kartta omaan fbo:oon
+    ofFbo karttaFbo;
+    int w = ofGetWidth();
+    int h = ofGetHeight();
+    karttaFbo.allocate(w, h, GL_RGBA);
+    karttaFbo.begin();
+    //taustavärinä sama kuin blurrin reunat
+    ofClear(pensseli::clearColor);
+    
+    std::cerr << "kartan koko: " << w << " x " << h << "\n";
+    std::cout << "max: " << GL_MAX_FRAMEBUFFER_WIDTH << " x " << GL_MAX_FRAMEBUFFER_HEIGHT << "\n";
+    
+    //piirretään viivat karttaan
+    for(unsigned int i=0; i<viivat.size(); i++) {
+/*        
+        float x = viivat[i].haeViimeisinPaksuus().keskiarvo * w;
+        float y = (1 - viivat[i].haeViimeisinSumeus().keskiarvo) * h;
+        std::cerr << "piirretään karttaan (" << x << ", " << y << ")\n";
+        
+        ofSetColor(viivat[i].vari);
+        ofDrawCircle(x,y,10);
+ */
+    }
+    
+    karttaFbo.end();
+    
+    ofPixels px;
+    karttaFbo.readToPixels(px);
+    ofSaveImage(px, filename);
+}
