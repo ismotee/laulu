@@ -7,7 +7,6 @@
 int main( ){
     ofGLFWWindowSettings settings;
 
-
     // settings for main window
     settings.width = windowWidth;
     settings.height = windowHeight;
@@ -33,8 +32,7 @@ int main( ){
     
     // listeners for monitor
     ofAddListener(monitorWindow->events().draw,mainApp.get(),&ofApp::drawMonitor);
-    ofAddListener(monitorWindow->events().windowResized,mainApp.get(),&ofApp::monitorResized);
-    
+    ofAddListener(monitorWindow->events().windowResized,mainApp.get(),&ofApp::monitorResized);    
     
     // starting a application
     ofRunApp(mainWindow,mainApp);

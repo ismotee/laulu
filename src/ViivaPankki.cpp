@@ -198,5 +198,6 @@ void ViivaPankki::toglaaValinta(ofVec2f paksuusSumeusKa) {
 }
 
 void ViivaPankki::viimeistelePiirto() {
-
+    piirretytViivat.push_back(viivaNyt);
+    tiedosto::tallennaViiva(viivaNyt,"tallennetut/Viivat");
 }
