@@ -147,3 +147,9 @@ void ViivaOhjain::seuraavaViivaPlayback() {
         
     }
 }
+
+bool ViivaOhjain::viimeistele() {
+    pankki.viimeistelePiirto();
+    pankki.tallennaHakemistoon(tallennusHakemisto);
+    return true;
+}

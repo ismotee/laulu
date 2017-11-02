@@ -26,6 +26,7 @@ struct ViivaOhjain {
     bool improvisointi(ofPoint paikka, float paine);
     bool laskeKohde(ofPoint paikka, float paine);
     bool lahesty(ofPoint paikka, float paine);
+    bool viimeistele();
     const Viiva& haeMuokattava() const;
     const Viiva& haeKalibrointi() const;
     
