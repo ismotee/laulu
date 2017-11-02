@@ -35,8 +35,10 @@ void Ohjain::updateMonitori() {
         }
     }
 
-    if (Tilat::tila == Soittaa)
-        monitoriVari = pankki.viivaNyt.haeVari();
+    if (Tilat::tila == Soittaa && ViivaOhjain::soitettava.size()) {
+        monitoriVari = ViivaOhjain::soitettava.varit[lukupaaPlayback];
+        monitori2.piirraVari(monitoriVari);
+    }
     if (Tilat::tila == Rajaa) {
         ViivaOhjain::soita();
         if (valintaMuuttui)
@@ -44,8 +46,8 @@ void Ohjain::updateMonitori() {
         monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
     } else if (Tilat::tila == Piirtaa) {
 
-        //  vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
-        // monitori2.piirraViivatLopusta(v);
+        vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
+        monitori2.piirraViivatLopusta(v);
     }
 
 
@@ -82,13 +84,17 @@ void Ohjain::piirtaa() {
 
 void Ohjain::soittaa() {
 
-    ViivaOhjain::soita();
+    
 
-    cout << ofToString(soitettava.size()) << "\n";
 
-    if (soitettava.size()) {
+    if (ViivaOhjain::soitettava.size()) {
         //monitori1.piirraVari(ViivaOhjain::soitettava.haeVari());
-        monitori1.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
+        vector<Viiva> v(1,soitettava);
+        int l= ViivaOhjain::soitaPlayback();
+        if(l == 0)
+            monitori1.tyhjenna();
+        monitori1.piirraVari(soitettava.varit[l]);
+        monitori1.piirraViivatAlusta(v, l);
     }
 }
 
@@ -260,9 +266,10 @@ void Ohjain::keyPressed(int key) {
     }
     if (Tilat::tila == Soittaa) {
         if (key == OF_KEY_LEFT)
-            ViivaOhjain::edellinenViiva();
+            ViivaOhjain::edellinenViivaPlayback();
         else if (key == OF_KEY_RIGHT)
-            ViivaOhjain::seuraavaViiva();
+            ViivaOhjain::seuraavaViivaPlayback();
+        cout << ViivaOhjain::soitettavaPlayback_id << "\n";
     }
     if (Tilat::tila == Rajaa) {
 
