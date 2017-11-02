@@ -109,6 +109,10 @@ bool Viiva::muodostaViiva(
 
 void Viiva::lisaaPiste(ofPoint paikka, float paine_, VaiheetEnum vaihe) {
 
+    if(size() != 0) {
+        ofColor col = varit[0];
+        varit.push_back(col);
+    }
     if (!vaiheet.empty())
         tarkistaVaihe(vaihe);
 
@@ -133,7 +137,6 @@ void Viiva::lisaaPiste(ofPoint paikka, float paine_, VaiheetEnum vaihe) {
     float uusiPaksuus = ofClamp(kiihtyvyys / MAX_KIIHTYVYYS, 0, 1);
     paksuus.lisaaJaLaske(uusiPaksuus, OTANNAN_KOKO);
 
-
     //sumeus on paineen vastakohta
     float uusiSumeus = 1 - paine.back();
     sumeus.lisaaJaLaske(uusiSumeus, OTANNAN_KOKO);
@@ -149,9 +152,7 @@ void Viiva::lisaaPiste(ofPoint paikka, float paine_, VaiheetEnum vaihe) {
         sumeus[1] = sumeus[2];
     }
 
-
-    varit.push_back(ofColor());
-    // cout << pisteet.size() << " " << paine.size() << " " << sumeus.size() << " " << paksuus.size() << " " << varit.size() << " " << vaiheet.size() << "\n";
+   //  cout << "vektorien koot: " << pisteet.size() << " " << paine.size() << " " << sumeus.size() << " " << paksuus.size() << " " << varit.size() << " " << vaiheet.size() << "\n";
 }
 
 void Viiva::tarkistaVaihe(VaiheetEnum vaihe) {
@@ -166,9 +167,6 @@ void Viiva::tarkistaVaihe(VaiheetEnum vaihe) {
     // Improvisaatio
     if (vaiheet.back() == Kalibroi && vaihe == Improvisoi) {
         asetaKalibraatio();
-        asetaAlkuperainenKalibraatio();
-        tyhjennaOminaisuudet();
-        varit.push_back(kalibraatio.vari);
         
     } else if (vaihe == Improvisoi) {
         tarkistaImprovisaatio();
@@ -212,42 +210,30 @@ void Viiva::tarkistaImprovisaatio() {
     }
     if (improvisaatioLaskin > 10) {
         improvisaatioValmis = true;
-    }
-
-    improvisaatioValmis = false;
+    } else
+        improvisaatioValmis = false;
 }
 
 void Viiva::tarkistaLahestyKohdetta() {
     lahestymisLaskuri++;
 
+    float muutoksenKeskihajonta = muutos.keskihajonnat.back();
+    cout << "muutos, koko: " << muutos.size() << "\n";
+    cout << "muutoksenKh: " << muutos.keskihajonnat.back() << "\n";
 
-    int start_i = muutos.size() - 150;
-    if (start_i < 0) start_i = 0;
-
-    vector<float> arvot;
-    arvot.resize(muutos.size() - start_i, 0);
-
-    //cout << "start_i" << start_i << "\n";
-
-    for (int i = start_i; i < muutos.size(); i++) {
-        arvot[i - start_i] = muutos[i];
-    }
-
-    float muutoksenKeskihajonta = keskihajonta(arvot);
-    cout << "muutoksen keskihajonta: " << muutoksenKeskihajonta << "\n";
-
-    if (muutoksenKeskihajonta < 0.003 && lahestymisLaskuri > 150)
+    if (muutoksenKeskihajonta > 0.5 && lahestymisLaskuri > 50)
         lahestyKohdettaValmis = true;
-
-
-    lahestymisLaskuri = false;
+    else if(muutoksenKeskihajonta < 0.5) 
+        lahestymisLaskuri = 0;
 }
 
 void Viiva::lahestyKohdetta() {
+
     muutos.lisaaJaLaske(muutoksenMaaraPolulla(), OTANNAN_KOKO);
 
-    muokkaaVaria2(muutos.back());
+    muokkaaVaria2(muutos.back(), muutos.keskihajonnat.back());
 
+    
 }
 
 void Viiva::asetaKalibraatio() {
@@ -267,9 +253,6 @@ void Viiva::asetaKalibraatio() {
     kalibraatioValmis = true;
 }
 
-void Viiva::asetaAlkuperainenKalibraatio() {
-    alkuperainenKalibraatio = kalibraatio;
-}
 
 void Viiva::muokkaaVaria() {
 
@@ -277,7 +260,7 @@ void Viiva::muokkaaVaria() {
     float paksuusMuunnos = (paksuus.keskiarvot.back() - kalibraatio.sumeusKa) * 127 * 0.7;
 
     float lightness = getLightness(kalibraatio.vari.getSaturation() / 255, kalibraatio.vari.getBrightness() / 255) + sumeusMuunnos;
-    varit.push_back(asetaHSLnMukaan(kalibraatio.vari.getHue(), (kalibraatio.vari.getSaturation() + paksuusMuunnos) / 255, lightness));
+    varit.back() = asetaHSLnMukaan(kalibraatio.vari.getHue(), (kalibraatio.vari.getSaturation() + paksuusMuunnos) / 255, lightness);
 
 }
 
@@ -293,17 +276,19 @@ float Viiva::muutoksenMaaraPolulla() {
     ofVec2f k = kalibraatio.paksuusSumeusVektori();
 
     float projektio = (m - k).dot((s - k).getNormalized()) / (s - k).length();
-
+    return projektio;
     return ofClamp(projektio, -0.5, 1.2);
 
 }
 
-void Viiva::muokkaaVaria2(float maara) {
-
-
+void Viiva::muokkaaVaria2(float maara, float muutoksenKh) {
+    
     ofVec3f kohta = variRGBtoVec3(kalibraatio.vari) + (variRGBtoVec3(kohde->kalibraatio.vari) - variRGBtoVec3(kalibraatio.vari)) * maara;
 
-    varit.push_back(variRGBfromVec3(kohta));
+    ofColor kohtaVari = variRGBfromVec3(kohta); 
+    ofColor viimeisinVari = varit.back();
+    viimeisinVari.lerp(kohtaVari,ofClamp(muutoksenKh,0,1));
+    varit.back() = viimeisinVari;
     varit.back().r = ofClamp(varit.back().r, 0, 255);
     varit.back().g = ofClamp(varit.back().g, 0, 255);
     varit.back().b = ofClamp(varit.back().b, 0, 255);
@@ -363,6 +348,7 @@ void Viiva::tyhjennaOminaisuudet() {
 
 void Viiva::asetaKohde(shared_ptr<Viiva> kohde_) {
     kohde = kohde_;
+    cout << "kohde->nimi: " << kohde->nimi << "\n";
 }
 
 OminaisuusSiivu ViivanOminaisuus::haeSiivu(int id) {

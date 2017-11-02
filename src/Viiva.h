@@ -181,7 +181,6 @@ struct Viiva : public ViivanApufunktiot {
     ViivanOminaisuus sumeus;
 
     Kalibraatio kalibraatio;
-    Kalibraatio alkuperainenKalibraatio;
 
 
     Viiva();
@@ -229,7 +228,7 @@ struct Viiva : public ViivanApufunktiot {
     void asetaKohde(shared_ptr<Viiva> kohde_);
 
     void muokkaaVaria();
-    void muokkaaVaria2(float maara);
+    void muokkaaVaria2(float maara, float muutoksenKh);
     ofColor haeVari();
     void lahestyKohdetta();
     float muutoksenMaaraPolulla();

@@ -39,23 +39,20 @@ void Ohjain::updateMonitori() {
         monitoriVari = pankki.viivaNyt.haeVari();
     if (Tilat::tila == Rajaa) {
         ViivaOhjain::soita();
-        if(valintaMuuttui)
+        if (valintaMuuttui)
             monitori2.tyhjenna();
         monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
-    } else {
-        //monitori2.piirraVari(monitoriVari);
+    } else if (Tilat::tila == Piirtaa) {
 
-
-        vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
-        monitori2.piirraViivatKokonaan(v);
+        //  vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
+        // monitori2.piirraViivatLopusta(v);
     }
-    
+
 
 }
 
 void Ohjain::update() {
     /*jaetaan update Tilan mukaan. Tilan vaihtoehdot: rajaa, piirtaa, soittaa. update ajaa jonkun edellä mainituista funktioista */
-    cout << "tila:" << Tilat::toString() << "\n";
     Tilat::update();
 
     // tehdään OSC paketin lähetys
@@ -72,9 +69,15 @@ void Ohjain::piirtaa() {
     Vaiheet::verbose();
     Vaiheet::update();
 
-    //Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
-    vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
-    monitori1.piirraViivatKohdasta(v, pankki.viivaNyt.size() - 1);
+    if (Vaiheet::vaiheetEnum == Kulje) {
+        monitori1.tyhjenna();
+        monitori1.piirraKartta(pankki.valitutViivat, 10);
+
+    } else if (!pankki.viivaNyt.empty()) {
+        //Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
+        vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
+        monitori1.piirraViivatKohdasta(v, pankki.viivaNyt.size() - 1);
+    }
 }
 
 void Ohjain::soittaa() {
@@ -93,21 +96,21 @@ void Ohjain::rajaa() {
     //Kaikki viivat pienellä ja valitut viivat isolla
     monitori1.tyhjenna();
     monitori1.piirraKartta(ViivaOhjain::pankki.viivat, 3);
-    monitori1.piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);    
+    monitori1.piirraKartta(ViivaOhjain::pankki.valitutViivat, 10);
 
     if (Kyna::click) {
         //Kynasta saa suoraan paksuus-sumeus-vektorin:
         valintaMuuttui = true;
         ViivaOhjain::meneAlkuun();
         ViivaOhjain::pankki.toglaaValinta(Kyna::paikka_scaled);
-    }
-    else
+    } else
         valintaMuuttui = false;
 }
 
 VaiheetEnum Ohjain::kulje() {
     //jos painetaan kynällä, aloitetaan kalibrointi
     if (Kyna::click) {
+        pankki.valitseVari(Kyna::paikka_scaled);
         return Kalibroi;
     }
 
@@ -157,7 +160,6 @@ VaiheetEnum Ohjain::improvisoi() {
 
     //jos nostetaan kynä joksikin aikaa, palataan alkuun. TODO: toimiiko tämä ihan oikein?
 
-    cout << "aloitetaan impro\n";
 
     static int irrotuslaskenta = 0;
     if (!Kyna::drag) {
@@ -169,7 +171,6 @@ VaiheetEnum Ohjain::improvisoi() {
     } else
         irrotuslaskenta = 0;
 
-    cout << "irrotuslaskenta tehty\n";
 
 
     bool improvisointiValmis;
@@ -179,7 +180,6 @@ VaiheetEnum Ohjain::improvisoi() {
     else
         improvisointiValmis = ViivaOhjain::improvisointi(Kyna::paikka, 0.5);
 
-    cout << "improvisointi tehty\n";
 
     if (improvisointiValmis) {
         return LaskeKohde;
@@ -189,7 +189,7 @@ VaiheetEnum Ohjain::improvisoi() {
 }
 
 VaiheetEnum Ohjain::laskeKohde() {
-
+    ViivaOhjain::laskeKohde(Kyna::paikka, Kyna::paine);
     //aseta kalibrointi uusiksi, jotta ei tule värihyppäystä
     return LahestyKohdetta;
 }
@@ -209,7 +209,10 @@ VaiheetEnum Ohjain::lahestyKohdetta() {
 
     bool lahestyminenValmis;
 
-    lahestyminenValmis = ViivaOhjain::lahesty(Kyna::paikka, Kyna::paine);
+    if (hidpen::isOpen)
+        lahestyminenValmis = ViivaOhjain::lahesty(Kyna::paikka, Kyna::paine);
+    else
+        lahestyminenValmis = ViivaOhjain::lahesty(Kyna::paikka, 0.5);
 
     if (lahestyminenValmis) {
         return Viimeistele;
@@ -220,8 +223,8 @@ VaiheetEnum Ohjain::lahestyKohdetta() {
 
 VaiheetEnum Ohjain::viimeistele() {
 
-    pankki.tallennaHakemistoon("valmiitViivat/");
-
+    //pankki.tallennaHakemistoon("valmiitViivat/");
+    pankki.viivaNyt.nollaaLaskurit();
     //pankki.leikkaaMuokattava(pankki.muokattava.OTANNAN_KOKO);
 
 
@@ -235,6 +238,7 @@ VaiheetEnum Ohjain::keskeyta() {
     //    cout << tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png\n";
     //    pankki.tallennaHakemistoon("keskeytetytViivat/");
 
+    
 
     monitori1.tyhjenna();
     pankki.viimeistelePiirto();
@@ -246,9 +250,10 @@ VaiheetEnum Ohjain::keskeyta() {
 
 void Ohjain::keyPressed(int key) {
 
-    if (key == OF_KEY_TAB)
+    if (key == OF_KEY_TAB) {
         Tilat::vaihdaTilaa();
-
+        cout << "tila:" << Tilat::toString() << "\n";
+    }
 
     if (Tilat::tila == Piirtaa) {
 
@@ -268,7 +273,7 @@ void Ohjain::updateOSC() {
 
     // seg faulttaa tällä hetkellä
     //  cout << "lähetetään Osc paketti\n";
-    OscViiva::sendViiva(pankki.viivaNyt);
+    OscViiva::sendViiva(pankki.viivaNyt,Vaiheet::vaiheetEnum);
     //  cout << "Osc paketti lähetetty\n";
 }
 

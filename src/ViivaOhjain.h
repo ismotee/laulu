@@ -24,21 +24,28 @@ struct ViivaOhjain {
     bool kulkeminen();
     bool kalibrointi(ofPoint paikka, float paine);
     bool improvisointi(ofPoint paikka, float paine);
-    bool laskeKohdeVari();
+    bool laskeKohde(ofPoint paikka, float paine);
     bool lahesty(ofPoint paikka, float paine);
     const Viiva& haeMuokattava() const;
     const Viiva& haeKalibrointi() const;
     
     
     void soita();
-    void soitaTaakse();
     void meneAlkuun();
     
     void edellinenViiva();
     void seuraavaViiva();
 
+    void edellinenViivaPlayback();
+    void seuraavaViivaPlayback();
+
     int lukupaa;
+    int lukupaaPlayback;
     int soitettava_id;
+    int soitettavaPlayback_id;
     Viiva soitettava;
+    
+    void soitaPlayback();
+    void playbackAlkuun();
     
 };

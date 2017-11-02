@@ -45,8 +45,9 @@ bool ViivaOhjain::improvisointi(ofPoint paikka, float paine) {
     return pankki.viivaNyt.improvisaatioValmis;
 }
 
-bool ViivaOhjain::laskeKohdeVari() {
-
+bool ViivaOhjain::laskeKohde(ofPoint paikka, float paine) {
+    pankki.lisaaPiste(paikka, paine, LaskeKohde);
+    return true;
 }
 
 
@@ -92,10 +93,6 @@ void ViivaOhjain::meneAlkuun() {
     lukupaa = 0;
 }
 
-void ViivaOhjain::soitaTaakse() {
-
-}
-
 void ViivaOhjain::edellinenViiva() {
     soitettava_id--;
     if(soitettava_id< 0)
@@ -116,4 +113,37 @@ const Viiva& ViivaOhjain::haeKalibrointi() const {
 
 const Viiva& ViivaOhjain::haeMuokattava() const {
 
+}
+void ViivaOhjain::playbackAlkuun() {
+    lukupaaPlayback = 0;
+}
+
+bool ViivaOhjain::soitaPlayback() {
+    lukupaaPlayback++;
+    
+    
+    if(!pankki.piirretytViivat.empty() && lukupaaPlayback >= pankki.piirretytViivat[soitettavaPlayback_id].size()) {
+        lukupaaPlayback = 0;
+        return true;
+    }
+    return false;
+    
+}
+
+void ViivaOhjain::edellinenViivaPlayback() {
+    soitettavaPlayback_id--;
+    
+    if(!pankki.piirretytViivat.empty() && soitettavaPlayback_id < 0) {
+        soitettavaPlayback_id = 0;
+    }
+    
+    playbackAlkuun();
+}
+
+void ViivaOhjain::seuraavaViivaPlayback() {
+    soitettavaPlayback_id++;
+    
+    if(!pankki.piirretytViivat.empty() && soitettavaPlayback_id >= pankki.piirretytViivat.size()) {
+        
+    }
 }

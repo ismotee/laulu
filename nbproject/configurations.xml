@@ -146,6 +146,17 @@
               <pElem>../../../libs/utf8cpp/include</pElem>
               <pElem>../../../libs/utf8cpp/include/utf8</pElem>
               <pElem>../../../libs/openFrameworks</pElem>
+              <pElem>../../../libs/openFrameworks/types</pElem>
+              <pElem>../../../libs/openFrameworks/app</pElem>
+              <pElem>../../../libs/openFrameworks/3d</pElem>
+              <pElem>../../../libs/openFrameworks/communication</pElem>
+              <pElem>../../../libs/openFrameworks/graphics</pElem>
+              <pElem>../../../libs/openFrameworks/video</pElem>
+              <pElem>../../../libs/openFrameworks/math</pElem>
+              <pElem>../../../libs/openFrameworks/utils</pElem>
+              <pElem>../../../libs/openFrameworks/sound</pElem>
+              <pElem>../../../libs/openFrameworks/events</pElem>
+              <pElem>../../../libs/openFrameworks/gl</pElem>
             </incDir>
             <preprocessorList>
               <Elem>GCC_HAS_REGEX</Elem>
@@ -243,20 +254,31 @@
         <ccTool flags="0">
         </ccTool>
       </item>
+      <folder path="0">
+        <ccTool>
+          <incDir>
+            <pElem>src</pElem>
+            <pElem>data</pElem>
+            <pElem>data/arkisto</pElem>
+            <pElem>data/valmiitViivat</pElem>
+            <pElem>data/keskeytetytViivat</pElem>
+            <pElem>nbproject</pElem>
+            <pElem>nbproject/private</pElem>
+            <pElem>../../../addons/ofxOsc/src</pElem>
+            <pElem>../../../addons/ofxOsc/libs</pElem>
+            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
+            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
+            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
+            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
+            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
+            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
       <folder path="ofxOsc">
         <ccTool>
           <incDir>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
             <pElem>../../../addons/ofxOsc/src</pElem>
             <pElem>../../../addons/ofxOsc/libs</pElem>
             <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
@@ -271,522 +293,66 @@
       </folder>
       <item path="src/Kyna.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/Monitori.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/Ohjain.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/OscInterface.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/Sessio.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/Soitin.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/Vaiheet.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/Viiva.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/ViivaOhjain.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/ViivaPankki.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/hidpen.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>src</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/ofApp.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/tiedosto.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/tilastot.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/timedThread.cpp" ex="false" tool="1" flavor2="11">
         <ccTool flags="0">
-          <incDir>
-            <pElem>../../../libs/openFrameworks/graphics</pElem>
-            <pElem>../../../libs/openFrameworks/3d</pElem>
-            <pElem>../../../libs/openFrameworks/events</pElem>
-            <pElem>../../../libs/openFrameworks/sound</pElem>
-            <pElem>../../../libs/openFrameworks/communication</pElem>
-            <pElem>../../../libs/openFrameworks/utils</pElem>
-            <pElem>../../../libs/openFrameworks/types</pElem>
-            <pElem>../../../libs/openFrameworks/gl</pElem>
-            <pElem>../../../libs/openFrameworks/math</pElem>
-            <pElem>../../../libs/openFrameworks/app</pElem>
-            <pElem>../../../libs/openFrameworks/video</pElem>
-            <pElem>src</pElem>
-            <pElem>nbproject</pElem>
-            <pElem>nbproject/private</pElem>
-            <pElem>../../../addons/ofxOsc/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/posix</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/ip/win32</pElem>
-            <pElem>../../../addons/ofxOsc/libs/oscpack/src/osc</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
     </conf>

@@ -62,26 +62,67 @@ bool OscInterface::setAddressAndPortsFromFile(std::string path) {
     return true;
 }
 
-void OscViiva::sendViiva(Viiva viiva) {
+void OscViiva::sendViiva(Viiva viiva, VaiheetEnum vaihe) {
     if (connection && viiva.size()) {
         ofxOscMessage msg;
-        if (viiva.size() > 2) {
-            msg.setAddress("/Viiva/jatkuu");
-        } else if (viiva.size() == 1) {
-            msg.setAddress("/Viiva/alkaa");
 
-        } else if (viiva.size() != 0 && viiva.vaiheet.back() == Keskeyta) {
-            msg.setAddress("/Viiva/loppuu");
+        if (viiva.size() == 1) {
+            msg.setAddress("/viiva/alkaa");
+            msg.addFloatArg(1);
+            sendMessage(msg);
+        } else if (vaihe == Keskeyta) {
+            msg.setAddress("/viiva/loppuu");
+            msg.addFloatArg(1);
+            sendMessage(msg);
         }
-
+        
+        
+        msg = ofxOscMessage();
+        msg.setAddress("/viiva/nimi");
         msg.addStringArg(viiva.nimi);
-        msg.addStringArg(vaiheenNimi(viiva.vaiheet.back()));
-        msg.addStringArg(std::to_string(viiva.pisteet.back().x));
-        msg.addStringArg(std::to_string(viiva.pisteet.back().y));
-        msg.addStringArg(to_string(viiva.paine.back()));
-        msg.addStringArg(to_string(viiva.paksuus.back()));
-        msg.addStringArg(to_string(viiva.sumeus.back()));
+        sendMessage(msg);
 
+        msg = ofxOscMessage();
+        msg.setAddress("/viiva/vaihe");
+        msg.addStringArg(vaiheenNimi(viiva.vaiheet.back()));
+        sendMessage(msg);
+        
+        msg = ofxOscMessage();
+        msg.setAddress("/viiva/piste");
+        msg.addFloatArg(viiva.pisteet.back().x);
+        msg.addFloatArg(viiva.pisteet.back().x);
+        sendMessage(msg);
+        
+        msg = ofxOscMessage();
+        msg.setAddress("/viiva/paine");
+        msg.addFloatArg(viiva.paine.back());
+        msg.addFloatArg(viiva.paine.keskiarvot.back());
+        msg.addFloatArg(viiva.paine.keskihajonnat.back());
+        msg.addFloatArg(viiva.paine.konvergenssit.back());
+        sendMessage(msg);
+        
+        
+        msg = ofxOscMessage();
+        msg.setAddress("/viiva/sumeus");
+        msg.addFloatArg(viiva.sumeus.back());
+        msg.addFloatArg(viiva.sumeus.keskiarvot.back());
+        msg.addFloatArg(viiva.sumeus.keskihajonnat.back());
+        msg.addFloatArg(viiva.sumeus.konvergenssit.back());
+        sendMessage(msg);
+        
+        msg = ofxOscMessage();
+        msg.setAddress("/viiva/paksuus");
+        msg.addFloatArg(viiva.paksuus.back());
+        msg.addFloatArg(viiva.paksuus.keskiarvot.back());
+        msg.addFloatArg(viiva.paksuus.keskihajonnat.back());
+        msg.addFloatArg(viiva.paksuus.konvergenssit.back());
+        sendMessage(msg);
+
+        msg = ofxOscMessage();
+        msg.setAddress("/viiva/vari");
+        msg.addFloatArg(viiva.varit.back().getHue());
+        msg.addFloatArg(viiva.varit.back().getSaturation());
+        msg.addFloatArg(viiva.varit.back().getBrightness());
         sendMessage(msg);
 
     }

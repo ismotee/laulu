@@ -54,6 +54,7 @@ struct ViivaPankki {
     void asetaKohteeksi(int id);
     void valitseViivat(Alue savyAlue,Alue saturaatioAlue, Alue kirkkausAlue, Alue paksuusAlue, Alue sumeusAlue);
     void toglaaValinta(ofVec2f paksuusSumeus);
+    void valitseVari(ofVec2f paksuusSumeusKa);
     void viimeistelePiirto();
     
     // lataus ja tallennus
