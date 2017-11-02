@@ -5,5 +5,5 @@
 namespace tiedosto {
   
     Viiva lataaViiva(std::string tiedostonNimi);
-    void tallennaViiva(Viiva viiva, std::string polku);
+    bool tallennaViiva(const Viiva& viiva, std::string polku);
 };

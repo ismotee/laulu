@@ -146,17 +146,6 @@
               <pElem>../../../libs/utf8cpp/include</pElem>
               <pElem>../../../libs/utf8cpp/include/utf8</pElem>
               <pElem>../../../libs/openFrameworks</pElem>
-              <pElem>../../../libs/openFrameworks/types</pElem>
-              <pElem>../../../libs/openFrameworks/app</pElem>
-              <pElem>../../../libs/openFrameworks/3d</pElem>
-              <pElem>../../../libs/openFrameworks/communication</pElem>
-              <pElem>../../../libs/openFrameworks/graphics</pElem>
-              <pElem>../../../libs/openFrameworks/video</pElem>
-              <pElem>../../../libs/openFrameworks/math</pElem>
-              <pElem>../../../libs/openFrameworks/utils</pElem>
-              <pElem>../../../libs/openFrameworks/sound</pElem>
-              <pElem>../../../libs/openFrameworks/events</pElem>
-              <pElem>../../../libs/openFrameworks/gl</pElem>
             </incDir>
             <preprocessorList>
               <Elem>GCC_HAS_REGEX</Elem>
@@ -257,11 +246,18 @@
       <folder path="0">
         <ccTool>
           <incDir>
+            <pElem>../../../libs/openFrameworks/graphics</pElem>
+            <pElem>../../../libs/openFrameworks/3d</pElem>
+            <pElem>../../../libs/openFrameworks/events</pElem>
+            <pElem>../../../libs/openFrameworks/sound</pElem>
+            <pElem>../../../libs/openFrameworks/communication</pElem>
+            <pElem>../../../libs/openFrameworks/utils</pElem>
+            <pElem>../../../libs/openFrameworks/types</pElem>
+            <pElem>../../../libs/openFrameworks/gl</pElem>
+            <pElem>../../../libs/openFrameworks/math</pElem>
+            <pElem>../../../libs/openFrameworks/app</pElem>
+            <pElem>../../../libs/openFrameworks/video</pElem>
             <pElem>src</pElem>
-            <pElem>data</pElem>
-            <pElem>data/arkisto</pElem>
-            <pElem>data/valmiitViivat</pElem>
-            <pElem>data/keskeytetytViivat</pElem>
             <pElem>nbproject</pElem>
             <pElem>nbproject/private</pElem>
             <pElem>../../../addons/ofxOsc/src</pElem>
@@ -279,6 +275,17 @@
       <folder path="ofxOsc">
         <ccTool>
           <incDir>
+            <pElem>../../../libs/openFrameworks/types</pElem>
+            <pElem>../../../libs/openFrameworks/app</pElem>
+            <pElem>../../../libs/openFrameworks/3d</pElem>
+            <pElem>../../../libs/openFrameworks/communication</pElem>
+            <pElem>../../../libs/openFrameworks/graphics</pElem>
+            <pElem>../../../libs/openFrameworks/video</pElem>
+            <pElem>../../../libs/openFrameworks/math</pElem>
+            <pElem>../../../libs/openFrameworks/utils</pElem>
+            <pElem>../../../libs/openFrameworks/sound</pElem>
+            <pElem>../../../libs/openFrameworks/events</pElem>
+            <pElem>../../../libs/openFrameworks/gl</pElem>
             <pElem>../../../addons/ofxOsc/src</pElem>
             <pElem>../../../addons/ofxOsc/libs</pElem>
             <pElem>../../../addons/ofxOsc/libs/oscpack</pElem>

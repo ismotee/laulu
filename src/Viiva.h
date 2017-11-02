@@ -160,7 +160,7 @@ struct Viiva : public ViivanApufunktiot {
     //miten suurta osaa datasta käytetään tilastollisessa tarkastelussa:
     static const int OTANNAN_KOKO = 300;
     static const float MAX_KIIHTYVYYS;
-    const char* versio = "1";
+    static const int versio = 1;
 
     std::string nimi;
     int improvisaatioLaskin;

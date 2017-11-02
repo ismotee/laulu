@@ -45,7 +45,7 @@ struct ViivaOhjain {
     int soitettavaPlayback_id;
     Viiva soitettava;
     
-    void soitaPlayback();
+    bool soitaPlayback();
     void playbackAlkuun();
     
 };
