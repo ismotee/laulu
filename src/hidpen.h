@@ -32,19 +32,26 @@ namespace hidpen{
     //location of pressure data in packet. Pressure data is 2 bytes.
     //NOTE: This information is from linuxwacom wiki, and might not be correct for all pens on all systems!
     const unsigned int PRESSURE_BYTE = 6;                                                       
-
+    const unsigned int X_BYTE = 2;
+    const unsigned int Y_BYTE = 4;
+    
 
     
     /*** variable declarations ***/
     /*     defined in hidpen.cpp */    
-    //maximum value of pressure, used to scale it to [0...1]. NOTE: this also may or may not vary between devices and systems
-    extern unsigned int pressureScale;               
+    //maximum values, used to scale to [0...1]. NOTE: this also may or may not vary between devices and systems
+    extern unsigned int xScale;
+    extern unsigned int yScale;
+    extern unsigned int pressureScale;
+    
     extern std::vector<deviceInfo> deviceList;  //vector containing info of all the devices
     extern hid_device* device;          //the open device
     extern bool isOpen;
     extern int currentDevice_i;  //which device is open         
     extern unsigned char buffer[BUF_SIZE];     //buffer for reading and writing
     extern float pressure;                     //pressure value is updated in readPressure(). This is the latest value of pressure    
+    extern float x;
+    extern float y;
     
     /*** function declarations ***/
     /*      defined in hidpen.cpp*/
@@ -70,8 +77,10 @@ namespace hidpen{
     //close hidapi
     bool exit();
 
+    //DEPRECATED, USE read() INSTEAD
     //read a pressure from pen. Used by update(). Return true if read, false otherwise. This only reads one value; use update() to read all packets
-    bool readPressure();            
+    bool readPressure();
+    bool read();
     //other functions use this:
     void clearBuffer();
             

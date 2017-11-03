@@ -13,7 +13,11 @@ int hidpen::currentDevice_i = -1;  //which device is open
 
 unsigned char hidpen::buffer[hidpen::BUF_SIZE];     //buffer for reading and writing
 float hidpen::pressure;                     //pressure value is updated in readPressure(). This is the latest value of pressure
+float hidpen::x;
+float hidpen::y;
 unsigned int hidpen::pressureScale = 2048;
+unsigned int hidpen::xScale = 32000;
+unsigned int hidpen::yScale = 20000;
 
 /*** function definitions ***/
 
@@ -182,7 +186,7 @@ bool hidpen::update() {
     //read all packets & update pressure
     int n;
     //count number of packages read (n)
-    for(n = 0; readPressure() == true; n++)
+    for(n = 0; read() == true; n++)
         ;
     //if there were packages, return true
     if(n > 0) return true;
@@ -191,13 +195,21 @@ bool hidpen::update() {
 
 
 bool hidpen::readPressure() {
+    #ifdef HIDPEN_DEBUG
+        std::cerr << "DEBUG:readPressure: deprecated, use read() instead!\n";
+    #endif            
+    read();
+}
+
+
+bool hidpen::read() {
     //check init
     if (hid_init() == -1) 
         return false;
 
     if(!isOpen) {
         #ifdef HIDPEN_DEBUG
-            std::cerr << "DEBUG:readPressure: device not open!\n";
+            std::cerr << "DEBUG:read: device not open!\n";
         #endif            
         return false;
     }
@@ -208,28 +220,36 @@ bool hidpen::readPressure() {
     if(err >= 0) {
         
         #ifdef HIDPEN_DEBUG
-            if(err != 0) std::cerr << "DEBUG:readPressure: Read " << err << " bytes. ";
+            if(err != 0) std::cerr << "DEBUG:read: Read " << err << " bytes. ";
         #endif            
             
         //If packet was too small to contain pen pressure data:
         if(err < PRESSURE_BYTE + 1) {
             #ifdef HIDPEN_DEBUG
-                if(err != 0) std::cerr << "No pressure data!\n";
+                if(err != 0) std::cerr << "No data!\n";
             #endif            
             return false;
         }
 
-        //get pressure
+        //get pressure, x & y
+        unsigned short x_s = (unsigned short) buffer[X_BYTE + 1] << 8 | (unsigned short) buffer[X_BYTE];
+        unsigned short y_s = (unsigned short) buffer[Y_BYTE + 1] << 8 | (unsigned short) buffer[Y_BYTE];
         unsigned short pressure_s = (unsigned short) buffer[PRESSURE_BYTE + 1] << 8 | (unsigned short) buffer[PRESSURE_BYTE];
+        
         pressure = (float)pressure_s / pressureScale;
+        x = (float)x_s / xScale;
+        y = (float)y_s / yScale;
+        
         #ifdef HIDPEN_DEBUG
             std::cerr << "Pressure: " << pressure << " (" << pressure_s << ")\n";
+            std::cerr << "x: " << x << " (" << x_s << ")\n";
+            std::cerr << "y: " << y << " (" << y_s << ")\n";
         #endif
         return true;
     }
     else {
         #ifdef HIDPEN_DEBUG
-            std::cerr << "DEBUG:readPressure: Could not read! " << hid_error(device) << "\n";
+            std::cerr << "DEBUG:read: Could not read! " << hid_error(device) << "\n";
         #endif
         return false;
     }
