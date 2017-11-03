@@ -105,7 +105,7 @@ Viiva tiedosto::lataaViiva(std::string tiedostonNimi) {
         }
         
         else if(luettu.compare("pisteet")==0) {
-            int koko; //montako pistettä            
+            int koko; //montako pistettä
             file >> koko;
             
             //tehdään tilaa vektoriin
@@ -115,14 +115,14 @@ Viiva tiedosto::lataaViiva(std::string tiedostonNimi) {
             //aletaan lukea pisteitä. Piste on 2 floattia (x, y)
             file.seekg(1, file.cur); //eliminoi rivinvaihto
             int bytes = koko * 2 * sizeof(float);
-            float* buffer = new float[koko * 2];
+            float* buffer = new float[2*koko];
             file.read((char*)buffer, bytes);
             
             //tallenna pisteet vektoriin
-            for(int piste_i = alkuKoko; piste_i < alkuKoko+koko; piste_i++) {
+            for(int piste_i = 0; piste_i < koko; piste_i++) {
                 float x = buffer[piste_i*2];
                 float y = buffer[piste_i*2 + 1];
-                pisteet[piste_i] = ofPoint(x,y);
+                pisteet[alkuKoko + piste_i] = ofPoint(x,y);
             }
             
             delete[] buffer;
@@ -172,16 +172,27 @@ Viiva tiedosto::lataaViiva(std::string tiedostonNimi) {
             delete[] buffer;
         }
 
-        else if(luettu.compare("varit")==0) {
-            int koko;
+        else if(luettu.compare("värit")==0) {
+            int koko; //montako väriä
             file >> koko;
             
+            //tehdään tilaa vektoriin
+            int alkuKoko = varit.size();
+            varit.resize(varit.size()+koko);
+            
+            //aletaan lukea värejä. Väri on 3 char (r, g, b, r, ...)
             file.seekg(1, file.cur); //eliminoi rivinvaihto
-            int bytes = koko * sizeof(float);
-            float* buffer = new float[koko];
+            int bytes = koko * 3 * sizeof(char);
+            char* buffer = new char[koko*3];
             file.read((char*)buffer, bytes);
             
-            varit.insert(varit.end(),buffer,buffer+koko);
+            //tallenna värit vektoriin
+            for(int vari_i = 0; vari_i < koko; vari_i++) {
+                float r = buffer[vari_i*3];
+                float g = buffer[vari_i*3 + 1];
+                float b = buffer[vari_i*3 + 2];
+                varit[alkuKoko + vari_i] = ofColor(r,g,b);
+            }
             
             delete[] buffer;
         }
@@ -222,17 +233,7 @@ bool tiedosto::tallennaViiva(const Viiva& viiva, std::string polku) {
         );                
         file.write(headerStr.c_str(), headerStr.length() );
                 
-        std::string variStr(
-                "väri " 
-                + std::to_string(viiva.kalibraatio.vari.r) + " "
-                + std::to_string(viiva.kalibraatio.vari.g) + " "
-                + std::to_string(viiva.kalibraatio.vari.b) );
-
-        std::string vaiheHeaderStr(
-            "vaihe\nkalibrointi\n"
-            + variStr + "\n"
-        );
-        
+        std::string vaiheHeaderStr;        
         std::string blockHeaderStr;
 
         //Käydään läpi viivan pisteitä. Kun vaihe vaihtuu, kirjoitetaan blokki
@@ -245,26 +246,47 @@ bool tiedosto::tallennaViiva(const Viiva& viiva, std::string polku) {
             for(; viiva.vaiheet[readPos] == viimeVaihe; readPos++) {
             }
             //readPos osoittaa nyt uuden vaiheen ensimmäiseen kohtaan viivassa
-            //kirjoitetaan alusta kohtaan readPos
+            //kirjoitetaan viime kirjoituksen lopusta kohtaan readPos
             int blockSize = readPos - writePos;
 
+            //bufferit joihin laitetaan uuden vaiheen tiedot
             float* pisteBuffer = new float[blockSize * 2];//tallennetaan koordinaatit peräkkäin: x, y, x, y, ...
             float* paineBuffer = new float[blockSize];
             float* paksuusBuffer = new float[blockSize];
             float* sumeusBuffer = new float[blockSize];
+            char* varitBuffer = new char[blockSize*3]; //r, g, b, r, g, b, ...
 
-            for(int p_i = writePos; p_i < blockSize; p_i++) {
-                pisteBuffer[p_i*2] = viiva.pisteet[p_i].x;
-                pisteBuffer[p_i*2+1] = viiva.pisteet[p_i].y;
+            //kopioidaan tiedot viivasta, alkaen viime kirjoituksen lopusta, päättyen kohtaan writePos+blockSize
+            //p_i: monesko vaiheen piste
+            for(int p_i = 0; p_i < blockSize; p_i++) {
+                pisteBuffer[p_i*2] = viiva.pisteet[writePos + p_i].x;
+                pisteBuffer[p_i*2+1] = viiva.pisteet[writePos + p_i].y;
             }        
-            std::copy(viiva.paine.arvot.begin(), viiva.paine.arvot.begin() + blockSize, paineBuffer);
-            std::copy(viiva.paksuus.arvot.begin(), viiva.paksuus.arvot.begin() + blockSize, paksuusBuffer);
-            std::copy(viiva.sumeus.arvot.begin(), viiva.sumeus.arvot.begin() + blockSize, sumeusBuffer);
+            std::copy(viiva.paine.arvot.begin() + writePos, viiva.paine.arvot.begin() + writePos + blockSize, paineBuffer);
+            std::copy(viiva.paksuus.arvot.begin() + writePos, viiva.paksuus.arvot.begin() + writePos + blockSize, paksuusBuffer);
+            std::copy(viiva.sumeus.arvot.begin() + writePos, viiva.sumeus.arvot.begin() + writePos + blockSize, sumeusBuffer);
+            
+            for(int v_i = 0; v_i < blockSize; v_i++) {
+                varitBuffer[v_i*3]   = viiva.varit[writePos + v_i].r;
+                varitBuffer[v_i*3+1] = viiva.varit[writePos + v_i].g;
+                varitBuffer[v_i*3+2] = viiva.varit[writePos + v_i].b;
+            }        
             
             vaiheHeaderStr = std::string(
                     "vaihe\n"
-                    + vaiheenNimi(viiva.vaiheet[readPos]) + "\n"
+                    + vaiheenNimi(viimeVaihe) + "\n"
             );
+            if(viimeVaihe == Kalibroi) {
+                std::string variStr(
+                    "väri " 
+                    + std::to_string(viiva.kalibraatio.vari.r) + " "
+                    + std::to_string(viiva.kalibraatio.vari.g) + " "
+                    + std::to_string(viiva.kalibraatio.vari.b) 
+                );
+                vaiheHeaderStr += variStr + "\n";
+            }
+            
+            file.write(vaiheHeaderStr.c_str(), vaiheHeaderStr.length() );
             
             blockHeaderStr = std::string("pisteet\n" + std::to_string(blockSize) + "\n");
             file.write(blockHeaderStr.c_str(), blockHeaderStr.length() );
@@ -285,7 +307,7 @@ bool tiedosto::tallennaViiva(const Viiva& viiva, std::string polku) {
             if(viiva.vaiheet[readPos] != Kalibroi) {
                 blockHeaderStr = std::string("värit\n" + std::to_string(blockSize) + "\n");
                 file.write(blockHeaderStr.c_str(), blockHeaderStr.length() );
-                file.write( (char*) sumeusBuffer, sizeof(float) * blockSize);
+                file.write( (char*) varitBuffer, sizeof(char) * blockSize * 3);
             }
             
             writePos += blockSize;
@@ -296,6 +318,7 @@ bool tiedosto::tallennaViiva(const Viiva& viiva, std::string polku) {
             delete[] paineBuffer;
             delete[] paksuusBuffer;
             delete[] sumeusBuffer;
+            delete[] varitBuffer;
         }
         file.close();
         std::cout << "tallennettiin: " << filename << "\n";

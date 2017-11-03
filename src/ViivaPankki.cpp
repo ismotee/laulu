@@ -108,6 +108,7 @@ void ViivaPankki::tallennaHakemistoon(string polku) {
         td.createDirectory(polku);
     ofDirectory d("./");
 
+    if(viivat.empty() )return;
     tiedosto::tallennaViiva(viivaNyt, d.getAbsolutePath() + "/" + polku);
 }
 
@@ -122,8 +123,9 @@ bool ViivaPankki::lataaHakemistosta(string polku) {
     dir.listDir();
 
 
-    for (int i = 0; i < dir.size(); i++)
+    for (int i = 0; i < dir.size(); i++) {
         viivat.push_back(tiedosto::lataaViiva(dir[i].getAbsolutePath()));
+    }
 
 }
 

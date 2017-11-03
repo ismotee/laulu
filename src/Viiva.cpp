@@ -1,7 +1,7 @@
 #include "Viiva.h"
 #include "tilastot.h"
 
-const float Viiva::MAX_KIIHTYVYYS = 1.5;
+const float Viiva::MAX_KIIHTYVYYS = 15; //pitäisi olla 1.5
 
 ofColor ViivanApufunktiot::asetaHSLnMukaan(float lh, float ls, float ll) {
     float bh = lh;

@@ -5,7 +5,7 @@ void Ohjain::setup() {
     monitori1.setup();
 
     ViivaOhjain::setup("arkisto/", "tallennetut/");
-
+    
     cout << pankki.viivat.size() << " viivaa ladattu\n";
 
     if (OscInterface::setAddressAndPortsFromFile("./oscSettings")) {

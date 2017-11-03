@@ -81,7 +81,7 @@ void ViivaOhjain::soita() {
     if(lukupaa >= 1000)
         lukupaa = 1;
     
-    cout << "koko: " << lukupaa << "/" << pankki.valitutViivat[soitettava_id].size() << "\n";
+    //cout << "koko: " << lukupaa << "/" << pankki.valitutViivat[soitettava_id].size() << "\n";
     
     
     soitettava = pankki.valitutViivat[soitettava_id];
