@@ -276,7 +276,7 @@ float Viiva::muutoksenMaaraPolulla() {
     ofVec2f k = kalibraatio.paksuusSumeusVektori();
 
     float projektio = (m - k).dot((s - k).getNormalized()) / (s - k).length();
-    return projektio;
+    //return projektio;
     return ofClamp(projektio, -0.5, 1.2);
 
 }
@@ -287,8 +287,8 @@ void Viiva::muokkaaVaria2(float maara, float muutoksenKh) {
 
     ofColor kohtaVari = variRGBfromVec3(kohta); 
     ofColor viimeisinVari = varit.back();
-    viimeisinVari.lerp(kohtaVari,ofClamp(muutoksenKh,0,1));
-    varit.back() = viimeisinVari;
+//    viimeisinVari.lerp(kohtaVari,ofClamp(muutoksenKh, 0, 1) );
+    varit.back() = kohtaVari;
     varit.back().r = ofClamp(varit.back().r, 0, 255);
     varit.back().g = ofClamp(varit.back().g, 0, 255);
     varit.back().b = ofClamp(varit.back().b, 0, 255);
