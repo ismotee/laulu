@@ -91,9 +91,12 @@ public:
     void piirraViivatLopusta(const std::vector<Viiva>& viivat);
     void piirraViivatKokonaan(const std::vector<Viiva>& viivat);
     void piirraKartta(const std::vector<Viiva>& viivat, float r = 10);
+    void piirraVari(ofColor vari_);
+
 
     void tyhjenna();
     void lopetaViivat();
     void tallennaKuvana(std::string filename = "kuvat/default.png");
     void tallennaKartta(const std::vector<Viiva>& viivat, std::string filename = "kuvat/kartta.png");
+    
 };

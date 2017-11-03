@@ -398,7 +398,7 @@ void Multimonitori::luoPensselit(unsigned int n) {
 
 
 void Multimonitori::draw() {
-    ofClear(taustaVari);
+    //ofClear(taustaVari);
     ofSetColor(ofColor::white);
     viivaFbo.draw(0,0);
 }
@@ -468,6 +468,14 @@ void Multimonitori::piirraViivatKohdasta(const std::vector<Viiva>& viivat, unsig
         //käytetään pensseli-indeksinä viivan indeksiä viiva_i:
         teeVeto( viivat[viiva_i].pisteet[n], viiva_i, paksuus, sumeus, viivat[viiva_i].varit[n] );
     }
+}
+
+void Multimonitori::piirraVari(ofColor vari_) {
+    //taustaa piirretään koko ajan, joten tämä riittää:
+    viivaFbo.begin();
+    ofClear(vari_);
+    viivaFbo.end();
+   // pensseli::vari = vari_;
 }
 
 
