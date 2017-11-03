@@ -18,6 +18,7 @@ struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public OscViiva
     void setup();
     void update();
     void updateMonitori();
+    void draw();
     
     void keyPressed(int key);
     

@@ -66,9 +66,15 @@ void Ohjain::update() {
 
 }
 
+void Ohjain::draw() {    
+    if(Tilat::tila == Rajaa) {
+        Kyna::draw();        
+    }
+}
+
 void Ohjain::piirtaa() {
 
-    Vaiheet::verbose();
+    //Vaiheet::verbose();
     Vaiheet::update();
 
     if (Vaiheet::vaiheetEnum == Kulje) {

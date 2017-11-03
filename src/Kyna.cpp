@@ -9,36 +9,53 @@ void Kyna::setup() {
     paine = 0;
     paikka = ofPoint();
     paikka_scaled = ofPoint();
+    drag = false;
 }
 
 void Kyna::update() {
     click = false;
-
     if(hidpen::isOpen) {
         hidpen::update();
         paine = hidpen::pressure;
+        paikka = ofPoint(hidpen::x * ofGetWidth(), (hidpen::y) * ofGetHeight() );
+        paikka_scaled = ofPoint(hidpen::x, 1-hidpen::y);
+        
+        if(hidpen::pressure > 0) {
+            if(!drag) {
+                click = true;
+                drag = true;
+            }
+        }
+        else {
+            click = false;
+            drag = false;
+        }            
     }
 }
 
+void Kyna::draw() {
+    ofSetColor(ofColor::gray);
+    ofDrawCircle(paikka, 2);
+}
+
 void Kyna::asetaPaikka(float x, float y) {
-    paikka = ofPoint(x,y);    
-    paikka_scaled = ofPoint(x / ofGetWidth(), 1 - (y / ofGetHeight() ) );
+    //deprekoitu! Käytä vain updatea
 }
 
 void Kyna::pressed(float x, float y) {
-    asetaPaikka(x, y);    
+    //asetaPaikka(x, y);    
     click = true;
     drag = true;
 }
 
 void Kyna::moved(float x, float y) {
-    asetaPaikka(x, y);
+    //asetaPaikka(x, y);
 }
 
 void Kyna::released(float x, float y) {
-    asetaPaikka(x, y);
-    click = false;
-    drag = false;
+    //asetaPaikka(x, y);
+    //click = false;
+    //drag = false;
 }
 
 void Kyna::kerroTiedot() {

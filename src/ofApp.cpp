@@ -5,6 +5,7 @@
 void ofApp::setup() {
     Ohjain::setup();
     ofSetFrameRate(60);
+    ofHideCursor();
 }
 
 //--------------------------------------------------------------
@@ -25,6 +26,8 @@ void ofApp::update() {
 
 void ofApp::draw() {
     monitori1.draw();
+
+    Ohjain::draw();
 }
 
 //--------------------------------------------------------------
@@ -49,25 +52,25 @@ void ofApp::keyReleased(int key) {
 //--------------------------------------------------------------
 
 void ofApp::mouseMoved(int x, int y) {
-    Kyna::moved(x, y);
+    //Kyna::moved(x, y);
 }
 
 //--------------------------------------------------------------
 
 void ofApp::mouseDragged(int x, int y, int button) {
-    Kyna::moved(x, y);
+    //Kyna::moved(x, y);
 }
 
 //--------------------------------------------------------------
 
 void ofApp::mousePressed(int x, int y, int button) {
-    Kyna::pressed(x, y);
+    //Kyna::pressed(x, y);
 }
 
 //--------------------------------------------------------------
 
 void ofApp::mouseReleased(int x, int y, int button) {
-    Kyna::released(x, y);
+    //Kyna::released(x, y);
 }
 //--------------------------------------------------------------
 

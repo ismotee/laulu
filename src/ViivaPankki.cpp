@@ -217,5 +217,5 @@ void ViivaPankki::viimeistelePiirto() {
 }
 
 void ViivaPankki::lataaPiirretytViivat(std::string polku) {
-
+    
 }

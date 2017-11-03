@@ -10,8 +10,9 @@ struct Kyna {
     bool click, drag;
     
     void setup();
-
     void update();
+    void draw();
+    
     void asetaPaikka(float x, float y);
     void pressed(float x, float y); 
     void moved(float x, float y);

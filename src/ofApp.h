@@ -25,6 +25,6 @@ class ofApp : public ofBaseApp, public Ohjain{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
                 
-                float mouseX,mouseY;
+                //float mouseX,mouseY;
                 
 };
