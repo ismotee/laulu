@@ -15,9 +15,9 @@ unsigned char hidpen::buffer[hidpen::BUF_SIZE];     //buffer for reading and wri
 float hidpen::pressure;                     //pressure value is updated in readPressure(). This is the latest value of pressure
 float hidpen::x;
 float hidpen::y;
-unsigned int hidpen::pressureScale = 2048;
-unsigned int hidpen::xScale = 32000;
-unsigned int hidpen::yScale = 20000;
+unsigned int hidpen::pressureScale = 65472;
+unsigned int hidpen::xScale = 7600;
+unsigned int hidpen::yScale = 4750;
 
 /*** function definitions ***/
 
@@ -232,9 +232,9 @@ bool hidpen::read() {
         }
 
         //get pressure, x & y
-        unsigned short x_s = (unsigned short) buffer[X_BYTE + 1] << 8 | (unsigned short) buffer[X_BYTE];
-        unsigned short y_s = (unsigned short) buffer[Y_BYTE + 1] << 8 | (unsigned short) buffer[Y_BYTE];
-        unsigned short pressure_s = (unsigned short) buffer[PRESSURE_BYTE + 1] << 8 | (unsigned short) buffer[PRESSURE_BYTE];
+        unsigned short x_s = (unsigned short) buffer[X_BYTE] << 8 | (unsigned short) buffer[X_BYTE+1];
+        unsigned short y_s = (unsigned short) buffer[Y_BYTE] << 8 | (unsigned short) buffer[Y_BYTE+1];
+        unsigned short pressure_s = (unsigned short) buffer[PRESSURE_BYTE] << 8 | (unsigned short) buffer[PRESSURE_BYTE + 1];
         
         pressure = (float)pressure_s / pressureScale;
         x = (float)x_s / xScale;

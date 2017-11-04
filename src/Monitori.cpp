@@ -75,9 +75,9 @@ void pensseli::strokeTo(ofPoint kohde) {
     //tee viiva nykyisestä sijainnista kohteeseen
     ofVec2f v = kohde - sijainti;
     float L = v.length();
-    float MAX_STROKE_LENGTH = 1000;
+    float MAX_STROKE_LENGTH = 800;
     if(L > MAX_STROKE_LENGTH) {
-        std::cout << "pensseli::strokeTo: liian pitkä veto! (" << L << ")\n";
+        std::cout << "pensseli::strokeTo: liian pitkä veto! " << L << " (" <<  sijainti.x << ":" << sijainti.y << ") -> (" << kohde.x << ", " << kohde.y << ") \n";
         return;
     }
     
@@ -158,7 +158,7 @@ void Monitori::teeVeto(ofPoint kohde, float paksuus, float sumeus) {
     // koko: 0 ... MAX_KOKO/(4+2/3)
     pensseli::koko = ofClamp(pow(paksuus, 0.7) * MAX_KOKO / (4+2/3), 1, MAX_KOKO / (4+2/3) ); 
     // blur: 0...16
-    pensseli::blur = ofClamp(pow(sumeus, 2) * 16, 0.1, 16);    
+    pensseli::blur = ofClamp(pow(sumeus, 2) * 16, 0.1, 16);
     
     viivaFbo.begin();
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
@@ -282,7 +282,7 @@ void Monitori::tallennaKuvana(std::string tiedosto) {
 
 void Monitori::piirraKartta(const std::vector<Viiva>& viivat, float r) {
     if(viivat.empty() ) {
-        std::cerr << "Monitori::piirraKartta: Ei viivoja!\n";
+        //std::cerr << "Monitori::piirraKartta: Ei viivoja!\n";
         return;
     }
 
