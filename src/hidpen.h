@@ -8,7 +8,7 @@
 #include <algorithm>
 
 //if HIDPEN_DEBUG is defined, prints all kinds of information to stderr:
-#define HIDPEN_DEBUG
+//#define HIDPEN_DEBUG
 
 namespace hidpen{
 

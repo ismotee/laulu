@@ -16,20 +16,33 @@ void Kyna::update() {
     click = false;
     if(hidpen::isOpen) {
         hidpen::update();
-        paine = hidpen::pressure;
-        paikka = ofPoint(hidpen::x * ofGetWidth(), (hidpen::y) * ofGetHeight() );
-        paikka_scaled = ofPoint(hidpen::x, 1-hidpen::y);
+        if(hidpen::pressure >= 0 && hidpen::pressure <= 1
+           && hidpen::x > 0 && hidpen::x <= 1
+           && hidpen::y > 0 && hidpen::y <= 1
+        )
+        {
+            paine = hidpen::pressure;
+            paikka = ofPoint(hidpen::x * ofGetWidth(), (hidpen::y) * ofGetHeight() );
+            paikka_scaled = ofPoint(hidpen::x, 1-hidpen::y);
         
-        if(hidpen::pressure > 0) {
-            if(!drag) {
-                click = true;
-                drag = true;
+            if(hidpen::pressure > 0) {
+                if(!drag) {
+                    click = true;
+                    drag = true;
+                }
+            }
+            else {
+                click = false;
+                drag = false;
             }
         }
         else {
-            click = false;
-            drag = false;
-        }            
+            //tuli huono paketti! Ei päivitetä mitään
+            #ifdef HIDPEN_DEBUG 
+                    std::cout << "Kyna: huono paketti: (" << hidpen::x << ", " << hidpen::y << ", " << hidpen::pressure << ")\n";
+            #endif
+            return;
+        }
     }
 }
 
