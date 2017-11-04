@@ -4,9 +4,13 @@ void Ohjain::setup() {
     ofSetFrameRate(50);
     Vaiheet::setup();
     monitori1.setup();
-
+    monitoriVari = ofColor::black;
+    kynaIrti = 0;
     ViivaOhjain::setup("arkisto/", "tallennetut/");
-    
+
+    pankki.lataaPiirretytViivat("tallennetut/");
+    cout << pankki.piirretytViivat.size() << " piirrettyä viivaa ladattu\n";
+
     cout << pankki.viivat.size() << " viivaa ladattu\n";
 
     if (OscInterface::setAddressAndPortsFromFile("./oscSettings")) {
@@ -26,16 +30,17 @@ void Ohjain::updateMonitori() {
 
     if (Kyna::drag && Tilat::tila == Piirtaa) {
         //monitoriVari = ofColor();
-        monitoriVari = ViivaOhjain::pankki.viivaNyt.haeVari();
-        monitori2.piirraVari(monitoriVari);
+        kynaIrti = 0;
+
+        if (pankki.viivaNyt.size() > 1)
+            monitori2.piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
     } else {
-        if (monitoriVari.getLightness() < 100)
-            monitoriVari.setBrightness(monitoriVari.getBrightness() - 1);
-        else {
-            monitoriVari.setBrightness(monitoriVari.getBrightness() + 1);
-            monitoriVari.setSaturation(monitoriVari.getSaturation() - 1);
-        }
+        kynaIrti++;
+        float suhde;
+        suhde = ofClamp((float) kynaIrti / 70, 0, 1);
+        monitori2.piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari().getLerped(monitoriVari, suhde));
     }
+
 
     if (Tilat::tila == Soittaa && ViivaOhjain::soitettava.size()) {
         monitoriVari = ViivaOhjain::soitettava.varit[lukupaaPlayback];
@@ -45,7 +50,8 @@ void Ohjain::updateMonitori() {
         ViivaOhjain::soita();
         if (valintaMuuttui)
             monitori2.tyhjenna();
-        monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
+        monitori2.piirraVari(ofColor::black);
+        //monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
     } else if (Tilat::tila == Piirtaa) {
 
         vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
@@ -68,14 +74,18 @@ void Ohjain::update() {
 
 }
 
-void Ohjain::draw() {    
-    if(Tilat::tila == Rajaa) {
-        Kyna::draw();        
+void Ohjain::draw() {
+    if (Tilat::tila == Rajaa) {
+        Kyna::draw();
     }
 }
 
 void Ohjain::piirtaa() {
 
+    if (playbackPlay) {
+        OscViiva::sendPlaybackStop();
+        playbackPlay=false;
+    }
     //Vaiheet::verbose();
     Vaiheet::update();
 
@@ -86,35 +96,40 @@ void Ohjain::piirtaa() {
     } else if (!pankki.viivaNyt.empty()) {
         vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
         monitori1.piirraViivatKohdasta(v, pankki.viivaNyt.size() - 1);
-       // monitori1.piirraKartta(pankki.valitutViivat, 10);
-       // monitori1.piirraPiste(v.back().paksuusSumeusKeskiarvoVektori() );
-        
-        if(pankki.etsiKolmio(pankki.valitutViivat, v.back().paksuusSumeusKeskiarvoVektori() )) {
+        // monitori1.piirraKartta(pankki.valitutViivat, 10);
+        // monitori1.piirraPiste(v.back().paksuusSumeusKeskiarvoVektori() );
+
+        if (pankki.etsiKolmio(pankki.valitutViivat, v.back().paksuusSumeusKeskiarvoVektori())) {
             //monitori1.piirraPiste(pankki.kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori());
             //monitori1.piirraPiste(pankki.kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori());
             //monitori1.piirraPiste(pankki.kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori());
         }
-        
-        
-    } else if(pankki.viivaNyt.size()== 1) {
+
+
+    } else if (pankki.viivaNyt.size() == 1) {
         monitori1.tyhjenna();
     }
 }
 
 void Ohjain::soittaa() {
 
-    
+    if (ViivaOhjain::lukupaaPlayback == 0 && playbackPlay) {
+        OscViiva::sendPlaybackStop();
+        playbackPlay = false;
+    }
 
-
-    if (ViivaOhjain::soitettava.size()) {
+    if (ViivaOhjain::soitettava.size() && playbackPlay) {
         //monitori1.piirraVari(ViivaOhjain::soitettava.haeVari());
-        vector<Viiva> v(1,soitettava);
-        int l= ViivaOhjain::soitaPlayback();
-        if(l == 0)
+        vector<Viiva> v(1, soitettava);
+        int l = ViivaOhjain::soitaPlayback();
+        if (l == 0)
             monitori1.tyhjenna();
         monitori1.piirraVari(soitettava.varit[l]);
         monitori1.piirraViivatAlusta(v, l);
+    } else {
+        ViivaOhjain::lukupaaPlayback = 0;
     }
+
 }
 
 void Ohjain::rajaa() {
@@ -225,7 +240,7 @@ VaiheetEnum Ohjain::lahestyKohdetta() {
 
     if (!Kyna::drag) {
         irrotuslaskenta++;
-        if (irrotuslaskenta > 100) {
+        if (irrotuslaskenta > 300) {
             irrotuslaskenta = 0;
             return Keskeyta;
         }
@@ -264,7 +279,7 @@ VaiheetEnum Ohjain::keskeyta() {
     //    cout << tallennusHakemisto + "kuvat/kokonaiset/" + tiedosto::aika() + ".png\n";
     //    pankki.tallennaHakemistoon("keskeytetytViivat/");
 
-    
+
 
     monitori1.tyhjenna();
     ViivaOhjain::viimeistele();
@@ -276,15 +291,22 @@ VaiheetEnum Ohjain::keskeyta() {
 
 void Ohjain::keyPressed(int key) {
 
+    if (key == 'w') {
+        monitoriVari = ofColor::white;
+    }
+    if (key == 'q') {
+        monitoriVari = ofColor::black;
+    }
+
     if (key == OF_KEY_TAB) {
         Tilat::vaihdaTilaa();
         cout << "tila:" << Tilat::toString() << "\n";
     }
 
     if (Tilat::tila == Piirtaa) {
-        if(key == OF_KEY_RETURN)
+        if (key == OF_KEY_RETURN)
             Vaiheet::vaiheetEnum = Viimeistele;
-            
+
     }
     if (Tilat::tila == Soittaa) {
         if (key == OF_KEY_LEFT)
@@ -292,11 +314,23 @@ void Ohjain::keyPressed(int key) {
         else if (key == OF_KEY_RIGHT)
             ViivaOhjain::seuraavaViivaPlayback();
         cout << ViivaOhjain::soitettavaPlayback_id << "\n";
+
+        if (key == ' ') {
+            if (!playbackPlay) {
+                playbackPlay = true;
+                OscViiva::sendPlaybackPlay(soitettava, ViivaOhjain::soitettavaPlayback_id);
+                ViivaOhjain::lukupaaPlayback = 1;
+            } else {
+                playbackPlay = false;
+                OscViiva::sendPlaybackStop();
+                ViivaOhjain::lukupaaPlayback = 0;
+            }
+        }
     }
     if (Tilat::tila == Rajaa) {
-        if(key == OF_KEY_LEFT)
+        if (key == OF_KEY_LEFT)
             pankki.edellinenSarja();
-        else if(key == OF_KEY_RIGHT)
+        else if (key == OF_KEY_RIGHT)
             pankki.seuraavaSarja();
     }
 }
@@ -305,7 +339,7 @@ void Ohjain::updateOSC() {
 
     // seg faulttaa tällä hetkellä
     //  cout << "lähetetään Osc paketti\n";
-    OscViiva::sendViiva(pankki.viivaNyt,Vaiheet::vaiheetEnum);
+    OscViiva::sendViiva(pankki.viivaNyt, Vaiheet::vaiheetEnum);
     //  cout << "Osc paketti lähetetty\n";
 }
 

@@ -99,7 +99,7 @@ public:
     void laskeVari();
     void valitseVari(ofVec2f paksuusSumeusKa);
     void viimeistelePiirto();
-    void lataaPiirretytViivat(std::string polku);
+    int lataaPiirretytViivat(std::string polku);
     
     // lataus ja tallennus
     // tapahtuu aina hakemistokohtaisesti.

@@ -11,7 +11,7 @@ struct OscInterface {
     bool connection;
     bool setupDone;
     
-    OscInterface():setupDone(false),connection(false) {}
+    OscInterface();
     
     ofxOscReceiver receiver;
     ofxOscSender sender;
@@ -27,4 +27,6 @@ struct OscInterface {
 
 struct OscViiva: public OscInterface {
     void sendViiva(Viiva viiva, VaiheetEnum vaihe);
+    void sendPlaybackPlay(Viiva viiva, int indeksi);
+    void sendPlaybackStop();
 };

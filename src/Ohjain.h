@@ -10,6 +10,9 @@
 struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public OscViiva {
 
     ofColor monitoriVari;
+    int kynaIrti;
+    int piirrettyjenAlkuindeksi;
+    bool playbackPlay;
     
     Multimonitori monitori1;
     Multimonitori monitori2;

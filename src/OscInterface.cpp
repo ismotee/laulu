@@ -3,6 +3,9 @@
 #include <fstream>
 #include <sstream>
 
+OscInterface::OscInterface() {
+
+}
 
 
 void OscInterface::setAddress(std::string ipAddress, int sender_port, int receiver_port) {
@@ -95,7 +98,7 @@ void OscViiva::sendViiva(Viiva viiva, VaiheetEnum vaihe) {
         msg = ofxOscMessage();
         msg.setAddress("/viiva/piste");
         msg.addFloatArg(viiva.pisteet.back().x);
-        msg.addFloatArg(viiva.pisteet.back().x);
+        msg.addFloatArg(viiva.pisteet.back().y);
         sendMessage(msg);
         
         msg = ofxOscMessage();
@@ -131,4 +134,28 @@ void OscViiva::sendViiva(Viiva viiva, VaiheetEnum vaihe) {
         sendMessage(msg);
 
     }
+}
+
+void OscViiva::sendPlaybackPlay(Viiva viiva, int indeksi) {
+
+    if(connection && viiva.size()) {
+        ofxOscMessage msg;
+        msg.setAddress("/playback/play");
+        msg.addFloatArg(indeksi+1);
+        
+        sendMessage(msg);
+        
+    }
+}
+
+void OscViiva::sendPlaybackStop() {
+    if(connection) {
+        ofxOscMessage msg;
+        msg.setAddress("/playback/stop");
+        msg.addFloatArg(0);
+        
+        sendMessage(msg);
+        
+    }
+
 }
