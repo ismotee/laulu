@@ -588,3 +588,11 @@ void Multimonitori::piirraViivatKokonaan(const std::vector<Viiva>& viivat) {
 
 
 
+void Multimonitori::piirraPiste(ofVec2f p) {
+    viivaFbo.begin();
+        ofSetColor(ofColor::black);
+        ofDrawCircle(p.x * ofGetWidth(), (1-p.y) * ofGetHeight(), 15);
+        ofSetColor(ofColor::white);
+        ofDrawCircle(p.x * ofGetWidth(), (1-p.y) * ofGetHeight(), 10);
+    viivaFbo.end();
+}

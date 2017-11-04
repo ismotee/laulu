@@ -221,7 +221,7 @@ bool tiedosto::tallennaViiva(const Viiva& viiva, std::string polku) {
     std::ofstream file (filename, std::ofstream::binary);
     
     std::string versionumero = std::to_string(Viiva::versio);
-    std::string sarja("sarjan_nimi_tähän");
+    std::string sarja = viiva.sarja;
     std::string viivanKoko = std::to_string(viiva.size() );
 
     if(file.is_open() ) {

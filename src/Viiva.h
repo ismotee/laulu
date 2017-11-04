@@ -26,11 +26,11 @@ struct Kalibraatio {
 
     ofColor vari;
 
-    ofVec2f paksuusSumeusVektori() {
+    ofVec2f paksuusSumeusVektori() const{
         return ofVec2f(paksuus, sumeus);
     }
 
-    ofVec2f paksuusSumeusKeskiarvoVektori() {
+    ofVec2f paksuusSumeusKeskiarvoVektori() const{
         return ofVec2f(paksuusKa, sumeusKa);
     }
 
@@ -163,6 +163,7 @@ struct Viiva : public ViivanApufunktiot {
     static const int versio = 1;
 
     std::string nimi;
+    std::string sarja;
     int improvisaatioLaskin;
     int lahestymisLaskuri;
     ViivanOminaisuus muutos;
@@ -198,7 +199,10 @@ struct Viiva : public ViivanApufunktiot {
     bool kulje();
     void lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe);
     void laskeUusimmat();
+    
+    //aseta kalibraatio viimeisestä pisteestä:
     void asetaKalibraatio();
+    
     void asetaAlkuperainenKalibraatio();
     void tarkistaVaihe(VaiheetEnum vaihe);
     void tarkistaKalibraatio();
@@ -229,6 +233,7 @@ struct Viiva : public ViivanApufunktiot {
 
     void muokkaaVaria();
     void muokkaaVaria2(float maara, float muutoksenKh);
+    void asetaVari(ofColor vari);
     ofColor haeVari();
     void lahestyKohdetta();
     float muutoksenMaaraPolulla();

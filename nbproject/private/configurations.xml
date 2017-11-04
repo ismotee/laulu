@@ -4,6 +4,262 @@
     <df root="." name="0">
       <df name="bin">
         <df name="data">
+          <df name="arkisto">
+            <df name="viiva_ja_vari_2017-9-10_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-1_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-2_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-3_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-4_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-15_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-18-1_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-18-2_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-18-3_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-20_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9_n8">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+          </df>
+          <df name="keskeytetytViivat">
+          </df>
+          <df name="tallennetut">
+            <df name="kuvat">
+              <df name="kalibroinnit">
+              </df>
+              <df name="kokonaiset">
+              </df>
+            </df>
+          </df>
+          <df name="valmiitViivat">
+          </df>
         </df>
         <df name="libs">
         </df>
@@ -56,6 +312,262 @@
     <df root="." name="1">
       <df name="bin">
         <df name="data">
+          <df name="arkisto">
+            <df name="viiva_ja_vari_2017-9-10_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-1_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-2_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-3_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-14-4_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-15_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-18-1_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-18-2_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-18-3_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9-20_n1">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+            <df name="viiva_ja_vari_2017-9_n8">
+              <df name="kuvat">
+                <df name="kalibroinnit">
+                </df>
+                <df name="keskeytetyt">
+                </df>
+                <df name="valmiit">
+                </df>
+              </df>
+              <df name="viivat">
+                <df name="ov0">
+                  <df name="kalibroinnit">
+                  </df>
+                  <df name="keskeytetyt">
+                  </df>
+                  <df name="valmiit">
+                  </df>
+                </df>
+                <df name="ov1">
+                </df>
+              </df>
+            </df>
+          </df>
+          <df name="keskeytetytViivat">
+          </df>
+          <df name="tallennetut">
+            <df name="kuvat">
+              <df name="kalibroinnit">
+              </df>
+              <df name="kokonaiset">
+              </df>
+            </df>
+          </df>
+          <df name="valmiitViivat">
+          </df>
         </df>
         <df name="libs">
         </df>

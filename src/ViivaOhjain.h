@@ -9,13 +9,14 @@
 
 struct ViivaOhjain {
     ViivaPankki pankki;
+    
+    //polut joista ladataan ja joihin tallennetaan    
     string hakemisto;
     string tallennusHakemisto;
-    vector<float> samankaltaisuus;
-    vector<float> muutos;
-    int lahestymisLaskuri;
     
-    int nykyinenPolku, polkuLaskuri;
+    
+    int nykyinenPolku;
+    int polkuLaskuri;
         
     void setup(string hakemisto_, string tallennusHakemisto_);
     void tallennaKalibrointi();

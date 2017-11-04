@@ -54,6 +54,139 @@ void Alue::asetaKeskipisteenMukaan(float p, float r) {
     max = p + r;
 }
 
+ofVec2f viivaSortti::keskipiste(0,0);
+
+bool viivaSortti::onLahempana(const Viiva& lhs, const Viiva& rhs) {
+    //return true if lhs < rhs
+    ofVec2f d_l = keskipiste - lhs.kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec2f d_r = keskipiste - rhs.kalibraatio.paksuusSumeusKeskiarvoVektori();    
+    return(d_l.length() < d_r.length());
+}
+
+void viivaSortti::jarjesta(std::vector<Viiva>& viivat, ofVec2f P) {
+    keskipiste = P;
+    std::sort(viivat.begin(), viivat.end(), onLahempana);
+}
+
+bool viivojenInterpoloija::onkoPisteKolmionSisalla(ofVec2f P) {
+    ofVec3f AP = P - kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec3f AB = kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori() - kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    
+    ofVec3f BP = P - kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec3f BC = kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori() - kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori();
+
+    ofVec3f CP = P - kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec3f CA = kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori() - kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori();
+        
+    ofVec3f v1 = AP.crossed(AB);
+    ofVec3f v2 = BP.crossed(BC);
+    ofVec3f v3 = CP.crossed(CA);
+    
+    if(v1.dot(v2) > 0) {
+        if(v1.dot(v3) > 0)
+            return true;
+    }
+    return false;
+
+}
+
+bool viivojenInterpoloija::etsiKolmio(std::vector<Viiva> viivat, ofVec2f P) {
+    if(viivat.size() < 3) return false;
+    
+    if(onkoPisteKolmionSisalla(P))
+        return true;
+    
+    //järjestetään ja laitetaan lähimmät kolmioon
+    viivaSortti::jarjesta(viivat, P);
+    std::copy(viivat.begin(), viivat.begin()+3, kolmio);
+    
+    bool found = false;
+    
+    //ruvetaan katsomaan onko piste kolmion sisällä
+    
+    kolmio[0] = viivat[0];
+    for(int i=1; i<viivat.size() && !found; i++) {
+        kolmio[1] = viivat[i];
+        for(int j = i+1; j<viivat.size() && !found; j++) {
+            kolmio[2] = viivat[j];
+            if (onkoPisteKolmionSisalla(P) ) {
+                found = true;
+            }
+        }
+    }
+    
+    //katsotaan löytyikö jotain
+    return found;    
+}
+
+ofColor viivojenInterpoloija::interpoloiVari(ofVec2f P) {
+
+    if(!onkoPisteKolmionSisalla(P))
+        return ofColor();
+    
+    ofVec2f AB = kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori() - kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec2f AC = kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori() - kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec2f BC = kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori() - kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec2f BP = P - kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    ofVec2f AP = P - kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori();
+    
+    float l_B = BP.dot(BC);
+    ofVec2f BPdot = (l_B / BC.length()) * BC;
+    ofVec2f APdot = AB + BPdot;
+    
+    float l_A = AP.length() / APdot.length();
+    
+    ofColor V_p_dot = kolmio[1].kalibraatio.vari * l_B + kolmio[2].kalibraatio.vari* (1-l_B);
+    
+    return kolmio[0].kalibraatio.vari* l_A + V_p_dot*(1-l_A);
+    // that's  it. we're done!
+    
+}
+
+
+bool ViivaPankki::lataaArkisto(const std::string& polku) {
+    
+    arkisto = ofDirectory(polku);
+    if(!arkisto.exists() ) {
+        std::cout << "ViivaPankki:lataaArkisto(): ei polkua " << polku << "\n";
+        return false;
+    }
+    
+    arkisto.listDir();
+    sarja_i = 0;
+    valitseSarja(sarja_i);
+    return true;
+}
+
+bool ViivaPankki::valitseSarja(int i) {
+    if(!arkisto.exists() || arkisto.size() == 0) {
+        return false;
+    }
+    
+    //jos annettiin huono indeksi:
+    if(i >= arkisto.size() || i < 0)
+        return false;
+    
+    tyhjennaValinta();
+    std::string polku = arkisto.getPath(sarja_i);
+    cout << "valitse Sarja: polku: " << polku << "\n";
+    lataaHakemistosta(polku);
+    
+}
+
+void ViivaPankki::seuraavaSarja() {
+    sarja_i++;
+    sarja_i = ofWrap(sarja_i, 0, arkisto.size() );
+    valitseSarja(sarja_i);
+}
+
+void ViivaPankki::edellinenSarja() {
+    sarja_i--;
+    sarja_i = ofWrap(sarja_i, 0, arkisto.size() );
+    valitseSarja(sarja_i);
+}
+
+
 void ViivaPankki::aloitaUusiViivaNyt() {
     viivaNyt = Viiva();
 }
@@ -65,11 +198,18 @@ void ViivaPankki::lisaaPiste(ofPoint paikka, float paine, VaiheetEnum vaihe) {
         shared_ptr<Viiva> ptr = make_shared<Viiva>(*etsiViiva());
 
         viivaNyt.asetaKohde(ptr);
+    } else if (vaihe == LahestyKohdetta) {
+        //viivaNyt.asetaVari(interpoloiVari(viivaNyt.paksuusSumeusKeskiarvoVektori()));
+       laskeVari();
+        viivaNyt.lisaaPiste(paikka, paine, vaihe);
+        
     } else
         viivaNyt.lisaaPiste(paikka, paine, vaihe);
 }
 
 Viiva* ViivaPankki::etsiViiva() {
+    //etsitään viiva, joka on lähimmäksi sitä suuntaa, johon on liikuttu kalibraation jälkeen.
+    /*
     ofVec2f kalibrointiVec = viivaNyt.kalibraatio.paksuusSumeusVektori();
     ofVec2f muokattavaVec = viivaNyt.paksuusSumeusVektori();
     ofVec2f vertailuVec = (muokattavaVec - kalibrointiVec).getNormalized();
@@ -93,13 +233,24 @@ Viiva* ViivaPankki::etsiViiva() {
             nearestId = i;
         }
     }
-
+*/
+    
+    float lyhin = (valitutViivat[0].paksuusSumeusKeskiarvoVektori() - viivaNyt.paksuusSumeusKeskiarvoVektori()).length();    
+    int lyhin_i = 0;
+    for(int i=1; i<valitutViivat.size(); i++) {
+        float l = (valitutViivat[i].paksuusSumeusKeskiarvoVektori() - viivaNyt.paksuusSumeusKeskiarvoVektori()).length();
+        if(l < lyhin){
+            lyhin = l;
+            lyhin_i = i;
+        }
+    }
+    
 #ifdef VIIVA_DEBUG
     cout << "etsiViiva, nearestValue: " << nearestValue << "\n";
     cout << "etsiViiva, nearestId: " << nearestId << "\n";
 #endif
 
-    return &valitutViivat[nearestId];
+    return &valitutViivat[lyhin_i];
 }
 
 void ViivaPankki::tallennaHakemistoon(string polku) {
@@ -113,20 +264,20 @@ void ViivaPankki::tallennaHakemistoon(string polku) {
 }
 
 bool ViivaPankki::lataaHakemistosta(string polku) {
-    ofDirectory dir(polku);
+    ofDirectory dir(polku + "/viivat/ov1");
     if (!dir.exists()) {
         cout << "yritettiin ladata " << dir.getAbsolutePath() << "\n";
         return false;
     }
     cout << "ladataan " << dir.getAbsolutePath() << "\n";
 
+    viivat.clear();
     dir.listDir();
-
-
+    
     for (int i = 0; i < dir.size(); i++) {
         viivat.push_back(tiedosto::lataaViiva(dir[i].getAbsolutePath()));
+        viivat.back().sarja = ofSplitString(polku,"/",true)[1];
     }
-
 }
 
 void ViivaPankki::asetaKohteeksi(int id) {
@@ -218,4 +369,25 @@ void ViivaPankki::viimeistelePiirto() {
 
 void ViivaPankki::lataaPiirretytViivat(std::string polku) {
     
+}
+
+void ViivaPankki::tyhjennaValinta() {
+    valitutViivat.clear();
+}
+
+void ViivaPankki::laskeVari() {
+    
+    float pituus_1 = (kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori() - viivaNyt.paksuusSumeusKeskiarvoVektori()).length();
+    float pituus_2 = (kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori() - viivaNyt.paksuusSumeusKeskiarvoVektori()).length();
+    float pituus_3 = (kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori() - viivaNyt.paksuusSumeusKeskiarvoVektori()).length();
+
+    float sum = pituus_1+pituus_2+pituus_3;
+    
+    float suhdeluku_1 = (1-pituus_1/sum)/2;
+    float suhdeluku_2 = (1-pituus_2/sum)/2;
+    float suhdeluku_3 = (1-pituus_3/sum)/2;
+    
+    
+    
+    viivaNyt.asetaVari(kolmio[0].kalibraatio.vari*suhdeluku_1 + kolmio[1].kalibraatio.vari*suhdeluku_2 + kolmio[2].kalibraatio.vari*suhdeluku_3);
 }

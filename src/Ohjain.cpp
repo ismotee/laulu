@@ -1,6 +1,7 @@
 #include "Ohjain.h"
 
 void Ohjain::setup() {
+    ofSetFrameRate(50);
     Vaiheet::setup();
     monitori1.setup();
 
@@ -24,8 +25,9 @@ void Ohjain::setup() {
 void Ohjain::updateMonitori() {
 
     if (Kyna::drag && Tilat::tila == Piirtaa) {
-        monitoriVari = ofColor();
-        //        monitoriVari = ViivaOhjain::pankki.viivaNyt.haeVari();
+        //monitoriVari = ofColor();
+        monitoriVari = ViivaOhjain::pankki.viivaNyt.haeVari();
+        monitori2.piirraVari(monitoriVari);
     } else {
         if (monitoriVari.getLightness() < 100)
             monitoriVari.setBrightness(monitoriVari.getBrightness() - 1);
@@ -82,9 +84,20 @@ void Ohjain::piirtaa() {
         monitori1.piirraKartta(pankki.valitutViivat, 10);
 
     } else if (!pankki.viivaNyt.empty()) {
-        //Monitori::piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
         vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
         monitori1.piirraViivatKohdasta(v, pankki.viivaNyt.size() - 1);
+       // monitori1.piirraKartta(pankki.valitutViivat, 10);
+       // monitori1.piirraPiste(v.back().paksuusSumeusKeskiarvoVektori() );
+        
+        if(pankki.etsiKolmio(pankki.valitutViivat, v.back().paksuusSumeusKeskiarvoVektori() )) {
+            //monitori1.piirraPiste(pankki.kolmio[0].kalibraatio.paksuusSumeusKeskiarvoVektori());
+            //monitori1.piirraPiste(pankki.kolmio[1].kalibraatio.paksuusSumeusKeskiarvoVektori());
+            //monitori1.piirraPiste(pankki.kolmio[2].kalibraatio.paksuusSumeusKeskiarvoVektori());
+        }
+        
+        
+    } else if(pankki.viivaNyt.size()== 1) {
+        monitori1.tyhjenna();
     }
 }
 
@@ -236,12 +249,13 @@ VaiheetEnum Ohjain::lahestyKohdetta() {
 VaiheetEnum Ohjain::viimeistele() {
 
     //pankki.tallennaHakemistoon("valmiitViivat/");
+    pankki.viivaNyt.asetaKalibraatio();
     pankki.viivaNyt.nollaaLaskurit();
     //pankki.leikkaaMuokattava(pankki.muokattava.OTANNAN_KOKO);
 
 
     //monitori1.tyhjenna();
-    return laskeKohde();
+    return Improvisoi;
 }
 
 VaiheetEnum Ohjain::keskeyta() {
@@ -268,7 +282,9 @@ void Ohjain::keyPressed(int key) {
     }
 
     if (Tilat::tila == Piirtaa) {
-
+        if(key == OF_KEY_RETURN)
+            Vaiheet::vaiheetEnum = Viimeistele;
+            
     }
     if (Tilat::tila == Soittaa) {
         if (key == OF_KEY_LEFT)
@@ -278,7 +294,10 @@ void Ohjain::keyPressed(int key) {
         cout << ViivaOhjain::soitettavaPlayback_id << "\n";
     }
     if (Tilat::tila == Rajaa) {
-
+        if(key == OF_KEY_LEFT)
+            pankki.edellinenSarja();
+        else if(key == OF_KEY_RIGHT)
+            pankki.seuraavaSarja();
     }
 }
 

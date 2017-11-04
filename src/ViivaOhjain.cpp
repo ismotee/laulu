@@ -3,7 +3,7 @@
 #include "Vaiheet.h"
 
 void ViivaOhjain::setup(string hakemisto_, string tallennusHakemisto_) {
-    pankki.lataaHakemistosta(hakemisto_);
+    pankki.lataaArkisto(hakemisto_);
     hakemisto = hakemisto_;
     tallennusHakemisto = tallennusHakemisto_;
     nykyinenPolku = 0;
@@ -80,7 +80,7 @@ void ViivaOhjain::soita() {
         return;
     lukupaa++;
 //    if(lukupaa >= pankki.valitutViivat[soitettava_id].size())
-    if(lukupaa >= 1000)
+    if(lukupaa >= 10000)
         lukupaa = 1;
     
     //cout << "koko: " << lukupaa << "/" << pankki.valitutViivat[soitettava_id].size() << "\n";

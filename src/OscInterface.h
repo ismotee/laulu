@@ -3,6 +3,7 @@
 #include "ofxOsc.h"
 #include "Vaiheet.h"
 #include "Viiva.h"
+#include "Tilat.h"
 
 
 struct OscInterface {

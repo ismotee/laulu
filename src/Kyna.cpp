@@ -34,8 +34,8 @@ void Kyna::update() {
 }
 
 void Kyna::draw() {
-    ofSetColor(ofColor::gray);
-    ofDrawCircle(paikka, 2);
+    ofSetColor(ofColor::white);
+    ofDrawCircle(paikka, 4);
 }
 
 void Kyna::asetaPaikka(float x, float y) {

@@ -92,6 +92,7 @@ public:
     void piirraViivatKokonaan(const std::vector<Viiva>& viivat);
     void piirraKartta(const std::vector<Viiva>& viivat, float r = 10);
     void piirraVari(ofColor vari_);
+    void piirraPiste(ofVec2f p);
 
 
     void tyhjenna();
