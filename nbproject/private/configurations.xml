@@ -254,6 +254,10 @@
             <df name="kuvat">
             </df>
           </df>
+          <df name="tallennetut-viivankaa">
+            <df name="kuvat">
+            </df>
+          </df>
           <df name="valmiitViivat">
           </df>
         </df>
@@ -555,6 +559,10 @@
           <df name="keskeytetytViivat">
           </df>
           <df name="tallennetut">
+            <df name="kuvat">
+            </df>
+          </df>
+          <df name="tallennetut-viivankaa">
             <df name="kuvat">
             </df>
           </df>

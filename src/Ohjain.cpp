@@ -32,8 +32,11 @@ void Ohjain::updateMonitori() {
         //monitoriVari = ofColor();
         kynaIrti = 0;
 
-        if (pankki.viivaNyt.size() > 1)
+        if (pankki.viivaNyt.size() > 1) {
             monitori2.piirraVari(ViivaOhjain::pankki.viivaNyt.haeVari());
+            vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
+            monitori1.piirraViivatLopusta(v);
+        }
     } else {
         kynaIrti++;
         float suhde;
@@ -51,11 +54,11 @@ void Ohjain::updateMonitori() {
         if (valintaMuuttui)
             monitori2.tyhjenna();
         monitori2.piirraVari(ofColor::black);
-        //monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
+        monitori2.piirraViivatKohdasta(pankki.valitutViivat, ViivaOhjain::lukupaa);
     } else if (Tilat::tila == Piirtaa) {
 
-        vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
-        monitori2.piirraViivatLopusta(v);
+        //vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
+        //monitori2.piirraViivatLopusta(v);
     }
 
 
@@ -84,14 +87,14 @@ void Ohjain::piirtaa() {
 
     if (playbackPlay) {
         OscViiva::sendPlaybackStop();
-        playbackPlay=false;
+        playbackPlay = false;
     }
     //Vaiheet::verbose();
     Vaiheet::update();
 
     if (Vaiheet::vaiheetEnum == Kulje) {
         monitori1.tyhjenna();
-        monitori1.piirraKartta(pankki.valitutViivat, 10);
+        //monitori1.piirraKartta(pankki.valitutViivat, 10);
 
     } else if (!pankki.viivaNyt.empty()) {
         vector<Viiva> v(1, ViivaOhjain::pankki.viivaNyt);
@@ -124,8 +127,8 @@ void Ohjain::soittaa() {
         int l = ViivaOhjain::soitaPlayback();
         if (l == 0)
             monitori1.tyhjenna();
-        monitori1.piirraVari(soitettava.varit[l]);
-        monitori1.piirraViivatAlusta(v, l);
+        //monitori1.piirraVari(soitettava.varit[l]);
+        monitori1.piirraViivatKohdasta(v, l);
     } else {
         ViivaOhjain::lukupaaPlayback = 0;
     }

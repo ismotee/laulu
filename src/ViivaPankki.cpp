@@ -373,7 +373,7 @@ int ViivaPankki::lataaPiirretytViivat(std::string polku) {
         return 0;
     }
     dir.listDir();
-
+    dir.sort();
     piirretytViivat.clear();
 
     for (int i = 0; i < dir.size(); i++) {
