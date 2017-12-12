@@ -7,30 +7,32 @@
 #include "Viiva.h"
 #include "Tilat.h"
 
-struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public OscViiva {
-
+struct Ohjain : public Tilat, public Vaiheet, public ViivaOhjain, public OscViiva {
     ofColor monitoriVari;
     int kynaIrti;
     int piirrettyjenAlkuindeksi;
     bool playbackPlay;
-    
+    bool tallennaKuvina;
+
     Multimonitori monitori1;
     Multimonitori monitori2;
     bool valintaMuuttui = false;
+
     
+
     void setup();
     void update();
     void updateMonitori();
     void draw();
-    
+
     void keyPressed(int key);
-    
+
     bool tallennetaan = false;
 
     VaiheetEnum improvisoi();
 
     VaiheetEnum kalibroi();
-    
+
     VaiheetEnum keskeyta();
 
     VaiheetEnum kulje();
@@ -40,13 +42,13 @@ struct Ohjain: public Tilat, public Vaiheet, public ViivaOhjain, public OscViiva
     VaiheetEnum laskeKohde();
 
     VaiheetEnum viimeistele();
-    
-    
+
+
     // Tilat funktiot
     void piirtaa();
     void soittaa();
     void rajaa();
-    
+
     void updateOSC();
-    
+
 };

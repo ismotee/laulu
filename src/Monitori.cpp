@@ -486,7 +486,7 @@ void Multimonitori::tallennaKuvana(std::string filename) {
 }
 
 void Multimonitori::tyhjenna() {
-    pensseli::clearColor = ofColor(0,0,0,255);
+    pensseli::clearColor = taustaVari;
     viivaFbo.begin();
         ofClear(pensseli::clearColor);
     viivaFbo.end();

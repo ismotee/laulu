@@ -14,6 +14,7 @@ struct ViivaOhjain {
     string hakemisto;
     string tallennusHakemisto;
     
+    ofSoundPlayer sPlayer;
     
     int nykyinenPolku;
     int polkuLaskuri;
@@ -31,6 +32,10 @@ struct ViivaOhjain {
     const Viiva& haeMuokattava() const;
     const Viiva& haeKalibrointi() const;
     
+    void lataaAani();
+    
+    void aloitaAani(int kohta = 0);
+    void lopetaAani();
     
     void soita();
     void meneAlkuun();

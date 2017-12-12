@@ -76,7 +76,7 @@ void OscViiva::sendViiva(Viiva viiva, VaiheetEnum vaihe) {
         
         if (viiva.size() == 1) {
             msg.setAddress("/viiva/alkaa");
-            msg.addFloatArg(1);
+            msg.addStringArg(viiva.nimi);
             sendMessage(msg);
         } else if (vaihe == Keskeyta) {
             msg.setAddress("/viiva/loppuu");

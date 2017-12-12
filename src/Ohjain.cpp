@@ -6,6 +6,7 @@ void Ohjain::setup() {
     monitori1.setup();
     monitoriVari = ofColor::black;
     kynaIrti = 0;
+    tallennaKuvina = false;
     ViivaOhjain::setup("arkisto/", "tallennetut/");
 
     pankki.lataaPiirretytViivat("tallennetut/");
@@ -46,9 +47,22 @@ void Ohjain::updateMonitori() {
 
 
     if (Tilat::tila == Soittaa && ViivaOhjain::soitettava.size()) {
-        monitoriVari = ViivaOhjain::soitettava.varit[lukupaaPlayback];
-        monitori2.piirraVari(monitoriVari);
+
+        if (ViivaOhjain::soitettava.paine[lukupaaPlayback] != 0) {
+            kynaIrti = 0;
+            monitoriVari = ViivaOhjain::soitettava.varit[lukupaaPlayback];
+            monitori2.piirraVari(monitoriVari);
+        } else {
+            kynaIrti++;
+            float suhde;
+            suhde = ofClamp((float) kynaIrti / 70, 0, 1);
+            monitori2.piirraVari(ViivaOhjain::soitettava.varit[lukupaaPlayback].getLerped(ofColor::black, suhde));
+
+        }
+
+
     }
+
     if (Tilat::tila == Rajaa) {
         ViivaOhjain::soita();
         if (valintaMuuttui)
@@ -93,6 +107,7 @@ void Ohjain::piirtaa() {
     Vaiheet::update();
 
     if (Vaiheet::vaiheetEnum == Kulje) {
+        monitori1.taustaVari = monitoriVari;
         monitori1.tyhjenna();
         //monitori1.piirraKartta(pankki.valitutViivat, 10);
 
@@ -110,6 +125,7 @@ void Ohjain::piirtaa() {
 
 
     } else if (pankki.viivaNyt.size() == 1) {
+        monitori1.taustaVari = monitoriVari;
         monitori1.tyhjenna();
     }
 }
@@ -120,6 +136,11 @@ void Ohjain::soittaa() {
         OscViiva::sendPlaybackStop();
         playbackPlay = false;
     }
+
+    if (!playbackPlay)
+        monitori1.tyhjenna();
+
+    
 
     if (ViivaOhjain::soitettava.size() && playbackPlay) {
         //monitori1.piirraVari(ViivaOhjain::soitettava.haeVari());
@@ -132,7 +153,19 @@ void Ohjain::soittaa() {
     } else {
         ViivaOhjain::lukupaaPlayback = 0;
     }
+    if (playbackPlay && tallennaKuvina) {
+        string frame = "";
+        if (lukupaaPlayback < 10)
+            frame = "000";
+        else if (lukupaaPlayback < 100)
+            frame = "00";
+        else if (lukupaaPlayback < 1000)
+            frame = "0";
 
+        frame += to_string(lukupaaPlayback);
+
+        monitori1.tallennaKuvana("framet/" + ViivaOhjain::soitettava.nimi + "_" + frame + ".png");
+    }
 }
 
 void Ohjain::rajaa() {
@@ -296,9 +329,16 @@ void Ohjain::keyPressed(int key) {
 
     if (key == 'w') {
         monitoriVari = ofColor::white;
+        monitori1.taustaVari = ofColor::white;
     }
     if (key == 'q') {
         monitoriVari = ofColor::black;
+        monitori1.taustaVari = ofColor::black;
+    }
+
+    if (key == 't') {
+        tallennaKuvina = !tallennaKuvina;
+        cout << "tallennaKuvina: " << tallennaKuvina << "\n";
     }
 
     if (key == OF_KEY_TAB) {
@@ -321,10 +361,12 @@ void Ohjain::keyPressed(int key) {
         if (key == ' ') {
             if (!playbackPlay) {
                 playbackPlay = true;
+                ViivaOhjain::aloitaAani();
                 OscViiva::sendPlaybackPlay(soitettava, ViivaOhjain::soitettavaPlayback_id);
                 ViivaOhjain::lukupaaPlayback = 1;
             } else {
                 playbackPlay = false;
+                ViivaOhjain::lopetaAani();
                 OscViiva::sendPlaybackStop();
                 ViivaOhjain::lukupaaPlayback = 0;
             }
